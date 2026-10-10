@@ -1,0 +1,129 @@
+# Implementation Plan
+
+Rewrite of the Expo app `LarissaGB01/solucao_eletrica` as a bare React Native + TypeScript app.
+Android first, iOS later. Offline: results come from a **mock calculator** now and from an
+on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) later.
+
+Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
+
+**Current phase:** 0, Skeleton & tooling
+
+---
+
+## Phase 0: Skeleton & tooling (4–6h)
+
+- [x] RN 0.87 CLI project, applicationId `com.larissagb.solucaoeletrica`
+- [x] TypeScript strict + `noUncheckedIndexedAccess`
+- [x] Layer folders under `src/` + ESLint boundary rules
+- [x] Prettier, Husky pre-commit (lint-staged), commitlint
+- [x] Jest + React Native Testing Library, `Result` type with tests
+- [x] GitHub Actions: lint, typecheck, format, tests, Android debug build
+- [x] CLAUDE.md, ARCHITECTURE.md, PLAN.md
+- [ ] ADRs 0001–0005 in `docs/adr/` (RN CLI over Expo, Clean Architecture, Portuguese domain language, KaTeX in a WebView, mock → offline engine)
+- [ ] Push branch, CI green on GitHub, protect `main` (PR + green CI required)
+
+**Acceptance criteria**
+
+- `npm run validate` passes locally and in CI
+- A PR that imports `react-native` inside `src/domain` fails CI
+- `assembleDebug` succeeds in CI
+
+## Phase 1: Foundation & shared UI (8–10h)
+
+- [ ] Theme tokens (colors, spacing, typography) taken from the old app
+- [ ] React Navigation 7 native-stack with typed route params; Home screen (2-column option grid)
+- [ ] Domain shared kernel: `DomainError`, value objects `Tensao`, `Potencia`, `FatorPotencia`, `Temperatura`, `Comprimento`
+- [ ] UI components: `Accordion` (reanimated), `Stepper`, `NumericInput` (accepts "," decimals), `Segmented`, `Formula` (KaTeX in a WebView)
+- [ ] DI container in `src/app` (React context) + `useUseCases()` hook
+
+**Acceptance criteria**
+
+- Home screen renders on an Android emulator and matches the old app visually
+- `Formula` renders `\frac{a}{b}` correctly on a device
+- Every value object rejects invalid input (tested: negative, zero, NaN, out-of-range)
+- Every shared UI component has an RNTL test
+
+## Phase 2: Cabeamento vertical slice (10–12h)
+
+- [ ] Domain: `ProjetoCabeamento`, `ResultadoCabeamento`, enums, port `CalculadoraDimensionamento`
+- [ ] Infrastructure: `MockCalculadoraDimensionamento` with fixed, realistic fixture results
+- [ ] Application: `DimensionarCabeamento` use case + tests with a fake port
+- [ ] Presentation: 4-step form (react-hook-form + zod), loading state, result screen
+- [ ] Error path: invalid input shows field messages and never calls the use case
+
+**Acceptance criteria**
+
+- On the emulator: Home → form → result shows the recommended conductor, breaker and conduit
+- Required fields, numeric ranges and power factor (0, 1] are validated with pt-BR messages
+- Domain + application coverage ≥90%
+
+## Phase 3: Disjuntor + Eletroduto slices (8–10h)
+
+- [ ] Disjuntor: domain, mock, use case, form, result
+- [ ] Eletroduto: domain, mock, use case, form, result
+- [ ] Extract duplicated form/result pieces into `presentation/ui` or `domain/shared`
+
+**Acceptance criteria**
+
+- All 3 flows work end to end on the emulator
+- No copy-pasted component appears in more than one feature folder
+
+## Phase 4: Passo a passo + Teoria (10–12h)
+
+- [ ] Pure LaTeX builders in `domain/dimensionamento/formulas` for every step (single-phase and three-phase variants)
+- [ ] Step-by-step screens for the 3 flows (accordion per step: formula with symbols → formula with values → result)
+- [ ] Teoria screen with all sections, table images, and NBR/Siemens/Kanaflex reference links
+- [ ] Move all pt-BR texts into `src/content`
+
+**Acceptance criteria**
+
+- Every formula builder has a unit test comparing the exact LaTeX string
+- Screen-by-screen feature parity with the old app (checklist from `docs/demonstrativoApp.md` of the old repo)
+
+## Phase 5: Offline calculation engine (15–25h)
+
+- [ ] Read the Java backend and list every rule + NBR 5410 table it uses
+- [ ] Port the tables as typed data in `domain/dimensionamento/nbr5410/tabelas`
+- [ ] Port the calculations as pure domain services implementing `CalculadoraDimensionamento`
+- [ ] Golden tests: ≥10 input sets per flow, outputs compared with the Java backend's
+- [ ] Switch the DI container from the mock to the real engine
+
+**Acceptance criteria**
+
+- All golden tests pass, numeric tolerance ≤0.01
+- The app works in airplane mode
+- `MockCalculadoraDimensionamento` remains only as a test helper
+
+## Phase 6: Hardening (6–8h)
+
+- [ ] Maestro E2E: 3 happy paths + 1 validation-error flow, run in CI on an Android emulator
+- [ ] Accessibility labels on all inputs/buttons; text scales to 200% without clipping
+- [ ] App icon + splash (`react-native-bootsplash`) from the old assets
+- [ ] Crash reporting (Sentry) with source maps uploaded from CI
+
+**Acceptance criteria**
+
+- E2E suite is green on `main`
+- Manual accessibility pass with TalkBack on all screens
+
+## Phase 7: Release to Google Play (6–8h + 14 days)
+
+- [ ] Release keystore, Play App Signing, secrets in GitHub Actions
+- [ ] Fastlane `supply`; CI builds a signed AAB on tag `v*`; `versionCode` = CI run number
+- [ ] Play listing (pt-BR), privacy policy, data safety form
+- [ ] Internal track → closed test (12 testers, 14 days) → production
+
+**Acceptance criteria**
+
+- Pushing tag `v1.0.0` produces a signed AAB in the internal track with no manual steps
+- App is live on Google Play
+
+## Phase 8: iOS (later, ~2 days)
+
+- [ ] `pod install`, Xcode signing, Fastlane `match`
+- [ ] macOS CI job, TestFlight upload
+- [ ] Manual parity pass on an iPhone
+
+**Acceptance criteria**
+
+- TestFlight build installs and all E2E flows pass on the iOS simulator

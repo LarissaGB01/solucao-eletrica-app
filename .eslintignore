@@ -1,0 +1,5 @@
+coverage/
+android/
+ios/
+node_modules/
+!.*.js
