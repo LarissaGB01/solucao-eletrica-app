@@ -89,6 +89,8 @@ one-line change there, with no screen changes.
 
 ### Navigation
 
+Route types (`RootStackParamList`) live in `presentation/navigation/routes.ts` so screens can type their props; the navigator that registers screens lives in `app/navigation/RootNavigator.tsx`.
+
 ```
 Home ─┬─► Teoria
       ├─► FormCabeamento ─► ResultadoCabeamento ─► PassoAPassoCabeamento
