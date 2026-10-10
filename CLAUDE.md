@@ -17,7 +17,7 @@ See `ARCHITECTURE.md` for layers and data flow, `PLAN.md` for the roadmap and cu
 ## Commands
 
 ```sh
-npm ci                  # install (Node 22, see .nvmrc)
+npm ci                  # install (Node 22, see .nvmrc); postinstall generates KaTeX assets
 npm start               # Metro bundler
 npm run android         # build + run on emulator/device (needs JDK 17 + Android SDK)
 npm test                # Jest
@@ -52,6 +52,7 @@ src/content/         static pt-BR texts (theory, labels)
 - No `any`. No non-null `!` outside tests. Parse untrusted input with zod.
 - Domain functions return `Result<T, E>` (`src/domain/shared/Result.ts`) instead of throwing.
 - No Expo packages, no HTTP clients (the app is offline by design).
+- `*.generated.ts` files are build outputs (gitignored). Regenerate with `npm run postinstall`; never edit them.
 - Don't edit `android/` or `ios/` unless the task is about native config; explain why when you do.
 - Every new domain/application file gets a colocated `*.test.ts`. Domain coverage threshold: 90%.
 

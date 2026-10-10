@@ -33,7 +33,7 @@ Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed 
 - [x] Theme tokens (colors, spacing, typography) taken from the old app
 - [x] React Navigation 7 native-stack with typed route params; Home screen (2-column option grid); placeholder screen for routes of later phases
 - [x] Domain shared kernel: `DomainError`, value objects `Tensao`, `Potencia`, `FatorPotencia`, `Temperatura`, `Comprimento`
-- [ ] UI components: `Accordion` (reanimated), `Stepper`, `NumericInput` (accepts "," decimals), `Segmented`, `Formula` (KaTeX in a WebView)
+- [x] UI components: `Accordion` (core `LayoutAnimation`, no reanimated needed), `Stepper`, `NumericInput` + `parseDecimal` (accepts "," decimals), `Segmented`, `Formula` (KaTeX in a WebView, assets inlined offline)
 
 **Acceptance criteria**
 

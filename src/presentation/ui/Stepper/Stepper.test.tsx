@@ -1,0 +1,43 @@
+import { render, screen, userEvent } from '@testing-library/react-native';
+import { Text } from 'react-native';
+
+import { Stepper } from './Stepper';
+
+const steps = [
+  { key: 'a', content: <Text>Etapa A</Text> },
+  { key: 'b', content: <Text>Etapa B</Text> },
+];
+
+describe('Stepper', () => {
+  it('moves forward and back, then finishes on the last step', async () => {
+    const onFinish = jest.fn();
+    await render(<Stepper steps={steps} onFinish={onFinish} />);
+
+    expect(screen.getByText('Etapa A')).toBeOnTheScreen();
+    expect(screen.getByLabelText('Etapa 1 de 2')).toBeOnTheScreen();
+    expect(
+      screen.queryByRole('button', { name: 'Voltar' }),
+    ).not.toBeOnTheScreen();
+
+    await userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
+    expect(screen.getByText('Etapa B')).toBeOnTheScreen();
+
+    await userEvent.press(screen.getByRole('button', { name: 'Voltar' }));
+    expect(screen.getByText('Etapa A')).toBeOnTheScreen();
+
+    await userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
+    await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
+    expect(onFinish).toHaveBeenCalledTimes(1);
+  });
+
+  it('stays on the step when canAdvance returns false', async () => {
+    const canAdvance = jest.fn().mockResolvedValue(false);
+    await render(
+      <Stepper steps={steps} onFinish={jest.fn()} canAdvance={canAdvance} />,
+    );
+
+    await userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
+    expect(canAdvance).toHaveBeenCalledWith(0);
+    expect(screen.getByText('Etapa A')).toBeOnTheScreen();
+  });
+});
