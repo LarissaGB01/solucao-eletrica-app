@@ -6,7 +6,7 @@ on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) l
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 0, Skeleton & tooling
+**Current phase:** 1, Foundation & shared UI
 
 ---
 
@@ -19,8 +19,8 @@ Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed 
 - [x] Jest + React Native Testing Library, `Result` type with tests
 - [x] GitHub Actions: lint, typecheck, format, tests, Android debug build
 - [x] CLAUDE.md, ARCHITECTURE.md, PLAN.md
-- [ ] ADRs 0001–0005 in `docs/adr/` (RN CLI over Expo, Clean Architecture, Portuguese domain language, KaTeX in a WebView, mock → offline engine)
-- [ ] Push branch, CI green on GitHub, protect `main` (PR + green CI required)
+- [x] ADRs 0001–0005 in `docs/adr/` (RN CLI over Expo, Clean Architecture, Portuguese domain language, KaTeX in a WebView, mock → offline engine)
+- [x] Push branch, CI green on GitHub, protect `main` (ruleset: PR + green CI required, squash only)
 
 **Acceptance criteria**
 
