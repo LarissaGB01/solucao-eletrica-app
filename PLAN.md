@@ -30,11 +30,10 @@ Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed 
 
 ## Phase 1: Foundation & shared UI (8–10h)
 
-- [ ] Theme tokens (colors, spacing, typography) taken from the old app
-- [ ] React Navigation 7 native-stack with typed route params; Home screen (2-column option grid)
-- [ ] Domain shared kernel: `DomainError`, value objects `Tensao`, `Potencia`, `FatorPotencia`, `Temperatura`, `Comprimento`
+- [x] Theme tokens (colors, spacing, typography) taken from the old app
+- [x] React Navigation 7 native-stack with typed route params; Home screen (2-column option grid); placeholder screen for routes of later phases
+- [x] Domain shared kernel: `DomainError`, value objects `Tensao`, `Potencia`, `FatorPotencia`, `Temperatura`, `Comprimento`
 - [ ] UI components: `Accordion` (reanimated), `Stepper`, `NumericInput` (accepts "," decimals), `Segmented`, `Formula` (KaTeX in a WebView)
-- [ ] DI container in `src/app` (React context) + `useUseCases()` hook
 
 **Acceptance criteria**
 
@@ -45,6 +44,7 @@ Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed 
 
 ## Phase 2: Cabeamento vertical slice (10–12h)
 
+- [ ] DI container: `UseCases` context + `useUseCases()` hook in `presentation`, provided by `src/app` (moved from Phase 1: nothing to inject before the first use case)
 - [ ] Domain: `ProjetoCabeamento`, `ResultadoCabeamento`, enums, port `CalculadoraDimensionamento`
 - [ ] Infrastructure: `MockCalculadoraDimensionamento` with fixed, realistic fixture results
 - [ ] Application: `DimensionarCabeamento` use case + tests with a fake port
