@@ -36,12 +36,18 @@ export function Formula({ expressions, accessibilityLabel }: Props) {
       onShouldStartLoadWithRequest={request => request.url === 'about:blank'}
       onMessage={onMessage}
       scrollEnabled={false}
-      style={[styles.webview, { height }]}
+      // The library's container defaults to flex: 1 (flex-basis 0), which overrides height
+      // and collapses to 0 inside auto-height parents.
+      containerStyle={[styles.container, { height }]}
+      style={styles.webview}
     />
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 0,
+  },
   webview: {
     backgroundColor: 'transparent',
   },

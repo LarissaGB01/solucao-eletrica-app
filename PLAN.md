@@ -6,7 +6,7 @@ on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) l
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 1, Foundation & shared UI
+**Current phase:** 2, Cabeamento vertical slice
 
 ---
 
