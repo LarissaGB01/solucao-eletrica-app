@@ -1,0 +1,20 @@
+import { buildFormulaHtml } from './formulaHtml';
+
+describe('buildFormulaHtml', () => {
+  it('embeds every expression and the KaTeX runtime', () => {
+    const html = buildFormulaHtml(['I_b = \\frac{P}{V}', 'S = 220']);
+    expect(html).toContain(JSON.stringify(['I_b = \\frac{P}{V}', 'S = 220']));
+    expect(html).toContain('katex.render');
+    expect(html).toContain('@font-face');
+  });
+
+  it('escapes "<" so an expression cannot close the script tag', () => {
+    const html = buildFormulaHtml(['</script><script>alert(1)</script>']);
+    expect(html).not.toContain('</script><script>alert(1)');
+    expect(html).toContain('\\u003c/script>');
+  });
+
+  it('does not reference any external resource', () => {
+    expect(buildFormulaHtml(['x'])).not.toMatch(/(src|href)=["']?https?:/);
+  });
+});
