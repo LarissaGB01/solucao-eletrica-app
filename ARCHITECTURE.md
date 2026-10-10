@@ -132,4 +132,10 @@ original Java backend (`LarissaGB01/solucao_eletrica_backend`) for the same inpu
 
 ## Decisions
 
-Recorded in `docs/adr/`.
+Recorded in `docs/adr/` (copy `0000-template.md` for new ones):
+
+- [0001](docs/adr/0001-react-native-cli-over-expo.md) React Native CLI instead of Expo
+- [0002](docs/adr/0002-clean-architecture-with-enforced-layers.md) Clean Architecture with lint-enforced layers
+- [0003](docs/adr/0003-portuguese-ubiquitous-language.md) Portuguese for domain terms, English for technical code
+- [0004](docs/adr/0004-katex-in-webview-for-formulas.md) KaTeX in a WebView for formula rendering
+- [0005](docs/adr/0005-mock-calculator-then-offline-engine.md) Mock calculator now, on-device NBR 5410 engine later
