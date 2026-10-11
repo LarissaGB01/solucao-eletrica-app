@@ -30,4 +30,4 @@ de ninguém, inclusive de crianças.
 
 ## Contato
 
-Dúvidas sobre esta política: **CONTATO_EMAIL**.
+Dúvidas sobre esta política: **larissabarcelos.dev@gmail.com**.
