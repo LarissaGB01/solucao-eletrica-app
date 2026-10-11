@@ -5,12 +5,13 @@ import { EletrodutoSugeridoCard } from '../resultados/EletrodutoSugeridoCard';
 import { ResultadoLayout } from '../resultados/ResultadoLayout';
 
 export function ResultadoCabeamentoScreen({
+  navigation,
   route,
 }: ScreenProps<'ResultadoCabeamento'>) {
   const { condutor, disjuntor, eletroduto } = route.params.resultado;
 
   return (
-    <ResultadoLayout>
+    <ResultadoLayout formulario="FormCabeamento" navigation={navigation}>
       <CondutorSugeridoCard condutor={condutor} />
       <DisjuntorSugeridoCard disjuntor={disjuntor} />
       <EletrodutoSugeridoCard eletroduto={eletroduto} />

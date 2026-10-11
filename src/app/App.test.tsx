@@ -77,4 +77,41 @@ describe('App navigation', () => {
 
     expect(await screen.findByText('3/4" (25,00 mm)')).toBeOnTheScreen();
   });
+
+  it('starts the same form over, or returns Home, from a result', async () => {
+    await render(<App />);
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Dimensionar Disjuntores' }),
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente de projeto: (A)'),
+      '17,3',
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      '24',
+    );
+    await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
+
+    await userEvent.press(
+      await screen.findByRole('button', { name: 'Dimensionar outro' }),
+    );
+    expect(
+      await screen.findByLabelText('Corrente de projeto: (A)'),
+    ).toHaveDisplayValue('');
+
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente de projeto: (A)'),
+      '10',
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      '24',
+    );
+    await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
+    await userEvent.press(
+      await screen.findByRole('button', { name: 'Voltar ao início' }),
+    );
+    expect(await screen.findByText('Bem-vindo!')).toBeOnTheScreen();
+  });
 });
