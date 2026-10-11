@@ -13,6 +13,14 @@ describe('FormDisjuntorScreen', () => {
     await renderScreen(FormDisjuntorScreen, 'FormDisjuntor', undefined, {
       dimensionarDisjuntor: { execute },
     });
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente de projeto: (A)'),
+      '',
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      '',
+    );
 
     await finalizar();
 

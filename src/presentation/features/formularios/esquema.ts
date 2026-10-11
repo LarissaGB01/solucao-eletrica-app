@@ -8,8 +8,11 @@ import { parseDecimal } from '../../ui';
 
 const mensagens: Record<CodigoErro, string> = mensagensErro;
 
+/** Number as a form field shows it: pt-BR decimal comma. */
+export const texto = (valor: number): string => String(valor).replace('.', ',');
+
 /** Text fields stay as typed; NaN makes the value objects reject unparseable input. */
-export const numero = (texto: string): number => parseDecimal(texto) ?? NaN;
+export const numero = (campo: string): number => parseDecimal(campo) ?? NaN;
 
 type ContextoTransformacao = {
   addIssue: (issue: {
