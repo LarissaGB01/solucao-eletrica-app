@@ -2,6 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { titulosTelas } from '../../content/navegacao';
+import { FormCabeamentoScreen } from '../../presentation/features/cabeamento/FormCabeamentoScreen';
+import { ResultadoCabeamentoScreen } from '../../presentation/features/cabeamento/ResultadoCabeamentoScreen';
 import { EmConstrucaoScreen } from '../../presentation/features/emConstrucao/EmConstrucaoScreen';
 import { HomeScreen } from '../../presentation/features/home/HomeScreen';
 import type { RootStackParamList } from '../../presentation/navigation/routes';
@@ -25,8 +27,13 @@ export function RootNavigator() {
         />
         <Stack.Screen
           name="FormCabeamento"
-          component={EmConstrucaoScreen}
+          component={FormCabeamentoScreen}
           options={{ title: titulosTelas.formulario }}
+        />
+        <Stack.Screen
+          name="ResultadoCabeamento"
+          component={ResultadoCabeamentoScreen}
+          options={{ title: titulosTelas.resultado }}
         />
         <Stack.Screen
           name="FormDisjuntor"

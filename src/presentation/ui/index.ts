@@ -1,6 +1,10 @@
 export { Accordion } from './Accordion/Accordion';
+export { ChipGroup } from './ChipGroup/ChipGroup';
 export { Formula } from './Formula/Formula';
+export { NumberSpinner } from './NumberSpinner/NumberSpinner';
 export { NumericInput } from './NumericInput/NumericInput';
 export { parseDecimal } from './NumericInput/parseDecimal';
+export { Question } from './Question/Question';
+export { ResultCard, type ResultLine } from './ResultCard/ResultCard';
 export { Segmented, type SegmentedOption } from './Segmented/Segmented';
 export { Stepper, type Step } from './Stepper/Stepper';

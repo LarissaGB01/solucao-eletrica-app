@@ -1,12 +1,12 @@
 import type { ImageSourcePropType } from 'react-native';
 
 import { home } from '../../../content/home';
-import type { RootStackParamList } from '../../navigation/routes';
+import type { RouteWithoutParams } from '../../navigation/routes';
 
 export type HomeOption = {
   label: string;
   image: ImageSourcePropType;
-  route: Exclude<keyof RootStackParamList, 'Home'>;
+  route: Exclude<RouteWithoutParams, 'Home'>;
 };
 
 export const homeOptions: readonly HomeOption[] = [

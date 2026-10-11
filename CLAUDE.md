@@ -34,6 +34,8 @@ npm run validate        # lint + typecheck + format:check + test:coverage (same 
 
 Run a single test file: `npx jest src/domain/shared/Result.test.ts`
 
+After changing `babel.config.js`, restart Metro with `npm start -- --reset-cache`.
+
 ## Layout
 
 ```
@@ -55,7 +57,7 @@ src/content/         static pt-BR texts (theory, labels)
 - No Expo packages, no HTTP clients (the app is offline by design).
 - `*.generated.ts` files are build outputs (gitignored). Regenerate with `npm run postinstall`; never edit them.
 - Don't edit `android/` or `ios/` unless the task is about native config; explain why when you do.
-- Every new domain/application file gets a colocated `*.test.ts`. Domain coverage threshold: 90%.
+- Every new domain/application file with behavior gets a colocated `*.test.ts` (type-only files excepted). Domain coverage threshold: 90%.
 
 ## Conventions
 
