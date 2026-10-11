@@ -65,9 +65,10 @@ Example: sizing a cable.
 
 ```
 FormCabeamentoScreen
-  │ react-hook-form + zod (field-level validation, "," decimals)
+  │ react-hook-form + zod ("," decimals); the zod schema delegates range rules to
+  │ criarProjetoCabeamento, so value objects are the single source of validation
   ▼
-useFormCabeamentoViewModel ──► builds ProjetoCabeamento via value-object create() → Result
+useFormCabeamentoViewModel ──► receives a valid ProjetoCabeamento from the schema
   │
   ▼
 DimensionarCabeamento (use case)
@@ -77,13 +78,14 @@ CalculadoraDimensionamento ◄── implemented by:
   │                             now:   infrastructure/mock/MockCalculadoraDimensionamento
   │                             later: domain/dimensionamento/nbr5410 (real offline engine)
   ▼
-Result<ResultadoCabeamento, DomainError>
+Result<ResultadoCabeamento, FalhaCalculo>
   │
   ▼
 ResultadoCabeamentoScreen ──► PassoAPassoCabeamentoScreen (formulas from domain/formulas)
 ```
 
-Screens pass **domain objects** between them, never raw form state. The DI container in
+Screens pass **domain data** between them, never raw form state. Results are plain readonly
+objects so navigation state stays serializable. The DI container in
 `src/app` decides which `CalculadoraDimensionamento` is used. Swapping mock → real engine is a
 one-line change there, with no screen changes.
 

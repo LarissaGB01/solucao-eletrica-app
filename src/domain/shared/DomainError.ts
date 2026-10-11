@@ -4,7 +4,8 @@ export type CodigoErro =
   | 'POTENCIA_INVALIDA'
   | 'FATOR_POTENCIA_INVALIDO'
   | 'TEMPERATURA_INVALIDA'
-  | 'COMPRIMENTO_INVALIDO';
+  | 'COMPRIMENTO_INVALIDO'
+  | 'QUANTIDADE_CIRCUITOS_INVALIDA';
 
 export type DomainError = {
   readonly codigo: CodigoErro;

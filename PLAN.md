@@ -6,7 +6,7 @@ on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) l
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 2, Cabeamento vertical slice
+**Current phase:** 3, Disjuntor + Eletroduto slices
 
 ---
 
@@ -44,12 +44,14 @@ Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed 
 
 ## Phase 2: Cabeamento vertical slice (10–12h)
 
-- [ ] DI container: `UseCases` context + `useUseCases()` hook in `presentation`, provided by `src/app` (moved from Phase 1: nothing to inject before the first use case)
-- [ ] Domain: `ProjetoCabeamento`, `ResultadoCabeamento`, enums, port `CalculadoraDimensionamento`
-- [ ] Infrastructure: `MockCalculadoraDimensionamento` with fixed, realistic fixture results
-- [ ] Application: `DimensionarCabeamento` use case + tests with a fake port
-- [ ] Presentation: 4-step form (react-hook-form + zod), loading state, result screen
-- [ ] Error path: invalid input shows field messages and never calls the use case
+- [x] DI container: `UseCases` context + `useUseCases()` hook in `presentation`, provided by `src/app` (moved from Phase 1: nothing to inject before the first use case)
+- [x] Domain: `ProjetoCabeamento`, `ResultadoCabeamento`, enums, port `CalculadoraDimensionamento`
+- [x] Infrastructure: `MockCalculadoraDimensionamento` with fixed, realistic fixture results
+- [x] Application: `DimensionarCabeamento` use case + tests with a fake port
+- [x] Presentation: 4-step form (react-hook-form + zod), loading state, result screen
+- [x] Error path: invalid input shows field messages and never calls the use case
+
+Picker/spinner replacements: `Segmented` (2–3 options), `ChipGroup` (installation method), `NumberSpinner` (temperature, grouped circuits).
 
 **Acceptance criteria**
 
