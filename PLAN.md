@@ -6,7 +6,7 @@ on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) l
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 4, Passo a passo + Teoria
+**Current phase:** 5, Offline calculation engine
 
 ---
 
@@ -74,10 +74,10 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 4: Passo a passo + Teoria (10–12h)
 
-- [ ] Pure LaTeX builders in `domain/dimensionamento/formulas` for every step (single-phase and three-phase variants). Symbolic versions done in 4a; versions with values in 4b
-- [ ] Step-by-step screens for the 3 flows (accordion per step: formula with symbols → formula with values → result)
+- [x] Pure LaTeX builders in `domain/dimensionamento/formulas` for every step (single-phase and three-phase variants).
+- [x] Step-by-step screens for the 3 flows (accordion per step: formula with symbols → formula with values → result)
 - [x] Teoria screen with all sections, table images, and NBR/Siemens/Kanaflex reference links (PR 4a)
-- [ ] Move all pt-BR texts into `src/content`
+- [x] Move all pt-BR texts into `src/content`
 
 **Acceptance criteria**
 

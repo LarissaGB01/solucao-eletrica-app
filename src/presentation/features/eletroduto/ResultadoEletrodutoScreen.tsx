@@ -6,9 +6,16 @@ export function ResultadoEletrodutoScreen({
   navigation,
   route,
 }: ScreenProps<'ResultadoEletroduto'>) {
+  const { eletroduto, memoria } = route.params.resultado;
+
   return (
     <ResultadoLayout formulario="FormEletroduto" navigation={navigation}>
-      <EletrodutoSugeridoCard eletroduto={route.params.resultado.eletroduto} />
+      <EletrodutoSugeridoCard
+        eletroduto={eletroduto}
+        onVerCalculos={() =>
+          navigation.navigate('PassoAPassoEletroduto', { memoria, eletroduto })
+        }
+      />
     </ResultadoLayout>
   );
 }

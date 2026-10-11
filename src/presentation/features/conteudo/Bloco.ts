@@ -2,7 +2,7 @@ import type { ImageSourcePropType } from 'react-native';
 
 /** One piece of an explanatory section (Teoria now, Passo a passo next). */
 export type Bloco =
-  | { tipo: 'formula'; latex: string; legenda?: string }
+  | { tipo: 'formula'; expressoes: readonly string[]; legenda?: string }
   | { tipo: 'texto'; texto: string }
   | {
       tipo: 'tabela';

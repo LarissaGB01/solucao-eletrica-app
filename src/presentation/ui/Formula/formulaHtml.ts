@@ -17,7 +17,7 @@ export function buildFormulaHtml(expressions: readonly string[]): string {
 html, body { margin: 0; padding: 0; background: transparent; color: ${
     colors.textStrong
   }; }
-.formula { margin: 8px 0; font-size: ${FONT_SIZE}px; }
+.formula { margin: 12px 0; font-size: ${FONT_SIZE}px; }
 .katex-display { margin: 0; }
 </style>
 </head>

@@ -1,14 +1,13 @@
 import { screen } from '@testing-library/react-native';
 
+import { RESULTADO_DISJUNTOR_EXEMPLO } from '../../../domain/dimensionamento/resultadosExemplo';
 import { renderScreen } from '../../testing/renderScreen';
 import { ResultadoDisjuntorScreen } from './ResultadoDisjuntorScreen';
 
 describe('ResultadoDisjuntorScreen', () => {
   it('shows only the suggested breaker', async () => {
     await renderScreen(ResultadoDisjuntorScreen, 'ResultadoDisjuntor', {
-      resultado: {
-        disjuntor: { nome: 'Siemens 5SL1 C20', correnteNominalA: 20 },
-      },
+      resultado: RESULTADO_DISJUNTOR_EXEMPLO,
     });
 
     expect(screen.getByText('Siemens 5SL1 C20')).toBeOnTheScreen();

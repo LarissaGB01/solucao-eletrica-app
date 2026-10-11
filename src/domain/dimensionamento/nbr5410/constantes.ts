@@ -3,6 +3,7 @@ import type {
   TipoCabo,
   UtilizacaoCircuito,
 } from '../cabeamento/enums';
+import type { Fases } from '../fases';
 
 // Values from the original backend (LarissaGB01/solucao_eletrica_backend, common/constantes).
 
@@ -13,6 +14,22 @@ export const MATERIAL_POR_TIPO_CABO: Record<TipoCabo, MaterialCondutor> = {
   PVC: 'COBRE',
   EPR: 'COBRE',
   ALUMINIO: 'ALUMINIO',
+};
+
+export type Isolacao = 'PVC' | 'EPR';
+
+/** The backend's aluminium cable is PVC-insulated. */
+export const ISOLACAO_POR_TIPO_CABO: Record<TipoCabo, Isolacao> = {
+  PVC: 'PVC',
+  EPR: 'EPR',
+  ALUMINIO: 'PVC',
+};
+
+/** Conductors carrying current: phase + neutral (or two phases), or three phases. */
+export const CONDUTORES_CARREGADOS: Record<Fases, 2 | 3> = {
+  MONOFASICO: 2,
+  BIFASICO: 2,
+  TRIFASICO: 3,
 };
 
 /** Resistivity in Ω·mm²/m. */

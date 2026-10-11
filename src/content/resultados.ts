@@ -1,5 +1,6 @@
 export const resultados = {
   acoes: {
+    verCalculos: 'Ver cálculos »',
     dimensionarOutro: 'Dimensionar outro',
     inicio: 'Voltar ao início',
   },

@@ -6,11 +6,14 @@ import { imagensResultado } from './imagensResultado';
 
 export function DisjuntorSugeridoCard({
   disjuntor,
+  onVerCalculos,
 }: {
   disjuntor: DisjuntorSugerido | null;
+  onVerCalculos: () => void;
 }) {
   return (
     <ResultCard
+      action={{ label: textos.acoes.verCalculos, onPress: onVerCalculos }}
       title={textos.disjuntor.titulo}
       image={imagensResultado.disjuntor}
       emptyMessage={textos.disjuntor.naoEncontrado}

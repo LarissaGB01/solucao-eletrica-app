@@ -1,14 +1,13 @@
 import { screen } from '@testing-library/react-native';
 
+import { RESULTADO_ELETRODUTO_EXEMPLO } from '../../../domain/dimensionamento/resultadosExemplo';
 import { renderScreen } from '../../testing/renderScreen';
 import { ResultadoEletrodutoScreen } from './ResultadoEletrodutoScreen';
 
 describe('ResultadoEletrodutoScreen', () => {
   it('shows only the suggested conduit', async () => {
     await renderScreen(ResultadoEletrodutoScreen, 'ResultadoEletroduto', {
-      resultado: {
-        eletroduto: { diametroNominalPolegadas: '3/4"', diametroNominalMm: 25 },
-      },
+      resultado: RESULTADO_ELETRODUTO_EXEMPLO,
     });
 
     expect(screen.getByText('3/4" (25,00 mm)')).toBeOnTheScreen();
