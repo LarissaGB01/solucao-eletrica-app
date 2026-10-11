@@ -3,7 +3,9 @@ import { View } from 'react-native';
 
 import { formEletroduto as textos } from '../../../content/eletroduto';
 import { formularios } from '../../../content/formularios';
+import { VALORES_TIPICOS } from '../../../domain/dimensionamento/valoresTipicos';
 import type { ScreenProps } from '../../navigation/routes';
+import { texto } from '../formularios/esquema';
 import { NumberSpinner, NumericInput, Question, StepperForm } from '../../ui';
 import { useFormEletrodutoViewModel } from './useFormEletrodutoViewModel';
 
@@ -23,6 +25,11 @@ export function FormEletrodutoScreen({
           <NumericInput
             label={textos.secaoNominalCondutor.rotulo}
             unit={textos.secaoNominalCondutor.unidade}
+            hint={formularios.valorTipico(
+              `${texto(VALORES_TIPICOS.secaoMm2)} ${
+                textos.secaoNominalCondutor.unidade
+              }`,
+            )}
             maxLength={8}
             value={field.value}
             onChangeText={field.onChange}

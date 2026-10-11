@@ -14,11 +14,11 @@ describe('FormDisjuntorScreen', () => {
       dimensionarDisjuntor: { execute },
     });
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente de projeto: (A)'),
+      screen.getByLabelText('Corrente de projeto (A)'),
       '',
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      screen.getByLabelText('Corrente máxima do condutor (A)'),
       '',
     );
 
@@ -42,11 +42,11 @@ describe('FormDisjuntorScreen', () => {
 
     await userEvent.press(screen.getByRole('radio', { name: 'Trifásico' }));
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente de projeto: (A)'),
+      screen.getByLabelText('Corrente de projeto (A)'),
       '17,3',
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      screen.getByLabelText('Corrente máxima do condutor (A)'),
       '24',
     );
     await finalizar();

@@ -31,4 +31,17 @@ describe('Accordion', () => {
     );
     expect(screen.getByText('Conteúdo')).toBeOnTheScreen();
   });
+
+  it('shows the section value in the header and announces it with the title', async () => {
+    await render(
+      <Accordion title="Corrente do Circuito" value="17,32 A">
+        <Text>Conteúdo</Text>
+      </Accordion>,
+    );
+
+    expect(screen.getByText('17,32 A')).toBeOnTheScreen();
+    expect(
+      screen.getByRole('button', { name: 'Corrente do Circuito = 17,32 A' }),
+    ).toBeCollapsed();
+  });
 });

@@ -1,3 +1,4 @@
+import { formCabeamento } from '../../../content/cabeamento';
 import { formularios } from '../../../content/formularios';
 import type { ScreenProps } from '../../navigation/routes';
 import { type Step, StepperForm } from '../../ui';
@@ -10,17 +11,36 @@ import { useFormCabeamentoViewModel } from './useFormCabeamentoViewModel';
 export function FormCabeamentoScreen({
   navigation,
 }: ScreenProps<'FormCabeamento'>) {
-  const { control, tipoPotencia, calculando, podeAvancar, finalizar } =
+  const { control, tipoPotencia, fases, calculando, podeAvancar, finalizar } =
     useFormCabeamentoViewModel(navigation);
 
   const etapas: Step[] = [
-    { key: 'circuito', content: <EtapaCircuito control={control} /> },
+    {
+      key: 'circuito',
+      title: formCabeamento.etapas.circuito,
+      content: <EtapaCircuito control={control} />,
+    },
     {
       key: 'eletrica',
-      content: <EtapaEletrica control={control} tipoPotencia={tipoPotencia} />,
+      title: formCabeamento.etapas.eletrica,
+      content: (
+        <EtapaEletrica
+          control={control}
+          tipoPotencia={tipoPotencia}
+          fases={fases}
+        />
+      ),
     },
-    { key: 'instalacao', content: <EtapaInstalacao control={control} /> },
-    { key: 'materiais', content: <EtapaMateriais control={control} /> },
+    {
+      key: 'instalacao',
+      title: formCabeamento.etapas.instalacao,
+      content: <EtapaInstalacao control={control} />,
+    },
+    {
+      key: 'materiais',
+      title: formCabeamento.etapas.materiais,
+      content: <EtapaMateriais control={control} />,
+    },
   ];
 
   return (

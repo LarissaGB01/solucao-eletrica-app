@@ -3,27 +3,30 @@ import { fireEvent, render, screen } from '@testing-library/react-native';
 import { NumericInput } from './NumericInput';
 
 describe('NumericInput', () => {
-  it('shows label and unit and reports typed text', async () => {
+  it('shows label, unit and hint, and reports typed text', async () => {
     const onChangeText = jest.fn();
     await render(
       <NumericInput
-        label="Tensão:"
-        unit="Volts"
+        label="Tensão"
+        unit="V"
+        hint="Valor típico: 127 V"
         value=""
         onChangeText={onChangeText}
       />,
     );
 
-    expect(screen.getByText('Volts')).toBeOnTheScreen();
-    await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '220');
+    expect(screen.getByText('V')).toBeOnTheScreen();
+    expect(screen.getByText('Valor típico: 127 V')).toBeOnTheScreen();
+    await fireEvent.changeText(screen.getByLabelText('Tensão (V)'), '220');
     expect(onChangeText).toHaveBeenCalledWith('220');
   });
 
-  it('shows an error message', async () => {
+  it('shows the error instead of the hint', async () => {
     await render(
       <NumericInput
-        label="Tensão:"
+        label="Tensão"
         value="0"
+        hint="Valor típico: 127 V"
         onChangeText={jest.fn()}
         error="Informe um valor maior que zero"
       />,
@@ -31,5 +34,6 @@ describe('NumericInput', () => {
     expect(
       screen.getByText('Informe um valor maior que zero'),
     ).toBeOnTheScreen();
+    expect(screen.queryByText('Valor típico: 127 V')).toBeNull();
   });
 });

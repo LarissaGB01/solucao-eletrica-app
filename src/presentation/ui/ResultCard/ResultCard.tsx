@@ -3,7 +3,6 @@ import {
   type ImageSourcePropType,
   StyleSheet,
   Text,
-  useWindowDimensions,
   View,
 } from 'react-native';
 
@@ -15,7 +14,7 @@ export type ResultLine = { label: string; value: string };
 type Props = {
   title: string;
   image: ImageSourcePropType;
-  /** Shown when present; otherwise `emptyMessage` is shown. */
+  /** The first line is the main answer and is shown large. `null` shows `emptyMessage`. */
   lines: readonly ResultLine[] | null;
   emptyMessage?: string;
   footnote?: string;
@@ -23,7 +22,7 @@ type Props = {
   action?: { label: string; onPress: () => void };
 };
 
-/** Orange-bordered card with an illustration and label/value pairs, as in the original result screen. */
+/** Answer card: the main value first, a small illustration, secondary values below. */
 export function ResultCard({
   title,
   image,
@@ -32,8 +31,7 @@ export function ResultCard({
   footnote,
   action,
 }: Props) {
-  const { width } = useWindowDimensions();
-  const imageSize = (width - spacing.xl * 2) / 2 - spacing.md * 2;
+  const [principal, ...demais] = lines ?? [];
 
   return (
     <View style={styles.container}>
@@ -41,80 +39,95 @@ export function ResultCard({
         {title}
       </Text>
       <View style={styles.card}>
-        <Image
-          source={image}
-          style={[styles.image, { width: imageSize, height: imageSize }]}
-        />
+        <Image source={image} style={styles.image} />
         <View style={styles.body}>
-          {lines === null ? (
-            <Text style={styles.value}>{emptyMessage}</Text>
+          {lines === null || principal === undefined ? (
+            <Text style={styles.empty}>{emptyMessage}</Text>
           ) : (
-            lines.map(line => (
-              <View key={line.label} style={styles.line}>
-                <Text style={styles.label}>{line.label}</Text>
-                <Text style={styles.value}>{line.value}</Text>
-              </View>
-            ))
-          )}
-          {lines !== null && footnote !== undefined && (
-            <Text style={styles.footnote}>{footnote}</Text>
+            <>
+              <Text style={styles.label}>{principal.label}</Text>
+              <Text style={styles.mainValue}>{principal.value}</Text>
+              {demais.map(line => (
+                <View key={line.label} style={styles.line}>
+                  <Text style={styles.label}>{line.label}</Text>
+                  <Text style={styles.value}>{line.value}</Text>
+                </View>
+              ))}
+              {footnote !== undefined && (
+                <Text style={styles.footnote}>{footnote}</Text>
+              )}
+            </>
           )}
         </View>
       </View>
       {action !== undefined && (
         <View style={styles.action}>
-          <Button label={action.label} onPress={action.onPress} />
+          <Button
+            label={action.label}
+            variant="secondary"
+            onPress={action.onPress}
+          />
         </View>
       )}
     </View>
   );
 }
 
+const IMAGE_SIZE = 72;
+
 const styles = StyleSheet.create({
-  action: {
-    marginTop: spacing.sm,
-  },
   container: {
     marginTop: spacing.xl,
   },
   title: {
-    ...typography.subtitle,
-    color: colors.border,
-    textAlign: 'center',
+    ...typography.label,
+    fontSize: 18,
+    color: colors.textStrong,
+    marginBottom: spacing.sm,
   },
   card: {
     flexDirection: 'row',
-    borderWidth: 3,
-    borderColor: colors.border,
+    gap: spacing.lg,
+    padding: spacing.lg,
+    borderWidth: 1,
+    borderColor: colors.borderSubtle,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.primary,
     borderRadius: radius.md,
-    backgroundColor: colors.background,
-    overflow: 'hidden',
+    backgroundColor: colors.surface,
   },
   image: {
-    borderRadius: spacing.xs,
+    width: IMAGE_SIZE,
+    height: IMAGE_SIZE,
+    borderRadius: spacing.sm,
   },
   body: {
     flex: 1,
-    padding: spacing.md,
     justifyContent: 'center',
-    gap: spacing.md,
-  },
-  line: {
-    alignItems: 'center',
   },
   label: {
-    ...typography.label,
     color: colors.textMuted,
-    textAlign: 'center',
+  },
+  mainValue: {
+    ...typography.title,
+    color: colors.primaryDark,
+  },
+  line: {
+    marginTop: spacing.sm,
   },
   value: {
     ...typography.label,
-    color: colors.border,
-    textAlign: 'center',
+    color: colors.textStrong,
   },
   footnote: {
-    ...typography.label,
-    color: colors.text,
-    textAlign: 'center',
+    marginTop: spacing.sm,
+    color: colors.textMuted,
+  },
+  empty: {
+    ...typography.body,
+    color: colors.textStrong,
+  },
+  action: {
+    marginTop: spacing.sm,
   },
 });

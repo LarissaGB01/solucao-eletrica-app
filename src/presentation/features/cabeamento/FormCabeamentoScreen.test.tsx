@@ -23,24 +23,18 @@ const proximo = () =>
   userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
 
 const limparEletricos = async () => {
-  await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '');
-  await fireEvent.changeText(
-    screen.getByLabelText('Potência: (VoltAmperes)'),
-    '',
-  );
+  await fireEvent.changeText(screen.getByLabelText('Tensão (V)'), '');
+  await fireEvent.changeText(screen.getByLabelText('Potência (VA)'), '');
 };
 
 const preencherAteFinal = async () => {
   await proximo();
-  await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '127');
-  await fireEvent.changeText(
-    screen.getByLabelText('Potência: (VoltAmperes)'),
-    '2200',
-  );
+  await fireEvent.changeText(screen.getByLabelText('Tensão (V)'), '127');
+  await fireEvent.changeText(screen.getByLabelText('Potência (VA)'), '2200');
   await proximo();
   await proximo();
   await fireEvent.changeText(
-    screen.getByLabelText('Comprimento: (metros)'),
+    screen.getByLabelText('Comprimento do cabo (m)'),
     '15',
   );
   await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
@@ -72,7 +66,7 @@ describe('FormCabeamentoScreen', () => {
     await proximo();
     await screen.findByText('Informe uma tensão inteira maior que zero.');
 
-    await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '127');
+    await fireEvent.changeText(screen.getByLabelText('Tensão (V)'), '127');
 
     expect(
       screen.queryByText('Informe uma tensão inteira maior que zero.'),
@@ -85,16 +79,13 @@ describe('FormCabeamentoScreen', () => {
   it('asks for the power factor only for active power and validates its range', async () => {
     await setup(jest.fn());
     await proximo();
-    expect(screen.queryByLabelText('Fator de Potência:')).toBeNull();
+    expect(screen.queryByLabelText('Fator de potência')).toBeNull();
 
     await userEvent.press(screen.getByRole('radio', { name: 'Ativa' }));
-    await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '220');
+    await fireEvent.changeText(screen.getByLabelText('Tensão (V)'), '220');
+    await fireEvent.changeText(screen.getByLabelText('Potência (W)'), '1800');
     await fireEvent.changeText(
-      screen.getByLabelText('Potência: (Watts)'),
-      '1800',
-    );
-    await fireEvent.changeText(
-      screen.getByLabelText('Fator de Potência:'),
+      screen.getByLabelText('Fator de potência'),
       '1,5',
     );
     await proximo();
@@ -140,13 +131,11 @@ describe('FormCabeamentoScreen', () => {
     await setup(execute);
 
     await proximo();
-    expect(screen.getByLabelText('Tensão: (Volts)')).toHaveDisplayValue('127');
-    expect(screen.getByLabelText('Potência: (VoltAmperes)')).toHaveDisplayValue(
-      '2200',
-    );
+    expect(screen.getByLabelText('Tensão (V)')).toHaveDisplayValue('127');
+    expect(screen.getByLabelText('Potência (VA)')).toHaveDisplayValue('2200');
     await proximo();
     await proximo();
-    expect(screen.getByLabelText('Comprimento: (metros)')).toHaveDisplayValue(
+    expect(screen.getByLabelText('Comprimento do cabo (m)')).toHaveDisplayValue(
       '15',
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
@@ -159,7 +148,7 @@ describe('FormCabeamentoScreen', () => {
     await proximo();
     await userEvent.press(screen.getByRole('radio', { name: 'Ativa' }));
 
-    expect(screen.getByLabelText('Fator de Potência:')).toHaveDisplayValue(
+    expect(screen.getByLabelText('Fator de potência')).toHaveDisplayValue(
       '0,92',
     );
   });
@@ -167,7 +156,7 @@ describe('FormCabeamentoScreen', () => {
   it('moves the suggested voltage with the phases, but keeps a typed one', async () => {
     await setup(jest.fn());
     await proximo();
-    const tensao = () => screen.getByLabelText('Tensão: (Volts)');
+    const tensao = () => screen.getByLabelText('Tensão (V)');
 
     await userEvent.press(screen.getByRole('radio', { name: 'Trifásico' }));
     expect(tensao()).toHaveDisplayValue('220');

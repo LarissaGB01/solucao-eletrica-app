@@ -68,19 +68,17 @@ const BUTTON_SIZE = 44;
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: spacing.lg,
+    marginVertical: spacing.md,
   },
   label: {
     ...typography.body,
     fontWeight: 'bold',
     color: colors.textStrong,
-    textAlign: 'center',
-    marginBottom: spacing.md,
+    marginBottom: spacing.sm,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   button: {
     width: BUTTON_SIZE,

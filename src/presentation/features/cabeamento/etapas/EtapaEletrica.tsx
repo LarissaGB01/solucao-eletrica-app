@@ -3,7 +3,13 @@ import { View } from 'react-native';
 
 import { formCabeamento } from '../../../../content/cabeamento';
 import { formularios } from '../../../../content/formularios';
+import type { Fases } from '../../../../domain/dimensionamento/fases';
+import {
+  TENSAO_TIPICA_V,
+  VALORES_TIPICOS,
+} from '../../../../domain/dimensionamento/valoresTipicos';
 import type { TipoPotencia } from '../../../../domain/shared/grandezas';
+import { texto } from '../../formularios/esquema';
 import { NumericInput, Question, Segmented } from '../../../ui';
 import { opcoesFases } from '../../formularios/opcoes';
 import { opcoesTipoPotencia } from '../opcoes';
@@ -14,9 +20,10 @@ const textos = formCabeamento.eletrico;
 type Props = {
   control: FormCabeamentoControl;
   tipoPotencia: TipoPotencia;
+  fases: Fases;
 };
 
-export function EtapaEletrica({ control, tipoPotencia }: Props) {
+export function EtapaEletrica({ control, tipoPotencia, fases }: Props) {
   return (
     <View>
       <Question>{formularios.dadosEletricos.pergunta}</Question>
@@ -40,6 +47,9 @@ export function EtapaEletrica({ control, tipoPotencia }: Props) {
           <NumericInput
             label={textos.tensao.rotulo}
             unit={textos.tensao.unidade}
+            hint={formularios.valorTipico(
+              `${TENSAO_TIPICA_V[fases]} ${textos.tensao.unidade}`,
+            )}
             maxLength={5}
             value={field.value}
             onChangeText={field.onChange}
@@ -68,6 +78,9 @@ export function EtapaEletrica({ control, tipoPotencia }: Props) {
           <NumericInput
             label={textos.potencia.rotulo}
             unit={textos.potencia.unidades[tipoPotencia]}
+            hint={formularios.valorTipico(
+              `${VALORES_TIPICOS.potenciaVA} ${textos.potencia.unidades[tipoPotencia]}`,
+            )}
             maxLength={8}
             value={field.value}
             onChangeText={field.onChange}
@@ -83,6 +96,9 @@ export function EtapaEletrica({ control, tipoPotencia }: Props) {
           render={({ field, fieldState }) => (
             <NumericInput
               label={textos.fatorPotencia.rotulo}
+              hint={textos.fatorPotencia.dica(
+                texto(VALORES_TIPICOS.fatorPotencia),
+              )}
               maxLength={6}
               value={field.value}
               onChangeText={field.onChange}

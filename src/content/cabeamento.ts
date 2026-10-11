@@ -1,4 +1,10 @@
 export const formCabeamento = {
+  etapas: {
+    circuito: 'Circuito',
+    eletrica: 'Dados elétricos',
+    instalacao: 'Instalação',
+    materiais: 'Materiais',
+  },
   finalidade: {
     pergunta: 'Informe a finalidade desse circuito',
     opcoes: { DISTRIBUICAO: 'Distribuição', TERMINAL: 'Terminal' },
@@ -12,16 +18,19 @@ export const formCabeamento = {
     unidade: '°C',
   },
   eletrico: {
-    tensao: { rotulo: 'Tensão:', unidade: 'Volts' },
+    tensao: { rotulo: 'Tensão', unidade: 'V' },
     tipoPotencia: {
       rotulo: 'Tipo de potência',
       opcoes: { APARENTE: 'Aparente', ATIVA: 'Ativa' },
     },
     potencia: {
-      rotulo: 'Potência:',
-      unidades: { APARENTE: 'VoltAmperes', ATIVA: 'Watts' },
+      rotulo: 'Potência',
+      unidades: { APARENTE: 'VA', ATIVA: 'W' },
     },
-    fatorPotencia: { rotulo: 'Fator de Potência:' },
+    fatorPotencia: {
+      rotulo: 'Fator de potência',
+      dica: (valor: string) => `Mínimo de referência da ANEEL: ${valor}`,
+    },
   },
   metodo: {
     pergunta: 'Informe o método de instalação da fiação elétrica',
@@ -34,8 +43,7 @@ export const formCabeamento = {
     opcoes: { PVC: 'PVC', EPR: 'EPR', ALUMINIO: 'Alumínio' },
   },
   comprimento: {
-    pergunta: 'Informe o comprimento do cabo',
-    rotulo: 'Comprimento:',
-    unidade: 'metros',
+    rotulo: 'Comprimento do cabo',
+    unidade: 'm',
   },
 } as const;
