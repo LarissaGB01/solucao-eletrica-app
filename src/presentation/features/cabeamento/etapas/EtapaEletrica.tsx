@@ -2,9 +2,11 @@ import { Controller } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { formCabeamento } from '../../../../content/cabeamento';
+import { formularios } from '../../../../content/formularios';
 import type { TipoPotencia } from '../../../../domain/shared/grandezas';
 import { NumericInput, Question, Segmented } from '../../../ui';
-import { opcoesFases, opcoesTipoPotencia } from '../opcoes';
+import { opcoesFases } from '../../formularios/opcoes';
+import { opcoesTipoPotencia } from '../opcoes';
 import type { FormCabeamentoControl } from '../useFormCabeamentoViewModel';
 
 const textos = formCabeamento.eletrico;
@@ -17,13 +19,13 @@ type Props = {
 export function EtapaEletrica({ control, tipoPotencia }: Props) {
   return (
     <View>
-      <Question>{textos.pergunta}</Question>
+      <Question>{formularios.dadosEletricos.pergunta}</Question>
       <Controller
         control={control}
         name="fases"
         render={({ field }) => (
           <Segmented
-            accessibilityLabel={textos.fases.rotulo}
+            accessibilityLabel={formularios.fases.rotulo}
             options={opcoesFases}
             value={field.value}
             onChange={field.onChange}

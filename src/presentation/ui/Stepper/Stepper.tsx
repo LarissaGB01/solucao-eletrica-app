@@ -34,24 +34,27 @@ export function Stepper({ steps, onFinish, canAdvance }: Props) {
 
   return (
     <View>
-      <View
-        style={styles.indicators}
-        accessible
-        accessibilityLabel={textos.etapa(active + 1, steps.length)}
-      >
-        {steps.map((step, index) => (
-          <View
-            key={step.key}
-            style={[
-              styles.dot,
-              index < active && styles.dotDone,
-              index === active && styles.dotActive,
-            ]}
-          >
-            <Text style={styles.dotLabel}>{index + 1}</Text>
-          </View>
-        ))}
-      </View>
+      {/* A single step needs no progress indicator. */}
+      {steps.length > 1 && (
+        <View
+          style={styles.indicators}
+          accessible
+          accessibilityLabel={textos.etapa(active + 1, steps.length)}
+        >
+          {steps.map((step, index) => (
+            <View
+              key={step.key}
+              style={[
+                styles.dot,
+                index < active && styles.dotDone,
+                index === active && styles.dotActive,
+              ]}
+            >
+              <Text style={styles.dotLabel}>{index + 1}</Text>
+            </View>
+          ))}
+        </View>
+      )}
 
       {steps[active]?.content}
 

@@ -8,3 +8,4 @@ export { Question } from './Question/Question';
 export { ResultCard, type ResultLine } from './ResultCard/ResultCard';
 export { Segmented, type SegmentedOption } from './Segmented/Segmented';
 export { Stepper, type Step } from './Stepper/Stepper';
+export { StepperForm } from './StepperForm/StepperForm';

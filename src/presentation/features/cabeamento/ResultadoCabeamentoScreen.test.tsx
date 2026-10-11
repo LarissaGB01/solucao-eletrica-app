@@ -1,20 +1,11 @@
-import { render, screen } from '@testing-library/react-native';
+import { screen } from '@testing-library/react-native';
 
 import type { ResultadoCabeamento } from '../../../domain/dimensionamento/cabeamento';
-import type { ScreenProps } from '../../navigation/routes';
+import { renderScreen } from '../../testing/renderScreen';
 import { ResultadoCabeamentoScreen } from './ResultadoCabeamentoScreen';
 
 const renderResultado = (resultado: ResultadoCabeamento) =>
-  render(
-    <ResultadoCabeamentoScreen
-      navigation={{} as ScreenProps<'ResultadoCabeamento'>['navigation']}
-      route={{
-        key: 'resultado',
-        name: 'ResultadoCabeamento',
-        params: { resultado },
-      }}
-    />,
-  );
+  renderScreen(ResultadoCabeamentoScreen, 'ResultadoCabeamento', { resultado });
 
 describe('ResultadoCabeamentoScreen', () => {
   it('shows the suggested conductor, breaker and conduit', async () => {

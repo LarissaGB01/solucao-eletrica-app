@@ -46,13 +46,16 @@ and don't depend on React Native, so they can be tested in isolation and reused 
 
 ```
 src/domain/
-├── shared/                 Result, DomainError, units: Tensao, Potencia, FatorPotencia,
-│                           Temperatura, Comprimento
+├── shared/                 Result, DomainError, combinarCampos, units: Tensao, Potencia,
+│                           FatorPotencia, Temperatura, Comprimento, Corrente, SecaoNominal,
+│                           QuantidadeCircuitos, QuantidadeCondutores
 └── dimensionamento/
     ├── cabeamento/         ProjetoCabeamento (input), ResultadoCabeamento, enums:
     │                       FinalidadeCircuito, UtilizacaoCircuito, Fases, MetodoInstalacao, TipoCabo
     ├── disjuntor/          ProjetoDisjuntor, ResultadoDisjuntor
     ├── eletroduto/         ProjetoEletroduto, ResultadoEletroduto
+    ├── fases.ts            Fases (shared by cabeamento and disjuntor)
+    ├── sugestoes.ts        CondutorSugerido, DisjuntorSugerido, EletrodutoSugerido
     ├── formulas/           pure LaTeX builders for each calculation step
     └── ports/              CalculadoraDimensionamento (interface)
 ```
@@ -83,6 +86,9 @@ Result<ResultadoCabeamento, FalhaCalculo>
   ▼
 ResultadoCabeamentoScreen ──► PassoAPassoCabeamentoScreen (formulas from domain/formulas)
 ```
+
+Each form screen is a thin `StepperForm`; shared form logic lives in
+`presentation/features/formularios` and shared result cards in `presentation/features/resultados`.
 
 Screens pass **domain data** between them, never raw form state. Results are plain readonly
 objects so navigation state stays serializable. The DI container in

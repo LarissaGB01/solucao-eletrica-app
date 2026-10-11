@@ -1,6 +1,6 @@
 import type { ResultadoCabeamento } from '../../domain/dimensionamento/cabeamento';
 import { projetoCabeamentoExemplo } from '../../domain/dimensionamento/cabeamento';
-import type { CalculadoraDimensionamento } from '../../domain/dimensionamento/ports/CalculadoraDimensionamento';
+import { fakeCalculadora } from '../testing/fakeCalculadora';
 import { DimensionarCabeamento } from './DimensionarCabeamento';
 
 const resultado: ResultadoCabeamento = {
@@ -9,27 +9,21 @@ const resultado: ResultadoCabeamento = {
   eletroduto: null,
 };
 
-const fakeCalculadora = (
-  dimensionarCabeamento: CalculadoraDimensionamento['dimensionarCabeamento'],
-): CalculadoraDimensionamento => ({ dimensionarCabeamento });
-
 describe('DimensionarCabeamento', () => {
   it('passes the project to the calculator and returns its result', async () => {
-    const dimensionar = jest.fn().mockResolvedValue(resultado);
+    const dimensionarCabeamento = jest.fn().mockResolvedValue(resultado);
     const projeto = projetoCabeamentoExemplo();
 
     const result = await new DimensionarCabeamento(
-      fakeCalculadora(dimensionar),
+      fakeCalculadora({ dimensionarCabeamento }),
     ).execute(projeto);
 
-    expect(dimensionar).toHaveBeenCalledWith(projeto);
+    expect(dimensionarCabeamento).toHaveBeenCalledWith(projeto);
     expect(result).toEqual({ ok: true, value: resultado });
   });
 
   it('turns a calculator failure into FALHA_CALCULO', async () => {
-    const useCase = new DimensionarCabeamento(
-      fakeCalculadora(() => Promise.reject(new Error('boom'))),
-    );
+    const useCase = new DimensionarCabeamento(fakeCalculadora({}));
 
     expect(await useCase.execute(projetoCabeamentoExemplo())).toEqual({
       ok: false,

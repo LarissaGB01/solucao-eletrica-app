@@ -1,4 +1,4 @@
-import { resultado as textos } from '../../../content/cabeamento';
+import { resultados as textos } from '../../../content/resultados';
 import type { EletrodutoSugerido } from '../../../domain/dimensionamento/sugestoes';
 import { formatarNumero } from '../../format/formatarNumero';
 import { ResultCard } from '../../ui';

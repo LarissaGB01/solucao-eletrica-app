@@ -13,13 +13,9 @@ describe('App navigation', () => {
     expect(screen.getByText('Solução Elétrica')).toBeOnTheScreen();
   });
 
-  it.each([
-    'Dimensionar Disjuntores',
-    'Dimensionar Eletrodutos',
-    'Base Teórica',
-  ])('opens a placeholder screen from "%s"', async option => {
+  it('opens a placeholder screen from "Base Teórica"', async () => {
     await render(<App />);
-    await userEvent.press(screen.getByRole('button', { name: option }));
+    await userEvent.press(screen.getByRole('button', { name: 'Base Teórica' }));
     expect(await screen.findByText('Em construção')).toBeOnTheScreen();
   });
 
@@ -48,5 +44,37 @@ describe('App navigation', () => {
     expect(await screen.findByText('2,50 mm²')).toBeOnTheScreen();
     expect(screen.getByText('Siemens 5SL1 C20')).toBeOnTheScreen();
     expect(screen.getByText('3/4" (25,00 mm)')).toBeOnTheScreen();
+  });
+
+  it('sizes a breaker end to end with the mock calculator', async () => {
+    await render(<App />);
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Dimensionar Disjuntores' }),
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente de projeto: (A)'),
+      '17,3',
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      '24',
+    );
+    await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
+
+    expect(await screen.findByText('Siemens 5SL1 C20')).toBeOnTheScreen();
+  });
+
+  it('sizes a conduit end to end with the mock calculator', async () => {
+    await render(<App />);
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Dimensionar Eletrodutos' }),
+    );
+    await fireEvent.changeText(
+      screen.getByLabelText('Seção nominal do condutor: (mm²)'),
+      '2,5',
+    );
+    await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
+
+    expect(await screen.findByText('3/4" (25,00 mm)')).toBeOnTheScreen();
   });
 });
