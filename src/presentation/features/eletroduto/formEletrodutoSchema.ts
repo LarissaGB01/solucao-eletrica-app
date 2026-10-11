@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 import { criarProjetoEletroduto } from '../../../domain/dimensionamento/eletroduto';
-import { numero, projetoOuErros } from '../formularios/esquema';
+import { VALORES_TIPICOS } from '../../../domain/dimensionamento/valoresTipicos';
+import { numero, projetoOuErros, texto } from '../formularios/esquema';
 
 /** Form shape; validation is delegated to the domain via `projetoOuErros`. */
 export const formEletrodutoSchema = z
@@ -22,6 +23,6 @@ export const formEletrodutoSchema = z
 export type ValoresFormEletroduto = z.input<typeof formEletrodutoSchema>;
 
 export const VALORES_INICIAIS_ELETRODUTO: ValoresFormEletroduto = {
-  secaoNominalCondutor: '',
-  quantidadeCondutores: 3, // phase, neutral and ground of a single-phase circuit
+  secaoNominalCondutor: texto(VALORES_TIPICOS.secaoMm2),
+  quantidadeCondutores: VALORES_TIPICOS.quantidadeCondutores,
 };

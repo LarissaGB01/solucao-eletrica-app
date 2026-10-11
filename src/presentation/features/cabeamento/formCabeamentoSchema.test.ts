@@ -21,6 +21,10 @@ const mensagensPorCampo = (valores: ValoresFormCabeamento) => {
 };
 
 describe('formCabeamentoSchema', () => {
+  it('accepts the prefilled values as they are', () => {
+    expect(formCabeamentoSchema.safeParse(VALORES_INICIAIS).success).toBe(true);
+  });
+
   it('turns valid text into a ProjetoCabeamento', () => {
     const result = formCabeamentoSchema.safeParse(preenchido);
     expect(result.success && result.data.tensao.volts).toBe(127);
@@ -40,7 +44,14 @@ describe('formCabeamentoSchema', () => {
   });
 
   it('shows pt-BR messages on the empty required fields', () => {
-    expect(mensagensPorCampo(VALORES_INICIAIS)).toEqual({
+    expect(
+      mensagensPorCampo({
+        ...VALORES_INICIAIS,
+        tensao: '',
+        potencia: '',
+        comprimento: '',
+      }),
+    ).toEqual({
       tensao: 'Informe uma tensão inteira maior que zero.',
       potencia: 'Informe uma potência maior que zero.',
       comprimento: 'Informe um comprimento inteiro maior que zero.',

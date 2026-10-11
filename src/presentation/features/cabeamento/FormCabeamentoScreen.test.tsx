@@ -22,6 +22,14 @@ const setup = async (execute: UseCases['dimensionarCabeamento']['execute']) => {
 const proximo = () =>
   userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
 
+const limparEletricos = async () => {
+  await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '');
+  await fireEvent.changeText(
+    screen.getByLabelText('Potência: (VoltAmperes)'),
+    '',
+  );
+};
+
 const preencherAteFinal = async () => {
   await proximo();
   await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '127');
@@ -44,6 +52,7 @@ describe('FormCabeamentoScreen', () => {
     await setup(execute);
 
     await proximo();
+    await limparEletricos();
     await proximo();
 
     expect(screen.getByLabelText('Etapa 2 de 4')).toBeOnTheScreen();
@@ -59,6 +68,7 @@ describe('FormCabeamentoScreen', () => {
   it('clears a message as soon as the field is fixed', async () => {
     await setup(jest.fn());
     await proximo();
+    await limparEletricos();
     await proximo();
     await screen.findByText('Informe uma tensão inteira maior que zero.');
 
@@ -123,5 +133,47 @@ describe('FormCabeamentoScreen', () => {
 
     expect(alert).toHaveBeenCalledWith('Erro inesperado. Tente novamente!');
     expect(navigation.navigate).not.toHaveBeenCalled();
+  });
+
+  it('starts with common Brazilian values, so the defaults can be calculated directly', async () => {
+    const execute = jest.fn().mockResolvedValue(ok(resultado));
+    await setup(execute);
+
+    await proximo();
+    expect(screen.getByLabelText('Tensão: (Volts)')).toHaveDisplayValue('127');
+    expect(screen.getByLabelText('Potência: (VoltAmperes)')).toHaveDisplayValue(
+      '2200',
+    );
+    await proximo();
+    await proximo();
+    expect(screen.getByLabelText('Comprimento: (metros)')).toHaveDisplayValue(
+      '15',
+    );
+    await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
+
+    expect(execute).toHaveBeenCalled();
+  });
+
+  it('suggests 0,92 as power factor for active power', async () => {
+    await setup(jest.fn());
+    await proximo();
+    await userEvent.press(screen.getByRole('radio', { name: 'Ativa' }));
+
+    expect(screen.getByLabelText('Fator de Potência:')).toHaveDisplayValue(
+      '0,92',
+    );
+  });
+
+  it('moves the suggested voltage with the phases, but keeps a typed one', async () => {
+    await setup(jest.fn());
+    await proximo();
+    const tensao = () => screen.getByLabelText('Tensão: (Volts)');
+
+    await userEvent.press(screen.getByRole('radio', { name: 'Trifásico' }));
+    expect(tensao()).toHaveDisplayValue('220');
+
+    await fireEvent.changeText(tensao(), '380');
+    await userEvent.press(screen.getByRole('radio', { name: 'Monofásico' }));
+    expect(tensao()).toHaveDisplayValue('380');
   });
 });

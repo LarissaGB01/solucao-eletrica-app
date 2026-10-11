@@ -109,7 +109,7 @@ describe('App navigation', () => {
     );
     expect(
       await screen.findByLabelText('Corrente de projeto: (A)'),
-    ).toHaveDisplayValue('');
+    ).toHaveDisplayValue('15');
 
     await fireEvent.changeText(
       screen.getByLabelText('Corrente de projeto: (A)'),

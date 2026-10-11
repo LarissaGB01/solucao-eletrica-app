@@ -13,6 +13,10 @@ describe('FormEletrodutoScreen', () => {
     await renderScreen(FormEletrodutoScreen, 'FormEletroduto', undefined, {
       dimensionarEletroduto: { execute },
     });
+    await fireEvent.changeText(
+      screen.getByLabelText('Seção nominal do condutor: (mm²)'),
+      '',
+    );
 
     await finalizar();
 

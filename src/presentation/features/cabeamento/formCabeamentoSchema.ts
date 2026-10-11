@@ -8,7 +8,11 @@ import {
   TIPOS_CABO,
   UTILIZACOES_CIRCUITO,
 } from '../../../domain/dimensionamento/cabeamento';
-import { numero, projetoOuErros } from '../formularios/esquema';
+import {
+  TENSAO_TIPICA_V,
+  VALORES_TIPICOS,
+} from '../../../domain/dimensionamento/valoresTipicos';
+import { numero, projetoOuErros, texto } from '../formularios/esquema';
 
 /** Form shape; validation is delegated to the domain via `projetoOuErros`. */
 export const formCabeamentoSchema = z
@@ -41,19 +45,20 @@ export const formCabeamentoSchema = z
 
 export type ValoresFormCabeamento = z.input<typeof formCabeamentoSchema>;
 
+/** Prefilled with the most common Brazilian values (domain/dimensionamento/valoresTipicos). */
 export const VALORES_INICIAIS: ValoresFormCabeamento = {
   finalidade: 'TERMINAL',
   utilizacao: 'TOMADA',
-  temperaturaAmbiente: 30, // NBR 5410 reference temperature
+  temperaturaAmbiente: VALORES_TIPICOS.temperaturaC,
   fases: 'MONOFASICO',
-  tensao: '',
+  tensao: texto(TENSAO_TIPICA_V.MONOFASICO),
   tipoPotencia: 'APARENTE',
-  potencia: '',
-  fatorPotencia: '',
+  potencia: texto(VALORES_TIPICOS.potenciaVA),
+  fatorPotencia: texto(VALORES_TIPICOS.fatorPotencia),
   metodoInstalacao: 'B1',
   circuitosAgrupados: 1,
   tipoCabo: 'PVC',
-  comprimento: '',
+  comprimento: texto(VALORES_TIPICOS.comprimentoM),
 };
 
 /** Fields validated before leaving each step of the form. */
