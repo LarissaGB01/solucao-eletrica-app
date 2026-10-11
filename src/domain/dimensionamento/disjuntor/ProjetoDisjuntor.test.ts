@@ -25,4 +25,22 @@ describe('criarProjetoDisjuntor', () => {
       'correnteProjeto',
     ]);
   });
+
+  it('requires the conductor capacity to exceed the design current', () => {
+    expect(
+      criarProjetoDisjuntor({
+        fases: 'MONOFASICO',
+        correnteProjeto: 30,
+        correnteMaximaCondutor: 30,
+      }),
+    ).toEqual({
+      ok: false,
+      error: {
+        correnteMaximaCondutor: {
+          codigo: 'CORRENTE_MAXIMA_INSUFICIENTE',
+          valorRecebido: 30,
+        },
+      },
+    });
+  });
 });

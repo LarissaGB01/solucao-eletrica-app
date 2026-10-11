@@ -10,7 +10,7 @@ describe('ResultadoDisjuntorScreen', () => {
       resultado: RESULTADO_DISJUNTOR_EXEMPLO,
     });
 
-    expect(screen.getByText('Siemens 5SL1 C20')).toBeOnTheScreen();
+    expect(screen.getByText('5SL1 220-7MB')).toBeOnTheScreen();
     expect(screen.queryByText('Condutor Sugerido')).toBeNull();
     expect(screen.queryByText('Eletroduto Sugerido')).toBeNull();
   });

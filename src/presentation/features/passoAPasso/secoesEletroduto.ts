@@ -5,6 +5,7 @@ import { referencias, teoria } from '../../../content/teoria';
 import { passoAPasso as p } from '../../../domain/dimensionamento/formulas/passoAPasso';
 import type { MemoriaEletroduto } from '../../../domain/dimensionamento/memoria';
 import type { EletrodutoSugerido } from '../../../domain/dimensionamento/sugestoes';
+import { formatarPolegadas } from '../../format/formatarPolegadas';
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
 import { tabelas } from '../conteudo/tabelas';
@@ -20,7 +21,7 @@ export function secoesEletroduto(
     ? [
         linha(
           resultados.eletroduto.diametro,
-          `${eletroduto.diametroNominalPolegadas} (${n(
+          `${formatarPolegadas(eletroduto.diametroNominalPolegadas)} (${n(
             eletroduto.diametroNominalMm,
           )} ${mm})`,
         ),
@@ -50,7 +51,7 @@ export function secoesEletroduto(
       titulo: eletroduto
         ? titulo(
             titulos.eletrodutoRecomendado,
-            eletroduto.diametroNominalPolegadas,
+            formatarPolegadas(eletroduto.diametroNominalPolegadas),
           )
         : titulos.eletrodutoRecomendado,
       blocos: [

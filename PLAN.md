@@ -6,7 +6,7 @@ on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) l
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 5, Offline calculation engine
+**Current phase:** 6, Hardening
 
 ---
 
@@ -86,17 +86,17 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 5: Offline calculation engine (15–25h)
 
-- [ ] Read the Java backend and list every rule + NBR 5410 table it uses
-- [ ] Port the tables as typed data in `domain/dimensionamento/nbr5410/tabelas`
-- [ ] Port the calculations as pure domain services implementing `CalculadoraDimensionamento`
-- [ ] Golden tests: ≥10 input sets per flow, outputs compared with the Java backend's
-- [ ] Switch the DI container from the mock to the real engine
+- [x] Read the Java backend and list every rule + NBR 5410 table it uses
+- [x] Port the tables as typed data in `domain/dimensionamento/nbr5410/tabelas`
+- [x] Port the calculations as pure domain services implementing `CalculadoraDimensionamento`
+- [x] Golden tests: ≥10 input sets per flow, outputs compared with the Java backend's
+- [x] Switch the DI container from the mock to the real engine
 
 **Acceptance criteria**
 
-- All golden tests pass, numeric tolerance ≤0.01
+- All golden tests pass: continuous values within 0.01 or 1 % (backend truncation, ADR 0006), discrete choices exact
 - The app works in airplane mode
-- `MockCalculadoraDimensionamento` remains only as a test helper
+- `MockCalculadoraDimensionamento` removed (unused); tests use `fakeCalculadora` and `resultadosExemplo`
 
 ## Phase 6: Hardening (6–8h)
 

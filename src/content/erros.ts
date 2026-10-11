@@ -10,5 +10,11 @@ export const mensagensErro = {
   CORRENTE_INVALIDA: 'Informe uma corrente maior que zero.',
   SECAO_INVALIDA: 'Informe uma seção maior que zero.',
   QUANTIDADE_CONDUTORES_INVALIDA: 'Informe pelo menos 1 condutor.',
+  CORRENTE_MAXIMA_INSUFICIENTE:
+    'A corrente máxima do condutor deve ser maior que a corrente de projeto.',
+  TEMPERATURA_FORA_DA_TABELA:
+    'Não há fator de correção para essa temperatura e esse cabo. Tente outra temperatura ou outro cabo.',
+  CONDUTOR_NAO_ENCONTRADO:
+    'Nenhum condutor da tabela atende a esses dados. Tente outro método de instalação, cabo ou mais circuitos.',
   FALHA_CALCULO: 'Erro inesperado. Tente novamente!',
 } as const;

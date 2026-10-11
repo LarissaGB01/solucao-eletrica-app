@@ -15,3 +15,11 @@ export async function calcular<T>(
     return err({ codigo: 'FALHA_CALCULO' });
   }
 }
+
+/** Same as `calcular` for calls that already return a Result: errors of both kinds come out flat. */
+export async function calcularResultado<T, E>(
+  executar: () => Promise<Result<T, E>>,
+): Promise<Result<T, E | FalhaCalculo>> {
+  const resultado = await calcular(executar);
+  return resultado.ok ? resultado.value : resultado;
+}

@@ -1,9 +1,12 @@
 import type { MemoriaCondutor } from '../memoria';
-import { RESULTADO_CABEAMENTO_EXEMPLO } from '../resultadosExemplo';
+import {
+  RESULTADO_CABEAMENTO_EXEMPLO,
+  RESULTADO_ELETRODUTO_EXEMPLO,
+} from '../resultadosExemplo';
 import { fixoLatex, passoAPasso as p } from './passoAPasso';
 
-const { condutor, disjuntor, eletroduto } =
-  RESULTADO_CABEAMENTO_EXEMPLO.memoria;
+const { condutor, disjuntor } = RESULTADO_CABEAMENTO_EXEMPLO.memoria;
+const eletroduto = RESULTADO_ELETRODUTO_EXEMPLO.memoria;
 
 const ativaTrifasico: MemoriaCondutor = {
   ...condutor,

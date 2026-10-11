@@ -35,6 +35,7 @@ npm run validate        # lint + typecheck + format:check + test:coverage (same 
 Run a single test file: `npx jest src/domain/shared/Result.test.ts`
 
 After changing `babel.config.js`, restart Metro with `npm start -- --reset-cache`.
+Golden fixtures: see the header of `scripts/golden/gerar-golden.mjs` (needs the Java backend running).
 
 ## Layout
 
@@ -42,7 +43,7 @@ After changing `babel.config.js`, restart Metro with `npm start -- --reset-cache
 src/app/             composition root: App, navigation, providers, wiring
 src/domain/          pure TS business rules (no React, no RN)
 src/application/     use cases
-src/infrastructure/  port implementations (mock calculator, storage)
+src/infrastructure/  adapters to the outside world (storage later)
 src/presentation/    screens, view-model hooks, UI components, theme
 src/content/         static pt-BR texts (theory, labels)
 ```

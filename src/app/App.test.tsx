@@ -21,7 +21,7 @@ describe('App navigation', () => {
     ).toBeOnTheScreen();
   });
 
-  it('sizes a cable end to end with the mock calculator', async () => {
+  it('sizes a cable end to end offline', async () => {
     await render(<App />);
     const proximo = () =>
       userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
@@ -44,11 +44,11 @@ describe('App navigation', () => {
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
 
     expect(await screen.findByText('2,50 mm²')).toBeOnTheScreen();
-    expect(screen.getByText('Siemens 5SL1 C20')).toBeOnTheScreen();
-    expect(screen.getByText('3/4" (25,00 mm)')).toBeOnTheScreen();
+    expect(screen.getByText('5SL1 220-7MB')).toBeOnTheScreen();
+    expect(screen.getByText('1 1/4" (30,00 mm)')).toBeOnTheScreen();
   });
 
-  it('sizes a breaker end to end with the mock calculator', async () => {
+  it('sizes a breaker end to end offline', async () => {
     await render(<App />);
     await userEvent.press(
       screen.getByRole('button', { name: 'Dimensionar Disjuntores' }),
@@ -63,7 +63,7 @@ describe('App navigation', () => {
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
 
-    expect(await screen.findByText('Siemens 5SL1 C20')).toBeOnTheScreen();
+    expect(await screen.findByText('5SL1 220-7MB')).toBeOnTheScreen();
 
     await userEvent.press(
       screen.getByRole('button', { name: 'Ver cálculos »' }),
@@ -75,7 +75,7 @@ describe('App navigation', () => {
     ).toBeOnTheScreen();
   });
 
-  it('sizes a conduit end to end with the mock calculator', async () => {
+  it('sizes a conduit end to end offline', async () => {
     await render(<App />);
     await userEvent.press(
       screen.getByRole('button', { name: 'Dimensionar Eletrodutos' }),
@@ -86,7 +86,7 @@ describe('App navigation', () => {
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
 
-    expect(await screen.findByText('3/4" (25,00 mm)')).toBeOnTheScreen();
+    expect(await screen.findByText('1 1/4" (30,00 mm)')).toBeOnTheScreen();
   });
 
   it('starts the same form over, or returns Home, from a result', async () => {

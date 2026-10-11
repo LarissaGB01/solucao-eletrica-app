@@ -1,6 +1,6 @@
 # 0005. Mock calculator now, on-device NBR 5410 engine later
 
-- **Status:** Accepted
+- **Status:** Superseded by [0006](0006-offline-engine-full-precision.md) (Phase 5 done)
 - **Date:** 2026-10-10
 
 ## Context

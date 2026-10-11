@@ -8,7 +8,8 @@ export type CodigoErro =
   | 'QUANTIDADE_CIRCUITOS_INVALIDA'
   | 'CORRENTE_INVALIDA'
   | 'SECAO_INVALIDA'
-  | 'QUANTIDADE_CONDUTORES_INVALIDA';
+  | 'QUANTIDADE_CONDUTORES_INVALIDA'
+  | 'CORRENTE_MAXIMA_INSUFICIENTE';
 
 export type DomainError = {
   readonly codigo: CodigoErro;

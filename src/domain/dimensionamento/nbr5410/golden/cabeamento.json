@@ -1,0 +1,473 @@
+[
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "TOMADA",
+      "fases": "MONOFASICO",
+      "tensao": 127,
+      "tipoPotencia": "APARENTE",
+      "potencia": 2200,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "B1",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 30,
+      "circuitosAgrupados": 1,
+      "comprimento": 15
+    },
+    "saida": {
+      "potenciaAparenteVA": 2200,
+      "correnteCircuitoA": 17.32,
+      "fatorAgrupamento": 1,
+      "fatorTemperatura": 1,
+      "correnteProjetoA": 17.32,
+      "secaoCalculadaMm2": 1.759275,
+      "condutor": {
+        "secaoNominalMm2": 2.5,
+        "correnteMaximaA": 24
+      },
+      "disjuntor": {
+        "nome": "5SL1 220-7MB",
+        "correnteNominalA": 20
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 1,
+      "diametroCondutorMm": 1.7888543819998317,
+      "diametroMinimoEletrodutoMm": 4.47213595499958
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "DISTRIBUICAO",
+      "utilizacao": "TOMADA",
+      "fases": "TRIFASICO",
+      "tensao": 380,
+      "tipoPotencia": "ATIVA",
+      "potencia": 15000,
+      "fatorPotencia": 0.92,
+      "metodoInstalacao": "C",
+      "tipoCabo": "EPR",
+      "temperaturaAmbiente": 35,
+      "circuitosAgrupados": 3,
+      "comprimento": 40
+    },
+    "saida": {
+      "potenciaAparenteVA": 16304.35,
+      "correnteCircuitoA": 24.77,
+      "fatorAgrupamento": 0.5773502691896258,
+      "fatorTemperatura": 0.96,
+      "correnteProjetoA": 44.69,
+      "secaoCalculadaMm2": 7.0072212113281775,
+      "condutor": {
+        "secaoNominalMm2": 10,
+        "correnteMaximaA": 71
+      },
+      "disjuntor": {
+        "nome": "5SL1 350-7MB",
+        "correnteNominalA": 50
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 3,
+      "diametroCondutorMm": 3.605551275463989,
+      "diametroMinimoEletrodutoMm": 27.041634565979916
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "TOMADA",
+      "fases": "BIFASICO",
+      "tensao": 220,
+      "tipoPotencia": "APARENTE",
+      "potencia": 4400,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "A1",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 40,
+      "circuitosAgrupados": 2,
+      "comprimento": 25
+    },
+    "saida": {
+      "potenciaAparenteVA": 4400,
+      "correnteCircuitoA": 20,
+      "fatorAgrupamento": 0.7071067811865475,
+      "fatorTemperatura": 0.87,
+      "correnteProjetoA": 32.51,
+      "secaoCalculadaMm2": 3.177113,
+      "condutor": {
+        "secaoNominalMm2": 6,
+        "correnteMaximaA": 34
+      },
+      "disjuntor": null,
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 2,
+      "diametroCondutorMm": 2.8284271247461903,
+      "diametroMinimoEletrodutoMm": 14.142135623730951
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "ILUMINACAO",
+      "fases": "MONOFASICO",
+      "tensao": 127,
+      "tipoPotencia": "APARENTE",
+      "potencia": 1000,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "B2",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 25,
+      "circuitosAgrupados": 1,
+      "comprimento": 10
+    },
+    "saida": {
+      "potenciaAparenteVA": 1000,
+      "correnteCircuitoA": 7.87,
+      "fatorAgrupamento": 1,
+      "fatorTemperatura": 1.06,
+      "correnteProjetoA": 7.42,
+      "secaoCalculadaMm2": 0.502456,
+      "condutor": {
+        "secaoNominalMm2": 1.5,
+        "correnteMaximaA": 16.5
+      },
+      "disjuntor": {
+        "nome": "5SL1 210-7MB",
+        "correnteNominalA": 10
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 1,
+      "diametroCondutorMm": 1.378404875209022,
+      "diametroMinimoEletrodutoMm": 3.446012188022555
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "DISTRIBUICAO",
+      "utilizacao": "TOMADA",
+      "fases": "TRIFASICO",
+      "tensao": 220,
+      "tipoPotencia": "ATIVA",
+      "potencia": 9000,
+      "fatorPotencia": 0.85,
+      "metodoInstalacao": "D",
+      "tipoCabo": "ALUMINIO",
+      "temperaturaAmbiente": 20,
+      "circuitosAgrupados": 1,
+      "comprimento": 60
+    },
+    "erro": 401
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "TOMADA",
+      "fases": "MONOFASICO",
+      "tensao": 220,
+      "tipoPotencia": "APARENTE",
+      "potencia": 7000,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "A2",
+      "tipoCabo": "EPR",
+      "temperaturaAmbiente": 50,
+      "circuitosAgrupados": 4,
+      "comprimento": 30
+    },
+    "saida": {
+      "potenciaAparenteVA": 7000,
+      "correnteCircuitoA": 31.82,
+      "fatorAgrupamento": 0.5,
+      "fatorTemperatura": 0.82,
+      "correnteProjetoA": 77.6,
+      "secaoCalculadaMm2": 9.100363,
+      "condutor": {
+        "secaoNominalMm2": 25,
+        "correnteMaximaA": 99
+      },
+      "disjuntor": {
+        "nome": "5SL1 280-7MB",
+        "correnteNominalA": 80
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "2\"",
+        "diametroNominalMm": 50
+      },
+      "quantidadeCondutores": 4,
+      "diametroCondutorMm": 5.656854249492381,
+      "diametroMinimoEletrodutoMm": 56.568542494923804
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "DISTRIBUICAO",
+      "utilizacao": "TOMADA",
+      "fases": "TRIFASICO",
+      "tensao": 380,
+      "tipoPotencia": "APARENTE",
+      "potencia": 50000,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "B1",
+      "tipoCabo": "EPR",
+      "temperaturaAmbiente": 30,
+      "circuitosAgrupados": 1,
+      "comprimento": 80
+    },
+    "saida": {
+      "potenciaAparenteVA": 50000,
+      "correnteCircuitoA": 75.97,
+      "fatorAgrupamento": 1,
+      "fatorTemperatura": 1,
+      "correnteProjetoA": 75.97,
+      "secaoCalculadaMm2": 23.823611341445588,
+      "condutor": {
+        "secaoNominalMm2": 25,
+        "correnteMaximaA": 117
+      },
+      "disjuntor": {
+        "nome": "5SL1 380-7MB",
+        "correnteNominalA": 80
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 1,
+      "diametroCondutorMm": 5.656854249492381,
+      "diametroMinimoEletrodutoMm": 14.142135623730951
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "ILUMINACAO",
+      "fases": "MONOFASICO",
+      "tensao": 127,
+      "tipoPotencia": "ATIVA",
+      "potencia": 1500,
+      "fatorPotencia": 1,
+      "metodoInstalacao": "C",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 33,
+      "circuitosAgrupados": 2,
+      "comprimento": 20
+    },
+    "saida": {
+      "potenciaAparenteVA": 1500,
+      "correnteCircuitoA": 11.81,
+      "fatorAgrupamento": 0.7071067811865475,
+      "fatorTemperatura": 0.94,
+      "correnteProjetoA": 17.76,
+      "secaoCalculadaMm2": 2.405291,
+      "condutor": {
+        "secaoNominalMm2": 2.5,
+        "correnteMaximaA": 27
+      },
+      "disjuntor": {
+        "nome": "5SL1 220-7MB",
+        "correnteNominalA": 20
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 2,
+      "diametroCondutorMm": 1.7888543819998317,
+      "diametroMinimoEletrodutoMm": 8.94427190999916
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "DISTRIBUICAO",
+      "utilizacao": "TOMADA",
+      "fases": "BIFASICO",
+      "tensao": 220,
+      "tipoPotencia": "APARENTE",
+      "potencia": 3000,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "B1",
+      "tipoCabo": "ALUMINIO",
+      "temperaturaAmbiente": 45,
+      "circuitosAgrupados": 6,
+      "comprimento": 100
+    },
+    "saida": {
+      "potenciaAparenteVA": 3000,
+      "correnteCircuitoA": 13.64,
+      "fatorAgrupamento": 0.4082482904638631,
+      "fatorTemperatura": 0.79,
+      "correnteProjetoA": 42.29,
+      "secaoCalculadaMm2": 54.9193318,
+      "condutor": {
+        "secaoNominalMm2": 70,
+        "correnteMaximaA": 150
+      },
+      "disjuntor": {
+        "nome": "5SL1 250-7MB",
+        "correnteNominalA": 50
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "5\"",
+        "diametroNominalMm": 125
+      },
+      "quantidadeCondutores": 6,
+      "diametroCondutorMm": 9.433981132056603,
+      "diametroMinimoEletrodutoMm": 141.50971698084908
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "TOMADA",
+      "fases": "TRIFASICO",
+      "tensao": 220,
+      "tipoPotencia": "APARENTE",
+      "potencia": 20000,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "C",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 55,
+      "circuitosAgrupados": 2,
+      "comprimento": 50
+    },
+    "saida": {
+      "potenciaAparenteVA": 20000,
+      "correnteCircuitoA": 52.49,
+      "fatorAgrupamento": 0.7071067811865475,
+      "fatorTemperatura": 0.61,
+      "correnteProjetoA": 121.69,
+      "secaoCalculadaMm2": 20.59829613463963,
+      "condutor": {
+        "secaoNominalMm2": 50,
+        "correnteMaximaA": 144
+      },
+      "disjuntor": null,
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 2,
+      "diametroCondutorMm": 8,
+      "diametroMinimoEletrodutoMm": 40
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "ILUMINACAO",
+      "fases": "MONOFASICO",
+      "tensao": 127,
+      "tipoPotencia": "APARENTE",
+      "potencia": 500,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "A1",
+      "tipoCabo": "EPR",
+      "temperaturaAmbiente": 10,
+      "circuitosAgrupados": 1,
+      "comprimento": 5
+    },
+    "saida": {
+      "potenciaAparenteVA": 500,
+      "correnteCircuitoA": 3.94,
+      "fatorAgrupamento": 1,
+      "fatorTemperatura": 1.15,
+      "correnteProjetoA": 3.42,
+      "secaoCalculadaMm2": 0.115795,
+      "condutor": {
+        "secaoNominalMm2": 1.5,
+        "correnteMaximaA": 19
+      },
+      "disjuntor": {
+        "nome": "5SL1 204-7MB",
+        "correnteNominalA": 4
+      },
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "quantidadeCondutores": 1,
+      "diametroCondutorMm": 1.378404875209022,
+      "diametroMinimoEletrodutoMm": 3.446012188022555
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "DISTRIBUICAO",
+      "utilizacao": "TOMADA",
+      "fases": "TRIFASICO",
+      "tensao": 440,
+      "tipoPotencia": "ATIVA",
+      "potencia": 75000,
+      "fatorPotencia": 0.9,
+      "metodoInstalacao": "D",
+      "tipoCabo": "EPR",
+      "temperaturaAmbiente": 70,
+      "circuitosAgrupados": 3,
+      "comprimento": 150
+    },
+    "saida": {
+      "potenciaAparenteVA": 83333.33,
+      "correnteCircuitoA": 109.35,
+      "fatorAgrupamento": 0.5773502691896258,
+      "fatorTemperatura": 0.58,
+      "correnteProjetoA": 326.55,
+      "secaoCalculadaMm2": 165.82398560522404,
+      "condutor": {
+        "secaoNominalMm2": 240,
+        "correnteMaximaA": 351
+      },
+      "disjuntor": null,
+      "eletroduto": {
+        "diametroNominalPolegadas": "5\"",
+        "diametroNominalMm": 125
+      },
+      "quantidadeCondutores": 3,
+      "diametroCondutorMm": 17.4928556845359,
+      "diametroMinimoEletrodutoMm": 131.19641763401927
+    }
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "TOMADA",
+      "fases": "MONOFASICO",
+      "tensao": 127,
+      "tipoPotencia": "APARENTE",
+      "potencia": 2200,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "B1",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 65,
+      "circuitosAgrupados": 1,
+      "comprimento": 15
+    },
+    "erro": 402
+  },
+  {
+    "entrada": {
+      "finalidade": "TERMINAL",
+      "utilizacao": "TOMADA",
+      "fases": "MONOFASICO",
+      "tensao": 127,
+      "tipoPotencia": "APARENTE",
+      "potencia": 500000,
+      "fatorPotencia": 0,
+      "metodoInstalacao": "A1",
+      "tipoCabo": "PVC",
+      "temperaturaAmbiente": 30,
+      "circuitosAgrupados": 1,
+      "comprimento": 15
+    },
+    "erro": 401
+  }
+]

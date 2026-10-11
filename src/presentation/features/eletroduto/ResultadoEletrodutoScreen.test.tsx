@@ -10,7 +10,7 @@ describe('ResultadoEletrodutoScreen', () => {
       resultado: RESULTADO_ELETRODUTO_EXEMPLO,
     });
 
-    expect(screen.getByText('3/4" (25,00 mm)')).toBeOnTheScreen();
+    expect(screen.getByText('1 1/4" (30,00 mm)')).toBeOnTheScreen();
     expect(screen.queryByText('Disjuntor Sugerido')).toBeNull();
   });
 });

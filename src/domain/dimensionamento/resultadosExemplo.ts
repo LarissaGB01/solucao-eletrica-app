@@ -8,8 +8,8 @@ import type {
 } from './memoria';
 
 // One coherent example: 127 V single-phase outlet circuit, 2200 VA, 15 m, method B1, PVC, 30 °C.
-// Intermediate values follow the backend formulas; table lookups follow NBR 5410 and the
-// Siemens/Kanaflex catalogues. Used by the mock calculator and by tests.
+// Values are the offline engine's output for `projetoCabeamentoExemplo`, rounded to two
+// decimals (a test keeps them in sync). Used by tests and previews.
 
 const memoriaCondutor: MemoriaCondutor = {
   dados: {
@@ -38,21 +38,29 @@ const memoriaDisjuntor: MemoriaDisjuntor = {
   correnteMaximaCondutorA: 24,
 };
 
-const memoriaEletroduto: MemoriaEletroduto = {
+// In the combined flow the conductor count is the number of grouped circuits (backend parity).
+const memoriaEletrodutoCabeamento: MemoriaEletroduto = {
   secaoNominalMm2: 2.5,
-  quantidadeCondutores: 3, // phase, neutral, ground
+  quantidadeCondutores: 1,
   diametroCondutorMm: 1.78, // √(4 · 2.5 / π)
-  diametroMinimoEletrodutoMm: 13.38, // 100 · 1.7841 · 3 / 40 (unrounded diameter)
+  diametroMinimoEletrodutoMm: 4.46, // 100 · 1.7841 · 1 / 40 (unrounded diameter)
+};
+
+/** Conduit-only flow: three 2.5 mm² conductors (phase, neutral, ground). */
+const memoriaEletroduto: MemoriaEletroduto = {
+  ...memoriaEletrodutoCabeamento,
+  quantidadeCondutores: 3,
+  diametroMinimoEletrodutoMm: 13.38,
 };
 
 export const RESULTADO_CABEAMENTO_EXEMPLO: ResultadoCabeamento = {
   condutor: { secaoNominalMm2: 2.5, correnteMaximaA: 24 },
-  disjuntor: { nome: 'Siemens 5SL1 C20', correnteNominalA: 20 },
-  eletroduto: { diametroNominalPolegadas: '3/4"', diametroNominalMm: 25 },
+  disjuntor: { nome: '5SL1 220-7MB', correnteNominalA: 20 },
+  eletroduto: { diametroNominalPolegadas: '1.1/4"', diametroNominalMm: 30 },
   memoria: {
     condutor: memoriaCondutor,
     disjuntor: memoriaDisjuntor,
-    eletroduto: memoriaEletroduto,
+    eletroduto: memoriaEletrodutoCabeamento,
   },
 };
 
