@@ -13,10 +13,12 @@ describe('App navigation', () => {
     expect(screen.getByText('Solução Elétrica')).toBeOnTheScreen();
   });
 
-  it('opens a placeholder screen from "Base Teórica"', async () => {
+  it('opens the theory from "Base Teórica"', async () => {
     await render(<App />);
     await userEvent.press(screen.getByRole('button', { name: 'Base Teórica' }));
-    expect(await screen.findByText('Em construção')).toBeOnTheScreen();
+    expect(
+      await screen.findByRole('button', { name: 'Potência Aparente' }),
+    ).toBeOnTheScreen();
   });
 
   it('sizes a cable end to end with the mock calculator', async () => {

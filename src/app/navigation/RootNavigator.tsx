@@ -8,7 +8,7 @@ import { FormDisjuntorScreen } from '../../presentation/features/disjuntor/FormD
 import { ResultadoDisjuntorScreen } from '../../presentation/features/disjuntor/ResultadoDisjuntorScreen';
 import { FormEletrodutoScreen } from '../../presentation/features/eletroduto/FormEletrodutoScreen';
 import { ResultadoEletrodutoScreen } from '../../presentation/features/eletroduto/ResultadoEletrodutoScreen';
-import { EmConstrucaoScreen } from '../../presentation/features/emConstrucao/EmConstrucaoScreen';
+import { TeoriaScreen } from '../../presentation/features/teoria/TeoriaScreen';
 import { HomeScreen } from '../../presentation/features/home/HomeScreen';
 import type { RootStackParamList } from '../../presentation/navigation/routes';
 import { colors } from '../../presentation/theme';
@@ -26,7 +26,7 @@ export function RootNavigator() {
         />
         <Stack.Screen
           name="Teoria"
-          component={EmConstrucaoScreen}
+          component={TeoriaScreen}
           options={{ title: titulosTelas.teoria }}
         />
         <Stack.Screen
