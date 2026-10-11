@@ -3,8 +3,3 @@ export const titulosTelas = {
   formulario: 'Formulário',
   resultado: 'Resultado',
 } as const;
-
-export const emConstrucao = {
-  titulo: 'Em construção',
-  descricao: 'Esta tela será implementada nas próximas fases.',
-} as const;

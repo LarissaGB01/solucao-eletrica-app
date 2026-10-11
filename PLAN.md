@@ -74,9 +74,9 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 4: Passo a passo + Teoria (10–12h)
 
-- [ ] Pure LaTeX builders in `domain/dimensionamento/formulas` for every step (single-phase and three-phase variants)
+- [ ] Pure LaTeX builders in `domain/dimensionamento/formulas` for every step (single-phase and three-phase variants). Symbolic versions done in 4a; versions with values in 4b
 - [ ] Step-by-step screens for the 3 flows (accordion per step: formula with symbols → formula with values → result)
-- [ ] Teoria screen with all sections, table images, and NBR/Siemens/Kanaflex reference links
+- [x] Teoria screen with all sections, table images, and NBR/Siemens/Kanaflex reference links (PR 4a)
 - [ ] Move all pt-BR texts into `src/content`
 
 **Acceptance criteria**
