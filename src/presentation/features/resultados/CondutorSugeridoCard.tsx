@@ -6,11 +6,14 @@ import { imagensResultado } from './imagensResultado';
 
 export function CondutorSugeridoCard({
   condutor,
+  onVerCalculos,
 }: {
   condutor: CondutorSugerido;
+  onVerCalculos: () => void;
 }) {
   return (
     <ResultCard
+      action={{ label: textos.acoes.verCalculos, onPress: onVerCalculos }}
       title={textos.condutor.titulo}
       image={imagensResultado.condutor}
       lines={[

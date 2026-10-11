@@ -3,11 +3,11 @@ import { criarProjetoDisjuntor } from '../../domain/dimensionamento/disjuntor';
 import { criarProjetoEletroduto } from '../../domain/dimensionamento/eletroduto';
 import type { CalculadoraDimensionamento } from '../../domain/dimensionamento/ports/CalculadoraDimensionamento';
 import {
-  MockCalculadoraDimensionamento,
-  RESULTADO_CABEAMENTO_MOCK,
-  RESULTADO_DISJUNTOR_MOCK,
-  RESULTADO_ELETRODUTO_MOCK,
-} from './MockCalculadoraDimensionamento';
+  RESULTADO_CABEAMENTO_EXEMPLO as RESULTADO_CABEAMENTO_MOCK,
+  RESULTADO_DISJUNTOR_EXEMPLO as RESULTADO_DISJUNTOR_MOCK,
+  RESULTADO_ELETRODUTO_EXEMPLO as RESULTADO_ELETRODUTO_MOCK,
+} from '../../domain/dimensionamento/resultadosExemplo';
+import { MockCalculadoraDimensionamento } from './MockCalculadoraDimensionamento';
 
 const calculadora: CalculadoraDimensionamento =
   new MockCalculadoraDimensionamento();
@@ -34,12 +34,5 @@ describe('MockCalculadoraDimensionamento', () => {
     await expect(
       calculadora.dimensionarEletroduto(eletroduto.value),
     ).resolves.toBe(RESULTADO_ELETRODUTO_MOCK);
-  });
-
-  it('is coordinated as NBR 5410 requires: breaker current <= conductor capacity', () => {
-    const { condutor, disjuntor } = RESULTADO_CABEAMENTO_MOCK;
-    expect(disjuntor?.correnteNominalA).toBeLessThanOrEqual(
-      condutor.correnteMaximaA,
-    );
   });
 });

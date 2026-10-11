@@ -4,6 +4,7 @@ export const SIMBOLOS = {
   potenciaAtiva: 'P_{\\text{ativa}}',
   fatorPotencia: 'FP',
   tensao: 'V',
+  temperatura: 'T_{\\text{ambiente}}',
   correnteCircuito: 'I_{\\text{circuito}}',
   quantidadeCircuitos: 'Q_{\\text{circuitos}}',
   fatorAgrupamento: 'FA',
@@ -24,4 +25,11 @@ export const SIMBOLOS = {
 export const UNIDADES = {
   resistividade: '\\Omega \\cdot \\text{mm}^2/\\text{m}',
   secao: '\\text{mm}^2',
+  potenciaAparente: '\\text{VA}',
+  potenciaAtiva: '\\text{W}',
+  corrente: '\\text{A}',
+  tensao: '\\text{V}',
+  temperatura: '^\\circ\\text{C}',
+  comprimento: '\\text{m}',
+  milimetro: '\\text{mm}',
 } as const;

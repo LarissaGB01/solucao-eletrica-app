@@ -56,6 +56,9 @@ src/domain/
     ├── eletroduto/         ProjetoEletroduto, ResultadoEletroduto
     ├── fases.ts            Fases (shared by cabeamento and disjuntor)
     ├── sugestoes.ts        CondutorSugerido, DisjuntorSugerido, EletrodutoSugerido
+    ├── memoria.ts          MemoriaCondutor/Disjuntor/Eletroduto: intermediate values per step
+    ├── nbr5410/            constants from the original backend (resistivity, limits, minimums)
+    ├── resultadosExemplo.ts one coherent example result (used by the mock and tests)
     ├── formulas/           pure LaTeX builders for each calculation step
     └── ports/              CalculadoraDimensionamento (interface)
 ```
@@ -84,7 +87,7 @@ CalculadoraDimensionamento ◄── implemented by:
 Result<ResultadoCabeamento, FalhaCalculo>
   │
   ▼
-ResultadoCabeamentoScreen ──► PassoAPassoCabeamentoScreen (formulas from domain/formulas)
+ResultadoCabeamentoScreen ──► PassoAPasso*Screen (result.memoria → LaTeX from domain/formulas)
 ```
 
 Each form screen is a thin `StepperForm`; shared form logic lives in
@@ -101,9 +104,11 @@ Route types (`RootStackParamList`) live in `presentation/navigation/routes.ts` s
 
 ```
 Home ─┬─► Teoria
-      ├─► FormCabeamento ─► ResultadoCabeamento ─► PassoAPassoCabeamento
-      ├─► FormDisjuntor  ─► ResultadoDisjuntor  ─► PassoAPassoDisjuntor
-      └─► FormEletroduto ─► ResultadoEletroduto ─► PassoAPassoEletroduto
+      ├─► FormCabeamento ─► ResultadoCabeamento ─┬─► PassoAPassoCondutor
+      │                                          ├─► PassoAPassoDisjuntor
+      │                                          └─► PassoAPassoEletroduto
+      ├─► FormDisjuntor  ─► ResultadoDisjuntor  ───► PassoAPassoDisjuntor
+      └─► FormEletroduto ─► ResultadoEletroduto ───► PassoAPassoEletroduto
 ```
 
 ## Dependency rules

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import { colors, radius, spacing, typography } from '../../theme';
+import { Button } from '../Button/Button';
 
 export type ResultLine = { label: string; value: string };
 
@@ -18,6 +19,8 @@ type Props = {
   lines: readonly ResultLine[] | null;
   emptyMessage?: string;
   footnote?: string;
+  /** Optional button under the card, e.g. "Ver cálculos". */
+  action?: { label: string; onPress: () => void };
 };
 
 /** Orange-bordered card with an illustration and label/value pairs, as in the original result screen. */
@@ -27,6 +30,7 @@ export function ResultCard({
   lines,
   emptyMessage,
   footnote,
+  action,
 }: Props) {
   const { width } = useWindowDimensions();
   const imageSize = (width - spacing.xl * 2) / 2 - spacing.md * 2;
@@ -57,11 +61,19 @@ export function ResultCard({
           )}
         </View>
       </View>
+      {action !== undefined && (
+        <View style={styles.action}>
+          <Button label={action.label} onPress={action.onPress} />
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  action: {
+    marginTop: spacing.sm,
+  },
   container: {
     marginTop: spacing.xl,
   },

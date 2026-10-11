@@ -1,17 +1,13 @@
 import { fireEvent, screen, userEvent } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 
-import type { ResultadoCabeamento } from '../../../domain/dimensionamento/cabeamento';
+import { RESULTADO_CABEAMENTO_EXEMPLO } from '../../../domain/dimensionamento/resultadosExemplo';
 import { err, ok } from '../../../domain/shared/Result';
 import type { UseCases } from '../../di/UseCasesContext';
 import { renderScreen } from '../../testing/renderScreen';
 import { FormCabeamentoScreen } from './FormCabeamentoScreen';
 
-const resultado: ResultadoCabeamento = {
-  condutor: { secaoNominalMm2: 2.5, correnteMaximaA: 24 },
-  disjuntor: null,
-  eletroduto: null,
-};
+const resultado = RESULTADO_CABEAMENTO_EXEMPLO;
 
 const setup = async (execute: UseCases['dimensionarCabeamento']['execute']) => {
   const { navigation } = await renderScreen(

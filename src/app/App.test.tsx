@@ -64,6 +64,15 @@ describe('App navigation', () => {
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
 
     expect(await screen.findByText('Siemens 5SL1 C20')).toBeOnTheScreen();
+
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Ver cálculos »' }),
+    );
+    expect(
+      await screen.findByRole('button', {
+        name: 'Corrente Nominal do Disjuntor',
+      }),
+    ).toBeOnTheScreen();
   });
 
   it('sizes a conduit end to end with the mock calculator', async () => {

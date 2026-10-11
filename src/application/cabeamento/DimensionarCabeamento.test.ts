@@ -1,13 +1,9 @@
-import type { ResultadoCabeamento } from '../../domain/dimensionamento/cabeamento';
+import { RESULTADO_CABEAMENTO_EXEMPLO } from '../../domain/dimensionamento/resultadosExemplo';
 import { projetoCabeamentoExemplo } from '../../domain/dimensionamento/cabeamento';
 import { fakeCalculadora } from '../testing/fakeCalculadora';
 import { DimensionarCabeamento } from './DimensionarCabeamento';
 
-const resultado: ResultadoCabeamento = {
-  condutor: { secaoNominalMm2: 2.5, correnteMaximaA: 24 },
-  disjuntor: null,
-  eletroduto: null,
-};
+const resultado = RESULTADO_CABEAMENTO_EXEMPLO;
 
 describe('DimensionarCabeamento', () => {
   it('passes the project to the calculator and returns its result', async () => {

@@ -8,6 +8,9 @@ import { FormDisjuntorScreen } from '../../presentation/features/disjuntor/FormD
 import { ResultadoDisjuntorScreen } from '../../presentation/features/disjuntor/ResultadoDisjuntorScreen';
 import { FormEletrodutoScreen } from '../../presentation/features/eletroduto/FormEletrodutoScreen';
 import { ResultadoEletrodutoScreen } from '../../presentation/features/eletroduto/ResultadoEletrodutoScreen';
+import { PassoAPassoCondutorScreen } from '../../presentation/features/passoAPasso/PassoAPassoCondutorScreen';
+import { PassoAPassoDisjuntorScreen } from '../../presentation/features/passoAPasso/PassoAPassoDisjuntorScreen';
+import { PassoAPassoEletrodutoScreen } from '../../presentation/features/passoAPasso/PassoAPassoEletrodutoScreen';
 import { TeoriaScreen } from '../../presentation/features/teoria/TeoriaScreen';
 import { HomeScreen } from '../../presentation/features/home/HomeScreen';
 import type { RootStackParamList } from '../../presentation/navigation/routes';
@@ -58,6 +61,21 @@ export function RootNavigator() {
           name="ResultadoEletroduto"
           component={ResultadoEletrodutoScreen}
           options={{ title: titulosTelas.resultado }}
+        />
+        <Stack.Screen
+          name="PassoAPassoCondutor"
+          component={PassoAPassoCondutorScreen}
+          options={{ title: titulosTelas.passoAPasso }}
+        />
+        <Stack.Screen
+          name="PassoAPassoDisjuntor"
+          component={PassoAPassoDisjuntorScreen}
+          options={{ title: titulosTelas.passoAPasso }}
+        />
+        <Stack.Screen
+          name="PassoAPassoEletroduto"
+          component={PassoAPassoEletrodutoScreen}
+          options={{ title: titulosTelas.passoAPasso }}
         />
       </Stack.Navigator>
     </NavigationContainer>

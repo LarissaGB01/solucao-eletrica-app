@@ -6,9 +6,16 @@ export function ResultadoDisjuntorScreen({
   navigation,
   route,
 }: ScreenProps<'ResultadoDisjuntor'>) {
+  const { disjuntor, memoria } = route.params.resultado;
+
   return (
     <ResultadoLayout formulario="FormDisjuntor" navigation={navigation}>
-      <DisjuntorSugeridoCard disjuntor={route.params.resultado.disjuntor} />
+      <DisjuntorSugeridoCard
+        disjuntor={disjuntor}
+        onVerCalculos={() =>
+          navigation.navigate('PassoAPassoDisjuntor', { memoria, disjuntor })
+        }
+      />
     </ResultadoLayout>
   );
 }

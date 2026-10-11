@@ -6,11 +6,14 @@ import { imagensResultado } from './imagensResultado';
 
 export function EletrodutoSugeridoCard({
   eletroduto,
+  onVerCalculos,
 }: {
   eletroduto: EletrodutoSugerido | null;
+  onVerCalculos: () => void;
 }) {
   return (
     <ResultCard
+      action={{ label: textos.acoes.verCalculos, onPress: onVerCalculos }}
       title={textos.eletroduto.titulo}
       image={imagensResultado.eletroduto}
       emptyMessage={textos.eletroduto.naoEncontrado}

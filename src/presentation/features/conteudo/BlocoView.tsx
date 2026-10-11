@@ -12,7 +12,7 @@ export function BlocoView({ bloco }: { bloco: Bloco }) {
           {bloco.legenda !== undefined && (
             <Text style={styles.legenda}>{bloco.legenda}</Text>
           )}
-          <Formula expressions={[bloco.latex]} />
+          <Formula expressions={bloco.expressoes} />
         </View>
       );
     case 'texto':
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   texto: {
     ...typography.body,
     color: colors.textStrong,
-    marginVertical: spacing.sm,
+    marginVertical: spacing.xs,
   },
 });
