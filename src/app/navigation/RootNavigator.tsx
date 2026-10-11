@@ -4,6 +4,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { titulosTelas } from '../../content/navegacao';
 import { FormCabeamentoScreen } from '../../presentation/features/cabeamento/FormCabeamentoScreen';
 import { ResultadoCabeamentoScreen } from '../../presentation/features/cabeamento/ResultadoCabeamentoScreen';
+import { FormDisjuntorScreen } from '../../presentation/features/disjuntor/FormDisjuntorScreen';
+import { ResultadoDisjuntorScreen } from '../../presentation/features/disjuntor/ResultadoDisjuntorScreen';
+import { FormEletrodutoScreen } from '../../presentation/features/eletroduto/FormEletrodutoScreen';
+import { ResultadoEletrodutoScreen } from '../../presentation/features/eletroduto/ResultadoEletrodutoScreen';
 import { EmConstrucaoScreen } from '../../presentation/features/emConstrucao/EmConstrucaoScreen';
 import { HomeScreen } from '../../presentation/features/home/HomeScreen';
 import type { RootStackParamList } from '../../presentation/navigation/routes';
@@ -37,13 +41,23 @@ export function RootNavigator() {
         />
         <Stack.Screen
           name="FormDisjuntor"
-          component={EmConstrucaoScreen}
+          component={FormDisjuntorScreen}
           options={{ title: titulosTelas.formulario }}
         />
         <Stack.Screen
+          name="ResultadoDisjuntor"
+          component={ResultadoDisjuntorScreen}
+          options={{ title: titulosTelas.resultado }}
+        />
+        <Stack.Screen
           name="FormEletroduto"
-          component={EmConstrucaoScreen}
+          component={FormEletrodutoScreen}
           options={{ title: titulosTelas.formulario }}
+        />
+        <Stack.Screen
+          name="ResultadoEletroduto"
+          component={ResultadoEletrodutoScreen}
+          options={{ title: titulosTelas.resultado }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -41,3 +41,18 @@ describe('Stepper', () => {
     expect(screen.getByText('Etapa A')).toBeOnTheScreen();
   });
 });
+
+describe('Stepper with a single step', () => {
+  it('hides the progress indicator and offers only Finalizar', async () => {
+    await render(
+      <Stepper
+        steps={[{ key: 'a', content: <Text>Única</Text> }]}
+        onFinish={jest.fn()}
+      />,
+    );
+
+    expect(screen.queryByLabelText('Etapa 1 de 1')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Finalizar' })).toBeOnTheScreen();
+    expect(screen.queryByRole('button', { name: 'Voltar' })).toBeNull();
+  });
+});

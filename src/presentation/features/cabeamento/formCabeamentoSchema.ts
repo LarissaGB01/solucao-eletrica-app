@@ -8,19 +8,9 @@ import {
   TIPOS_CABO,
   UTILIZACOES_CIRCUITO,
 } from '../../../domain/dimensionamento/cabeamento';
-import type { CodigoErro } from '../../../domain/shared/DomainError';
-import { mensagensErro } from '../../../content/erros';
-import { parseDecimal } from '../../ui';
+import { numero, projetoOuErros } from '../formularios/esquema';
 
-const mensagens: Record<CodigoErro, string> = mensagensErro;
-
-// Text fields stay as typed; NaN makes the value objects reject unparseable input.
-const numero = (texto: string) => parseDecimal(texto) ?? NaN;
-
-/**
- * Form shape + validation. Range rules are not repeated here: the domain value objects decide,
- * and their error codes become pt-BR messages on the matching field.
- */
+/** Form shape; validation is delegated to the domain via `projetoOuErros`. */
 export const formCabeamentoSchema = z
   .object({
     finalidade: z.enum(FINALIDADES_CIRCUITO),
@@ -36,26 +26,18 @@ export const formCabeamentoSchema = z
     tipoCabo: z.enum(TIPOS_CABO),
     comprimento: z.string(),
   })
-  .transform((valores, ctx) => {
-    const projeto = criarProjetoCabeamento({
-      ...valores,
-      tensao: numero(valores.tensao),
-      potencia: numero(valores.potencia),
-      fatorPotencia: numero(valores.fatorPotencia),
-      comprimento: numero(valores.comprimento),
-    });
-    if (projeto.ok) {
-      return projeto.value;
-    }
-    for (const [campo, erro] of Object.entries(projeto.error)) {
-      ctx.addIssue({
-        code: 'custom',
-        path: [campo],
-        message: mensagens[erro.codigo],
-      });
-    }
-    return z.NEVER;
-  });
+  .transform((valores, ctx) =>
+    projetoOuErros(
+      criarProjetoCabeamento({
+        ...valores,
+        tensao: numero(valores.tensao),
+        potencia: numero(valores.potencia),
+        fatorPotencia: numero(valores.fatorPotencia),
+        comprimento: numero(valores.comprimento),
+      }),
+      ctx,
+    ),
+  );
 
 export type ValoresFormCabeamento = z.input<typeof formCabeamentoSchema>;
 

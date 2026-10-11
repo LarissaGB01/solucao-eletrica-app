@@ -1,15 +1,10 @@
-import {
-  fireEvent,
-  render,
-  screen,
-  userEvent,
-} from '@testing-library/react-native';
+import { fireEvent, screen, userEvent } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 
 import type { ResultadoCabeamento } from '../../../domain/dimensionamento/cabeamento';
 import { err, ok } from '../../../domain/shared/Result';
-import { UseCasesProvider, type UseCases } from '../../di/UseCasesContext';
-import type { ScreenProps } from '../../navigation/routes';
+import type { UseCases } from '../../di/UseCasesContext';
+import { renderScreen } from '../../testing/renderScreen';
 import { FormCabeamentoScreen } from './FormCabeamentoScreen';
 
 const resultado: ResultadoCabeamento = {
@@ -19,16 +14,11 @@ const resultado: ResultadoCabeamento = {
 };
 
 const setup = async (execute: UseCases['dimensionarCabeamento']['execute']) => {
-  const navigation = { navigate: jest.fn() };
-  await render(
-    <UseCasesProvider value={{ dimensionarCabeamento: { execute } }}>
-      <FormCabeamentoScreen
-        navigation={
-          navigation as unknown as ScreenProps<'FormCabeamento'>['navigation']
-        }
-        route={{ key: 'form', name: 'FormCabeamento', params: undefined }}
-      />
-    </UseCasesProvider>,
+  const { navigation } = await renderScreen(
+    FormCabeamentoScreen,
+    'FormCabeamento',
+    undefined,
+    { dimensionarCabeamento: { execute } },
   );
   return navigation;
 };

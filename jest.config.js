@@ -10,6 +10,7 @@ module.exports = {
     'src/**/*.{ts,tsx}',
     '!src/**/*.test.{ts,tsx}',
     '!src/**/*.generated.ts',
+    '!src/**/testing/**',
   ],
   coverageThreshold: {
     './src/domain/': { lines: 90, branches: 90, functions: 90 },

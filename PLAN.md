@@ -6,7 +6,7 @@ on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) l
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 3, Disjuntor + Eletroduto slices
+**Current phase:** 4, Passo a passo + Teoria
 
 ---
 
@@ -61,9 +61,11 @@ Picker/spinner replacements: `Segmented` (2–3 options), `ChipGroup` (installat
 
 ## Phase 3: Disjuntor + Eletroduto slices (8–10h)
 
-- [ ] Disjuntor: domain, mock, use case, form, result
-- [ ] Eletroduto: domain, mock, use case, form, result
-- [ ] Extract duplicated form/result pieces into `presentation/ui` or `domain/shared`
+- [x] Disjuntor: domain, mock, use case, form, result
+- [x] Eletroduto: domain, mock, use case, form, result
+- [x] Extract duplicated form/result pieces into `presentation/ui` or `domain/shared`
+
+Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/formularios` (schema helpers, `useFormularioValidado`, `useCalculo`, phase options), `StepperForm` (ui), `features/resultados` (cards + layout).
 
 **Acceptance criteria**
 
