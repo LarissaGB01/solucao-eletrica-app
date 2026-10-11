@@ -21,7 +21,7 @@ import type { CondutorSugerido } from '../../../domain/dimensionamento/sugestoes
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Secao } from '../conteudo/Bloco';
 import { tabelas } from '../conteudo/tabelas';
-import { formula, linha, linkNbr, rotuloFases, titulo } from './comum';
+import { formula, linha, linkNbr, rotuloFases } from './comum';
 
 const { unidades } = resultados;
 
@@ -53,22 +53,23 @@ export function secoesCondutor(
       ],
     },
     {
-      titulo: titulo(titulos.potenciaAparente, `${n(m.potenciaAparenteVA)} VA`),
+      titulo: titulos.potenciaAparente,
+      valor: `${n(m.potenciaAparenteVA)} VA`,
       blocos: [formula(p.potenciaAparente(m))],
     },
     {
-      titulo: titulo(
-        titulos.correnteCircuito,
-        `${n(m.correnteCircuitoA)} ${unidades.corrente}`,
-      ),
+      titulo: titulos.correnteCircuito,
+      valor: `${n(m.correnteCircuitoA)} ${unidades.corrente}`,
       blocos: [formula(p.correnteCircuito(m))],
     },
     {
-      titulo: titulo(titulos.fatorAgrupamento, n(m.fatorAgrupamento)),
+      titulo: titulos.fatorAgrupamento,
+      valor: n(m.fatorAgrupamento),
       blocos: [formula(p.fatorAgrupamento(m))],
     },
     {
-      titulo: titulo(titulos.fatorTemperatura, n(m.fatorTemperatura)),
+      titulo: titulos.fatorTemperatura,
+      valor: n(m.fatorTemperatura),
       blocos: [
         linha(textos.rotulos.temperatura, `${dados.temperaturaC} °C`),
         linha(textos.rotulos.isolacao, isolacao),
@@ -82,17 +83,13 @@ export function secoesCondutor(
       ],
     },
     {
-      titulo: titulo(
-        titulos.correnteProjeto,
-        `${n(m.correnteProjetoA)} ${unidades.corrente}`,
-      ),
+      titulo: titulos.correnteProjeto,
+      valor: `${n(m.correnteProjetoA)} ${unidades.corrente}`,
       blocos: [formula(p.correnteProjeto(m))],
     },
     {
-      titulo: titulo(
-        titulos.resistividade,
-        `${n(RESISTIVIDADE[material], 4)} Ω·mm²/m`,
-      ),
+      titulo: titulos.resistividade,
+      valor: `${n(RESISTIVIDADE[material], 4)} Ω·mm²/m`,
       blocos: [
         {
           tipo: 'texto',
@@ -102,20 +99,16 @@ export function secoesCondutor(
       ],
     },
     {
-      titulo: titulo(
-        titulos.quedaTensao,
-        `${QUEDA_TENSAO_MAXIMA[dados.finalidade]} %`,
-      ),
+      titulo: titulos.quedaTensao,
+      valor: `${QUEDA_TENSAO_MAXIMA[dados.finalidade]} %`,
       blocos: [
         { tipo: 'texto', texto: textos.quedaTensao(finalidade.toUpperCase()) },
         formula(p.quedaTensao(m)),
       ],
     },
     {
-      titulo: titulo(
-        titulos.secaoCondutor,
-        `${n(secaoAdotadaMm2(m))} ${unidades.secao}`,
-      ),
+      titulo: titulos.secaoCondutor,
+      valor: `${n(secaoAdotadaMm2(m))} ${unidades.secao}`,
       blocos: [
         formula(p.secaoCondutor(m)),
         {
@@ -132,10 +125,8 @@ export function secoesCondutor(
       ],
     },
     {
-      titulo: titulo(
-        titulos.condutorRecomendado,
-        `${n(condutor.secaoNominalMm2)} ${unidades.secao}`,
-      ),
+      titulo: titulos.condutorRecomendado,
+      valor: `${n(condutor.secaoNominalMm2)} ${unidades.secao}`,
       blocos: [
         linha(textos.condutor.metodo, dados.metodoInstalacao),
         linha(

@@ -43,6 +43,7 @@ export function useFormCabeamentoViewModel(
   return {
     control,
     tipoPotencia: watch('tipoPotencia'),
+    fases,
     calculando,
     podeAvancar: (etapa: number) =>
       trigger([...(CAMPOS_POR_ETAPA[etapa] ?? [])]),

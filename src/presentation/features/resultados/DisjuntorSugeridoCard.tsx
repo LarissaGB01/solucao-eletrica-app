@@ -20,13 +20,13 @@ export function DisjuntorSugeridoCard({
       footnote={textos.disjuntor.marca}
       lines={
         disjuntor && [
-          { label: textos.disjuntor.nome, value: disjuntor.nome },
           {
             label: textos.disjuntor.corrente,
             value: `${formatarNumero(disjuntor.correnteNominalA)} ${
               textos.unidades.corrente
             }`,
           },
+          { label: textos.disjuntor.nome, value: disjuntor.nome },
         ]
       }
     />

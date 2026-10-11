@@ -10,4 +10,5 @@ export const formularios = {
     },
   },
   calculando: 'Calculando…',
+  valorTipico: (valor: string) => `Valor típico: ${valor}`,
 } as const;

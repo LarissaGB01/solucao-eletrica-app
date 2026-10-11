@@ -30,15 +30,12 @@ describe('App navigation', () => {
       screen.getByRole('button', { name: 'Dimensionar Cabeamento' }),
     );
     await proximo();
-    await fireEvent.changeText(screen.getByLabelText('Tensão: (Volts)'), '127');
-    await fireEvent.changeText(
-      screen.getByLabelText('Potência: (VoltAmperes)'),
-      '2200',
-    );
+    await fireEvent.changeText(screen.getByLabelText('Tensão (V)'), '127');
+    await fireEvent.changeText(screen.getByLabelText('Potência (VA)'), '2200');
     await proximo();
     await proximo();
     await fireEvent.changeText(
-      screen.getByLabelText('Comprimento: (metros)'),
+      screen.getByLabelText('Comprimento do cabo (m)'),
       '15',
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
@@ -54,11 +51,11 @@ describe('App navigation', () => {
       screen.getByRole('button', { name: 'Dimensionar Disjuntores' }),
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente de projeto: (A)'),
+      screen.getByLabelText('Corrente de projeto (A)'),
       '17,3',
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      screen.getByLabelText('Corrente máxima do condutor (A)'),
       '24',
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
@@ -81,7 +78,7 @@ describe('App navigation', () => {
       screen.getByRole('button', { name: 'Dimensionar Eletrodutos' }),
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Seção nominal do condutor: (mm²)'),
+      screen.getByLabelText('Seção nominal do condutor (mm²)'),
       '2,5',
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
@@ -95,11 +92,11 @@ describe('App navigation', () => {
       screen.getByRole('button', { name: 'Dimensionar Disjuntores' }),
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente de projeto: (A)'),
+      screen.getByLabelText('Corrente de projeto (A)'),
       '17,3',
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      screen.getByLabelText('Corrente máxima do condutor (A)'),
       '24',
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));
@@ -108,15 +105,15 @@ describe('App navigation', () => {
       await screen.findByRole('button', { name: 'Dimensionar outro' }),
     );
     expect(
-      await screen.findByLabelText('Corrente de projeto: (A)'),
+      await screen.findByLabelText('Corrente de projeto (A)'),
     ).toHaveDisplayValue('15');
 
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente de projeto: (A)'),
+      screen.getByLabelText('Corrente de projeto (A)'),
       '10',
     );
     await fireEvent.changeText(
-      screen.getByLabelText('Corrente máxima do condutor: (A)'),
+      screen.getByLabelText('Corrente máxima do condutor (A)'),
       '24',
     );
     await userEvent.press(screen.getByRole('button', { name: 'Finalizar' }));

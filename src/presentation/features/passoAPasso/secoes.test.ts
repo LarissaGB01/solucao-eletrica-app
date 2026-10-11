@@ -12,6 +12,10 @@ const textos = (secao: Secao | undefined) =>
     bloco.tipo === 'texto' ? [bloco.texto] : [],
   );
 
+/** Header as announced by screen readers: "Título = valor". */
+const cabecalho = (secao: Secao) =>
+  secao.valor === undefined ? secao.titulo : `${secao.titulo} = ${secao.valor}`;
+
 const descricoesTabelas = (secoes: readonly Secao[]) =>
   secoes.flatMap(s =>
     s.blocos.flatMap(b => (b.tipo === 'tabela' ? [b.descricao] : [])),
@@ -21,7 +25,7 @@ describe('secoesCondutor', () => {
   const secoes = secoesCondutor(exemplo.memoria.condutor, exemplo.condutor);
 
   it('has the old app sections, with the value of each step in its title', () => {
-    expect(secoes.map(s => s.titulo)).toEqual([
+    expect(secoes.map(cabecalho)).toEqual([
       'Dados Informados',
       'Potência Aparente = 2200,00 VA',
       'Corrente do Circuito = 17,32 A',
@@ -70,7 +74,7 @@ describe('secoesDisjuntor', () => {
       exemplo.memoria.disjuntor,
       exemplo.disjuntor,
     );
-    expect(secoes.map(s => s.titulo)).toEqual([
+    expect(secoes.map(cabecalho)).toEqual([
       'Dados Informados',
       'Corrente Nominal do Disjuntor',
       'Recomendação de Disjuntor = 20,00 A',
@@ -85,7 +89,7 @@ describe('secoesDisjuntor', () => {
 
   it('says when no breaker fits', () => {
     const secoes = secoesDisjuntor(exemplo.memoria.disjuntor, null);
-    expect(secoes[2]?.titulo).toBe('Recomendação de Disjuntor');
+    expect(secoes[2] && cabecalho(secoes[2])).toBe('Recomendação de Disjuntor');
     expect(textos(secoes[2])).toContain(
       'Desculpe, mas não encontrei disjuntor para os parâmetros fornecidos.',
     );
@@ -98,7 +102,7 @@ describe('secoesEletroduto', () => {
       RESULTADO_ELETRODUTO_EXEMPLO.memoria,
       RESULTADO_ELETRODUTO_EXEMPLO.eletroduto,
     );
-    expect(secoes.map(s => s.titulo)).toEqual([
+    expect(secoes.map(cabecalho)).toEqual([
       'Dados Informados',
       'Diâmetro do Condutor = 1,78 mm',
       'Diâmetro Mínimo do Eletroduto = 13,38 mm',

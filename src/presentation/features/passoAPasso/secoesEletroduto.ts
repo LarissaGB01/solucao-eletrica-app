@@ -9,7 +9,7 @@ import { formatarPolegadas } from '../../format/formatarPolegadas';
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
 import { tabelas } from '../conteudo/tabelas';
-import { formula, linha, titulo } from './comum';
+import { formula, linha } from './comum';
 
 const mm = resultados.unidades.milimetro;
 
@@ -34,26 +34,20 @@ export function secoesEletroduto(
       blocos: [formula(p.dadosEletroduto(m))],
     },
     {
-      titulo: titulo(
-        titulos.diametroCondutor,
-        `${n(m.diametroCondutorMm)} ${mm}`,
-      ),
+      titulo: titulos.diametroCondutor,
+      valor: `${n(m.diametroCondutorMm)} ${mm}`,
       blocos: [formula(p.diametroCondutor(m))],
     },
     {
-      titulo: titulo(
-        titulos.diametroEletroduto,
-        `${n(m.diametroMinimoEletrodutoMm)} ${mm}`,
-      ),
+      titulo: titulos.diametroEletroduto,
+      valor: `${n(m.diametroMinimoEletrodutoMm)} ${mm}`,
       blocos: [formula(p.diametroEletroduto(m))],
     },
     {
-      titulo: eletroduto
-        ? titulo(
-            titulos.eletrodutoRecomendado,
-            formatarPolegadas(eletroduto.diametroNominalPolegadas),
-          )
-        : titulos.eletrodutoRecomendado,
+      titulo: titulos.eletrodutoRecomendado,
+      valor: eletroduto
+        ? formatarPolegadas(eletroduto.diametroNominalPolegadas)
+        : undefined,
       blocos: [
         {
           tipo: 'texto',

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { formDisjuntor as textos } from '../../../content/disjuntor';
 import { formularios } from '../../../content/formularios';
+import { VALORES_TIPICOS } from '../../../domain/dimensionamento/valoresTipicos';
 import type { ScreenProps } from '../../navigation/routes';
 import { NumericInput, Question, Segmented, StepperForm } from '../../ui';
 import { opcoesFases } from '../formularios/opcoes';
@@ -36,6 +37,9 @@ export function FormDisjuntorScreen({
           <NumericInput
             label={textos.correnteProjeto.rotulo}
             unit={textos.correnteProjeto.unidade}
+            hint={formularios.valorTipico(
+              `${VALORES_TIPICOS.correnteProjetoA} ${textos.correnteProjeto.unidade}`,
+            )}
             maxLength={8}
             value={field.value}
             onChangeText={field.onChange}
@@ -50,6 +54,9 @@ export function FormDisjuntorScreen({
           <NumericInput
             label={textos.correnteMaximaCondutor.rotulo}
             unit={textos.correnteMaximaCondutor.unidade}
+            hint={textos.correnteMaximaCondutor.dica(
+              `${VALORES_TIPICOS.correnteMaximaCondutorA} ${textos.correnteMaximaCondutor.unidade}`,
+            )}
             maxLength={8}
             value={field.value}
             onChangeText={field.onChange}

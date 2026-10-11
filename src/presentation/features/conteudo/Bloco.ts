@@ -12,4 +12,9 @@ export type Bloco =
     }
   | { tipo: 'link'; rotulo: string; url: string };
 
-export type Secao = { titulo: string; blocos: readonly Bloco[] };
+/** `valor` is the section's result, shown on the right of its header. */
+export type Secao = {
+  titulo: string;
+  valor?: string;
+  blocos: readonly Bloco[];
+};

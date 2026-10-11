@@ -9,7 +9,7 @@ import type { DisjuntorSugerido } from '../../../domain/dimensionamento/sugestoe
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
 import { tabelas } from '../conteudo/tabelas';
-import { formula, linha, rotuloFases, titulo } from './comum';
+import { formula, linha, rotuloFases } from './comum';
 
 const { unidades } = resultados;
 
@@ -40,12 +40,10 @@ export function secoesDisjuntor(
       blocos: [formula(p.coordenacaoDisjuntor(m))],
     },
     {
-      titulo: disjuntor
-        ? titulo(
-            titulos.disjuntorRecomendado,
-            `${n(disjuntor.correnteNominalA)} ${unidades.corrente}`,
-          )
-        : titulos.disjuntorRecomendado,
+      titulo: titulos.disjuntorRecomendado,
+      valor: disjuntor
+        ? `${n(disjuntor.correnteNominalA)} ${unidades.corrente}`
+        : undefined,
       blocos: [
         { tipo: 'texto', texto: textos.disjuntor.curva },
         {

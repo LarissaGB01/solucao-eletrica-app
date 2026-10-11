@@ -2,6 +2,8 @@ import { Controller } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { formCabeamento as textos } from '../../../../content/cabeamento';
+import { formularios } from '../../../../content/formularios';
+import { VALORES_TIPICOS } from '../../../../domain/dimensionamento/valoresTipicos';
 import { NumericInput, Question, Segmented } from '../../../ui';
 import { opcoesTipoCabo } from '../opcoes';
 import type { FormCabeamentoControl } from '../useFormCabeamentoViewModel';
@@ -27,7 +29,6 @@ export function EtapaMateriais({
         )}
       />
 
-      <Question>{textos.comprimento.pergunta}</Question>
       <Controller
         control={control}
         name="comprimento"
@@ -35,6 +36,9 @@ export function EtapaMateriais({
           <NumericInput
             label={textos.comprimento.rotulo}
             unit={textos.comprimento.unidade}
+            hint={formularios.valorTipico(
+              `${VALORES_TIPICOS.comprimentoM} ${textos.comprimento.unidade}`,
+            )}
             maxLength={5}
             value={field.value}
             onChangeText={field.onChange}

@@ -1,12 +1,15 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { colors, spacing, typography } from '../../theme';
+import { colors, radius, spacing, typography } from '../../theme';
 
 type Props = {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
+  /** Short unit shown inside the field, e.g. "V". */
   unit?: string;
+  /** Helper text under the field, e.g. the typical value. Hidden while there is an error. */
+  hint?: string;
   error?: string;
   maxLength?: number;
 };
@@ -17,28 +20,36 @@ export function NumericInput({
   value,
   onChangeText,
   unit,
+  hint,
   error,
   maxLength,
 }: Props) {
+  const temErro = error !== undefined;
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label}>{label}</Text>
+      <View style={[styles.field, temErro && styles.fieldError]}>
         <TextInput
           accessibilityLabel={unit ? `${label} (${unit})` : label}
-          accessibilityHint={error}
+          accessibilityHint={error ?? hint}
           value={value}
           onChangeText={onChangeText}
           keyboardType="decimal-pad"
           maxLength={maxLength}
-          style={[styles.input, error !== undefined && styles.inputError]}
+          style={styles.input}
         />
-        {unit !== undefined && <Text style={styles.unit}>{unit}</Text>}
+        {unit !== undefined && (
+          <Text style={styles.unit} importantForAccessibility="no">
+            {unit}
+          </Text>
+        )}
       </View>
-      {error !== undefined && (
+      {temErro ? (
         <Text accessibilityLiveRegion="polite" style={styles.error}>
           {error}
         </Text>
+      ) : (
+        hint !== undefined && <Text style={styles.hint}>{hint}</Text>
       )}
     </View>
   );
@@ -46,38 +57,42 @@ export function NumericInput({
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: spacing.lg,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'center',
+    marginVertical: spacing.md,
   },
   label: {
-    ...typography.body,
-    fontWeight: 'bold',
+    ...typography.label,
     color: colors.textStrong,
+    marginBottom: spacing.xs,
+  },
+  field: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.borderSubtle,
+    borderRadius: radius.md,
+    backgroundColor: colors.surface,
+    paddingHorizontal: spacing.md,
+  },
+  fieldError: {
+    borderColor: colors.error,
   },
   input: {
     ...typography.body,
-    width: 100,
-    marginHorizontal: spacing.lg,
-    padding: spacing.xs,
-    textAlign: 'center',
+    flex: 1,
+    paddingVertical: spacing.sm,
     color: colors.textStrong,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  inputError: {
-    borderBottomColor: colors.error,
   },
   unit: {
     ...typography.body,
-    color: colors.text,
+    color: colors.textMuted,
+    marginLeft: spacing.sm,
+  },
+  hint: {
+    marginTop: spacing.xs,
+    color: colors.textMuted,
   },
   error: {
     marginTop: spacing.xs,
     color: colors.error,
-    textAlign: 'center',
   },
 });

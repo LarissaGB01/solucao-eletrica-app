@@ -4,8 +4,8 @@ import { Text } from 'react-native';
 import { Stepper } from './Stepper';
 
 const steps = [
-  { key: 'a', content: <Text>Etapa A</Text> },
-  { key: 'b', content: <Text>Etapa B</Text> },
+  { key: 'a', title: 'Circuito', content: <Text>Etapa A</Text> },
+  { key: 'b', title: 'Dados elétricos', content: <Text>Etapa B</Text> },
 ];
 
 describe('Stepper', () => {
@@ -15,12 +15,16 @@ describe('Stepper', () => {
 
     expect(screen.getByText('Etapa A')).toBeOnTheScreen();
     expect(screen.getByLabelText('Etapa 1 de 2')).toBeOnTheScreen();
+    expect(screen.getByRole('header', { name: 'Circuito' })).toBeOnTheScreen();
     expect(
       screen.queryByRole('button', { name: 'Voltar' }),
     ).not.toBeOnTheScreen();
 
     await userEvent.press(screen.getByRole('button', { name: 'Próximo' }));
     expect(screen.getByText('Etapa B')).toBeOnTheScreen();
+    expect(
+      screen.getByRole('header', { name: 'Dados elétricos' }),
+    ).toBeOnTheScreen();
 
     await userEvent.press(screen.getByRole('button', { name: 'Voltar' }));
     expect(screen.getByText('Etapa A')).toBeOnTheScreen();

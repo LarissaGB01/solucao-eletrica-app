@@ -1,6 +1,6 @@
-import { ActivityIndicator, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
-import { colors, spacing } from '../../theme';
+import { colors } from '../../theme';
 import { type Step, Stepper } from '../Stepper/Stepper';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   busyLabel: string;
 };
 
-/** Scrollable Stepper with a blocking spinner while the form is being processed. */
+/** Full-screen Stepper with a blocking spinner while the form is being processed. */
 export function StepperForm({
   steps,
   canAdvance,
@@ -21,12 +21,7 @@ export function StepperForm({
 }: Props) {
   return (
     <View style={styles.screen}>
-      <ScrollView
-        contentContainerStyle={styles.content}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Stepper steps={steps} canAdvance={canAdvance} onFinish={onFinish} />
-      </ScrollView>
+      <Stepper steps={steps} canAdvance={canAdvance} onFinish={onFinish} />
       {busy && (
         <View style={styles.overlay}>
           <ActivityIndicator
@@ -44,10 +39,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.background,
-  },
-  content: {
-    paddingVertical: spacing.xl * 1.5,
-    paddingHorizontal: spacing.xl,
   },
   overlay: {
     ...StyleSheet.absoluteFill,

@@ -52,6 +52,7 @@ export function Segmented<T extends string>({
 
 const styles = StyleSheet.create({
   container: {
+    marginVertical: spacing.sm,
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: colors.primary,

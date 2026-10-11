@@ -18,7 +18,7 @@ export function SecoesView({ secoes }: { secoes: readonly Secao[] }) {
       ]}
     >
       {secoes.map(secao => (
-        <Accordion key={secao.titulo} title={secao.titulo}>
+        <Accordion key={secao.titulo} title={secao.titulo} value={secao.valor}>
           {secao.blocos.map((bloco, index) => (
             <BlocoView key={index} bloco={bloco} />
           ))}

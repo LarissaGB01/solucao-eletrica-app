@@ -13,8 +13,6 @@ export const formula = (expressoes: readonly string[]): Bloco => ({
   expressoes,
 });
 
-export const titulo = (nome: string, valor: string) => `${nome} = ${valor}`;
-
 export const rotuloFases = (fases: Fases) => formularios.fases.opcoes[fases];
 
 export const linkNbr: Bloco = {

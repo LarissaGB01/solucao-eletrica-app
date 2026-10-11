@@ -7,10 +7,12 @@ import {
   View,
 } from 'react-native';
 
-import { colors, spacing } from '../../theme';
+import { colors, radius, spacing, typography } from '../../theme';
 
 type Props = {
   title: string;
+  /** Result of the section, shown on the right of the header (e.g. "17,32 A"). */
+  value?: string;
   initiallyExpanded?: boolean;
   children: ReactNode;
 };
@@ -18,6 +20,7 @@ type Props = {
 /** Collapsible section. Children are only mounted while expanded (keeps WebViews cheap). */
 export function Accordion({
   title,
+  value,
   initiallyExpanded = false,
   children,
 }: Props) {
@@ -32,12 +35,13 @@ export function Accordion({
     <View style={styles.container}>
       <Pressable
         accessibilityRole="button"
-        accessibilityLabel={title}
+        accessibilityLabel={value === undefined ? title : `${title} = ${value}`}
         accessibilityState={{ expanded }}
         onPress={toggle}
         style={styles.header}
       >
         <Text style={styles.title}>{title}</Text>
+        {value !== undefined && <Text style={styles.value}>{value}</Text>}
         <Text style={styles.icon} importantForAccessibility="no">
           {expanded ? '▲' : '▼'}
         </Text>
@@ -49,28 +53,39 @@ export function Accordion({
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: spacing.md,
+    marginVertical: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.borderSubtle,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.primary,
+    borderRadius: radius.md,
+    backgroundColor: colors.background,
+    overflow: 'hidden',
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: colors.primary,
-    padding: spacing.xs,
+    gap: spacing.sm,
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.lg,
   },
   title: {
+    ...typography.label,
     flex: 1,
-    color: colors.textInverse,
-    padding: spacing.md,
-    textAlign: 'center',
+    color: colors.textStrong,
+  },
+  value: {
+    ...typography.label,
+    color: colors.primaryDark,
   },
   icon: {
-    color: colors.textInverse,
+    color: colors.primary,
     fontSize: 12,
-    paddingHorizontal: spacing.sm,
   },
   content: {
-    backgroundColor: colors.surfaceMuted,
-    padding: spacing.md,
+    padding: spacing.lg,
+    borderTopWidth: 1,
+    borderTopColor: colors.borderSubtle,
+    backgroundColor: colors.surface,
   },
 });

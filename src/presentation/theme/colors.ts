@@ -13,4 +13,8 @@ export const colors = {
   inactive: '#9E9E9E',
   error: '#B00020',
   border: '#000000',
+  // Added in the design refresh: light warm surfaces and hairlines around the brand orange.
+  primaryDark: '#A8440F',
+  surface: '#FBF6F3',
+  borderSubtle: '#E6DBD4',
 } as const;
