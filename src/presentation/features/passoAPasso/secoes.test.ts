@@ -1,4 +1,7 @@
-import { RESULTADO_CABEAMENTO_EXEMPLO as exemplo } from '../../../domain/dimensionamento/resultadosExemplo';
+import {
+  RESULTADO_CABEAMENTO_EXEMPLO as exemplo,
+  RESULTADO_ELETRODUTO_EXEMPLO,
+} from '../../../domain/dimensionamento/resultadosExemplo';
 import type { Bloco, Secao } from '../conteudo/Bloco';
 import { secoesCondutor } from './secoesCondutor';
 import { secoesDisjuntor } from './secoesDisjuntor';
@@ -75,7 +78,7 @@ describe('secoesDisjuntor', () => {
     expect(textos(secoes[2])).toEqual([
       'Curva C',
       'Bipolar (2P)',
-      'Nome: Siemens 5SL1 C20',
+      'Nome: 5SL1 220-7MB',
       'Corrente nominal: 20,00 A',
     ]);
   });
@@ -92,23 +95,23 @@ describe('secoesDisjuntor', () => {
 describe('secoesEletroduto', () => {
   it('shows the diameters and the suggested conduit', () => {
     const secoes = secoesEletroduto(
-      exemplo.memoria.eletroduto,
-      exemplo.eletroduto,
+      RESULTADO_ELETRODUTO_EXEMPLO.memoria,
+      RESULTADO_ELETRODUTO_EXEMPLO.eletroduto,
     );
     expect(secoes.map(s => s.titulo)).toEqual([
       'Dados Informados',
       'Diâmetro do Condutor = 1,78 mm',
       'Diâmetro Mínimo do Eletroduto = 13,38 mm',
-      'Recomendação de Eletroduto = 3/4"',
+      'Recomendação de Eletroduto = 1 1/4"',
     ]);
     expect(textos(secoes[3])).toEqual([
       'Diâmetro nominal externo ≥ 13,38 mm',
-      'Diâmetro nominal: 3/4" (25,00 mm)',
+      'Diâmetro nominal: 1 1/4" (30,00 mm)',
     ]);
   });
 
   it('says when no conduit fits', () => {
-    const secoes = secoesEletroduto(exemplo.memoria.eletroduto, null);
+    const secoes = secoesEletroduto(RESULTADO_ELETRODUTO_EXEMPLO.memoria, null);
     expect(textos(secoes[3])).toContain(
       'Desculpe, mas não encontrei eletroduto para os parâmetros fornecidos.',
     );

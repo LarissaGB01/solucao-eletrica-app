@@ -42,7 +42,7 @@ Este repositório é a reescrita do app original ([solucao_eletrica](https://git
 | Sistemas   | Android                                                                                                             | Android (iOS planejado)                           |
 | Qualidade  | —                                                                                                                   | Arquitetura em camadas, testes automatizados e CI |
 
-> **Estado atual:** os cálculos ainda retornam valores fixos (mock). O motor de cálculo da NBR 5410 será portado do backend Java na Fase 5 do [roadmap](PLAN.md).
+> **Estado atual:** os cálculos rodam no aparelho, com as mesmas fórmulas e tabelas do backend Java original, conferidos por testes comparativos ([ADR 0006](docs/adr/0006-offline-engine-full-precision.md)).
 
 ## Documentação teórica
 

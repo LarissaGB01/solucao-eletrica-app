@@ -14,9 +14,9 @@ describe('ResultadoCabeamentoScreen', () => {
 
     expect(screen.getByText('2,50 mm²')).toBeOnTheScreen();
     expect(screen.getByText('24,00 A')).toBeOnTheScreen();
-    expect(screen.getByText('Siemens 5SL1 C20')).toBeOnTheScreen();
+    expect(screen.getByText('5SL1 220-7MB')).toBeOnTheScreen();
     expect(screen.getByText('20,00 A')).toBeOnTheScreen();
-    expect(screen.getByText('3/4" (25,00 mm)')).toBeOnTheScreen();
+    expect(screen.getByText('1 1/4" (30,00 mm)')).toBeOnTheScreen();
   });
 
   it('explains when no breaker or conduit fits', async () => {

@@ -1,0 +1,158 @@
+[
+  {
+    "entrada": {
+      "secaoNominalCondutor": 2.5,
+      "quantidadeCondutores": 3
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "diametroCondutorMm": 1.783255450012701,
+      "diametroMinimoEletrodutoMm": 13.374415875095256
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 1.5,
+      "quantidadeCondutores": 1
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "diametroCondutorMm": 1.3820274961085253,
+      "diametroMinimoEletrodutoMm": 3.455068740271313
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 10,
+      "quantidadeCondutores": 4
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "diametroCondutorMm": 3.5679125549822546,
+      "diametroMinimoEletrodutoMm": 35.679125549822544
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 16,
+      "quantidadeCondutores": 6
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "3\"",
+        "diametroNominalMm": 75
+      },
+      "diametroCondutorMm": 4.513313638558703,
+      "diametroMinimoEletrodutoMm": 67.69970457838055
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 25,
+      "quantidadeCondutores": 8
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "4\"",
+        "diametroNominalMm": 100
+      },
+      "diametroCondutorMm": 5.641808220774612,
+      "diametroMinimoEletrodutoMm": 112.83616441549225
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 50,
+      "quantidadeCondutores": 10
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "7\"",
+        "diametroNominalMm": 175
+      },
+      "diametroCondutorMm": 7.978721702127478,
+      "diametroMinimoEletrodutoMm": 199.46804255318696
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 95,
+      "quantidadeCondutores": 12
+    },
+    "saida": {
+      "eletroduto": null,
+      "diametroCondutorMm": 10.998181667894016,
+      "diametroMinimoEletrodutoMm": 329.9454500368205
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 150,
+      "quantidadeCondutores": 20
+    },
+    "saida": {
+      "eletroduto": null,
+      "diametroCondutorMm": 13.819913169047048,
+      "diametroMinimoEletrodutoMm": 690.9956584523525
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 240,
+      "quantidadeCondutores": 30
+    },
+    "saida": {
+      "eletroduto": null,
+      "diametroCondutorMm": 17.480846661417747,
+      "diametroMinimoEletrodutoMm": 1311.063499606331
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 6,
+      "quantidadeCondutores": 2
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "diametroCondutorMm": 2.7640549922170505,
+      "diametroMinimoEletrodutoMm": 13.820274961085252
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 35,
+      "quantidadeCondutores": 15
+    },
+    "saida": {
+      "eletroduto": null,
+      "diametroCondutorMm": 6.675327707311455,
+      "diametroMinimoEletrodutoMm": 250.32478902417955
+    }
+  },
+  {
+    "entrada": {
+      "secaoNominalCondutor": 4,
+      "quantidadeCondutores": 3
+    },
+    "saida": {
+      "eletroduto": {
+        "diametroNominalPolegadas": "1.1/4\"",
+        "diametroNominalMm": 30
+      },
+      "diametroCondutorMm": 2.2561028345356955,
+      "diametroMinimoEletrodutoMm": 16.920771259017716
+    }
+  }
+]

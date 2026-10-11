@@ -33,14 +33,14 @@ and don't depend on React Native, so they can be tested in isolation and reused 
 
 ## Modules
 
-| Layer          | Path                 | Responsibility                                                                                   | Knows about                  |
-| -------------- | -------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------- |
-| domain         | `src/domain`         | Entities, value objects, domain errors, ports, NBR 5410 rules, LaTeX formula builders            | nothing else                 |
-| application    | `src/application`    | Use cases that orchestrate the domain (`DimensionarCabeamento`, …)                               | domain                       |
-| infrastructure | `src/infrastructure` | Port implementations: `MockCalculadoraDimensionamento` (fixed fixtures), later local persistence | application, domain          |
-| presentation   | `src/presentation`   | Screens, `useXxxViewModel` hooks, shared UI (Accordion, Stepper, Formula, NumericInput), theme   | application, domain, content |
-| content        | `src/content`        | Static pt-BR texts: labels, theory, reference links                                              | nothing else                 |
-| app            | `src/app`            | `App.tsx`, navigation, DI container (React context), provider setup                              | everything                   |
+| Layer          | Path                 | Responsibility                                                                                 | Knows about                  |
+| -------------- | -------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------- |
+| domain         | `src/domain`         | Entities, value objects, domain errors, ports, NBR 5410 rules, LaTeX formula builders          | nothing else                 |
+| application    | `src/application`    | Use cases that orchestrate the domain (`DimensionarCabeamento`, …)                             | domain                       |
+| infrastructure | `src/infrastructure` | Adapters to the outside world (empty today; local persistence later)                           | application, domain          |
+| presentation   | `src/presentation`   | Screens, `useXxxViewModel` hooks, shared UI (Accordion, Stepper, Formula, NumericInput), theme | application, domain, content |
+| content        | `src/content`        | Static pt-BR texts: labels, theory, reference links                                            | nothing else                 |
+| app            | `src/app`            | `App.tsx`, navigation, DI container (React context), provider setup                            | everything                   |
 
 ### Domain contexts
 
@@ -58,7 +58,7 @@ src/domain/
     ├── sugestoes.ts        CondutorSugerido, DisjuntorSugerido, EletrodutoSugerido
     ├── memoria.ts          MemoriaCondutor/Disjuntor/Eletroduto: intermediate values per step
     ├── nbr5410/            constants from the original backend (resistivity, limits, minimums)
-    ├── resultadosExemplo.ts one coherent example result (used by the mock and tests)
+    ├── resultadosExemplo.ts one coherent example result (engine output; used by tests)
     ├── formulas/           pure LaTeX builders for each calculation step
     └── ports/              CalculadoraDimensionamento (interface)
 ```
@@ -80,11 +80,10 @@ useFormCabeamentoViewModel ──► receives a valid ProjetoCabeamento from the
 DimensionarCabeamento (use case)
   │ calls port
   ▼
-CalculadoraDimensionamento ◄── implemented by:
-  │                             now:   infrastructure/mock/MockCalculadoraDimensionamento
-  │                             later: domain/dimensionamento/nbr5410 (real offline engine)
+CalculadoraDimensionamento ◄── implemented by domain/dimensionamento/nbr5410/CalculadoraNbr5410
+  │                             (pure offline engine over typed NBR/Siemens/Kanaflex tables)
   ▼
-Result<ResultadoCabeamento, FalhaCalculo>
+Result<ResultadoCabeamento, ErroDimensionamento | FalhaCalculo>
   │
   ▼
 ResultadoCabeamentoScreen ──► PassoAPasso*Screen (result.memoria → LaTeX from domain/formulas)
@@ -95,8 +94,7 @@ Each form screen is a thin `StepperForm`; shared form logic lives in
 
 Screens pass **domain data** between them, never raw form state. Results are plain readonly
 objects so navigation state stays serializable. The DI container in
-`src/app` decides which `CalculadoraDimensionamento` is used. Swapping mock → real engine is a
-one-line change there, with no screen changes.
+`src/app` decides which `CalculadoraDimensionamento` is used.
 
 ### Navigation
 
@@ -138,12 +136,12 @@ Additional rules:
 | -------------- | ------------------------------------------------------------ | ------------------------------ |
 | domain         | Unit: value objects, rules, formula builders (≥90% coverage) | Jest                           |
 | application    | Unit with a fake `CalculadoraDimensionamento`                | Jest                           |
-| infrastructure | Mock fixtures satisfy domain invariants                      | Jest                           |
+| infrastructure | Adapter tests (none yet)                                     | Jest                           |
 | presentation   | Component: validation, navigation, loading and error states  | React Native Testing Library   |
 | whole app      | E2E happy paths per flow                                     | Maestro (CI, Android emulator) |
 
-When the real engine replaces the mock, **golden tests** compare its output with results from the
-original Java backend (`LarissaGB01/solucao_eletrica_backend`) for the same inputs.
+**Golden tests** (`nbr5410/motor.golden.test.ts`) compare the engine with fixtures captured from
+the original Java backend (`scripts/golden/gerar-golden.mjs`); see ADR 0006 for tolerances.
 
 ## Decisions
 
@@ -153,4 +151,5 @@ Recorded in `docs/adr/` (copy `0000-template.md` for new ones):
 - [0002](docs/adr/0002-clean-architecture-with-enforced-layers.md) Clean Architecture with lint-enforced layers
 - [0003](docs/adr/0003-portuguese-ubiquitous-language.md) Portuguese for domain terms, English for technical code
 - [0004](docs/adr/0004-katex-in-webview-for-formulas.md) KaTeX in a WebView for formula rendering
-- [0005](docs/adr/0005-mock-calculator-then-offline-engine.md) Mock calculator now, on-device NBR 5410 engine later
+- [0005](docs/adr/0005-mock-calculator-then-offline-engine.md) Mock calculator now, on-device NBR 5410 engine later (superseded)
+- [0006](docs/adr/0006-offline-engine-full-precision.md) Offline engine: backend rules at full precision

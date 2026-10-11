@@ -1,0 +1,154 @@
+[
+  {
+    "entrada": {
+      "fases": "MONOFASICO",
+      "correnteProjeto": 17.32,
+      "correnteMaximaCondutor": 24
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 220-7MB",
+        "correnteNominalA": 20
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "TRIFASICO",
+      "correnteProjeto": 40,
+      "correnteMaximaCondutor": 50
+    },
+    "saida": {
+      "disjuntor": null
+    }
+  },
+  {
+    "entrada": {
+      "fases": "BIFASICO",
+      "correnteProjeto": 10,
+      "correnteMaximaCondutor": 15
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 213-7MB",
+        "correnteNominalA": 13
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "MONOFASICO",
+      "correnteProjeto": 5,
+      "correnteMaximaCondutor": 7
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 206-7MB",
+        "correnteNominalA": 6
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "TRIFASICO",
+      "correnteProjeto": 63,
+      "correnteMaximaCondutor": 70
+    },
+    "saida": {
+      "disjuntor": null
+    }
+  },
+  {
+    "entrada": {
+      "fases": "MONOFASICO",
+      "correnteProjeto": 1,
+      "correnteMaximaCondutor": 3
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 202-7MB",
+        "correnteNominalA": 2
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "TRIFASICO",
+      "correnteProjeto": 75,
+      "correnteMaximaCondutor": 100
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 380-7MB",
+        "correnteNominalA": 80
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "BIFASICO",
+      "correnteProjeto": 20,
+      "correnteMaximaCondutor": 25
+    },
+    "saida": {
+      "disjuntor": null
+    }
+  },
+  {
+    "entrada": {
+      "fases": "MONOFASICO",
+      "correnteProjeto": 31.5,
+      "correnteMaximaCondutor": 40
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 232-7MB",
+        "correnteNominalA": 32
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "TRIFASICO",
+      "correnteProjeto": 12,
+      "correnteMaximaCondutor": 16
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 313-7MB",
+        "correnteNominalA": 13
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "MONOFASICO",
+      "correnteProjeto": 100,
+      "correnteMaximaCondutor": 150
+    },
+    "saida": {
+      "disjuntor": null
+    }
+  },
+  {
+    "entrada": {
+      "fases": "BIFASICO",
+      "correnteProjeto": 3.5,
+      "correnteMaximaCondutor": 6
+    },
+    "saida": {
+      "disjuntor": {
+        "nome": "5SL1 204-7MB",
+        "correnteNominalA": 4
+      }
+    }
+  },
+  {
+    "entrada": {
+      "fases": "MONOFASICO",
+      "correnteProjeto": 30,
+      "correnteMaximaCondutor": 20
+    },
+    "erro": 305
+  }
+]
