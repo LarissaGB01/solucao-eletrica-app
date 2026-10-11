@@ -102,7 +102,7 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 - [ ] Maestro E2E: 3 happy paths + 1 validation-error flow, run in CI on an Android emulator
 - [ ] Accessibility labels on all inputs/buttons; text scales to 200% without clipping
-- [ ] App icon + splash (`react-native-bootsplash`) from the old assets
+- [x] App icon (adaptive, bolt on brand orange); splash still pending (`react-native-bootsplash`)
 - [ ] Crash reporting (Sentry) with source maps uploaded from CI
 
 **Acceptance criteria**
@@ -114,7 +114,7 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 - [ ] Release keystore, Play App Signing, secrets in GitHub Actions
 - [ ] Fastlane `supply`; CI builds a signed AAB on tag `v*`; `versionCode` = CI run number
-- [ ] Play listing (pt-BR), privacy policy, data safety form
+- [x] Play listing (pt-BR), privacy policy, data safety answers (`docs/play/`)
 - [ ] Internal track → closed test (12 testers, 14 days) → production
 
 **Acceptance criteria**

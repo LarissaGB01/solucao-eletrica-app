@@ -72,6 +72,22 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'io.github.react-native-community:jsc-android:2026004.+'
 
+/**
+ * Upload key for Google Play, read from android/keystore.properties (gitignored):
+ *   storeFile=upload-keystore.jks
+ *   storePassword=...
+ *   keyAlias=upload
+ *   keyPassword=...
+ */
+def uploadKeyFile = rootProject.file("keystore.properties")
+def uploadKey = null
+if (uploadKeyFile.exists()) {
+    uploadKey = new Properties()
+    uploadKeyFile.withInputStream { uploadKey.load(it) }
+} else {
+    logger.warn("keystore.properties not found: release builds are debug-signed and can't go to Google Play.")
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -82,7 +98,8 @@ android {
         applicationId "com.larissagb.solucaoeletrica"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        // CI will pass a growing VERSION_CODE (Phase 7); local builds use 1.
+        versionCode((System.getenv("VERSION_CODE") ?: "1").toInteger())
         versionName "1.0"
     }
     signingConfigs {
@@ -92,15 +109,23 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        if (uploadKey != null) {
+            release {
+                storeFile file(uploadKey['storeFile'])
+                storePassword uploadKey['storePassword']
+                keyAlias uploadKey['keyAlias']
+                keyPassword uploadKey['keyPassword']
+            }
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            // Without keystore.properties the build still works locally (debug-signed), but
+            // Google Play rejects debug-signed bundles, so it can't be published by accident.
+            signingConfig uploadKey != null ? signingConfigs.release : signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }

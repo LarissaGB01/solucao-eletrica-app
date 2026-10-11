@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- No INTERNET permission: the app is fully offline. Debug builds add it in
+         src/debug/AndroidManifest.xml to reach the Metro bundler. -->
 
     <application
       android:name=".MainApplication"
