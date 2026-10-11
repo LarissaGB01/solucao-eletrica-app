@@ -76,3 +76,7 @@ yarn-error.log
 
 # Generated
 *.generated.ts
+
+# Google Play upload key (never commit)
+android/keystore.properties
+*.jks

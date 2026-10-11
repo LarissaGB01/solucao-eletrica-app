@@ -1,0 +1,4 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Debug only: the JS bundle is loaded from the Metro bundler over the network. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+</manifest>
