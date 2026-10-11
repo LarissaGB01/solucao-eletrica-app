@@ -13,7 +13,11 @@ export async function renderScreen<Route extends keyof RootStackParamList>(
   params: RootStackParamList[Route],
   useCases: Partial<UseCases> = {},
 ) {
-  const navigation = { navigate: jest.fn() };
+  const navigation = {
+    navigate: jest.fn(),
+    reset: jest.fn(),
+    popToTop: jest.fn(),
+  };
   // RouteProp is a conditional type TS can't build from a generic Route; tests pass real values.
   const route = {
     key: name,

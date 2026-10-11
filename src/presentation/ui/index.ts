@@ -1,4 +1,5 @@
 export { Accordion } from './Accordion/Accordion';
+export { Button } from './Button/Button';
 export { ChipGroup } from './ChipGroup/ChipGroup';
 export { Formula } from './Formula/Formula';
 export { NumberSpinner } from './NumberSpinner/NumberSpinner';

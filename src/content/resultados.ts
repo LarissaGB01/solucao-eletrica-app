@@ -1,4 +1,8 @@
 export const resultados = {
+  acoes: {
+    dimensionarOutro: 'Dimensionar outro',
+    inicio: 'Voltar ao início',
+  },
   condutor: {
     titulo: 'Condutor Sugerido',
     secao: 'Seção nominal',

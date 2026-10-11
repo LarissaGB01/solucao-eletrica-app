@@ -3,10 +3,11 @@ import { DisjuntorSugeridoCard } from '../resultados/DisjuntorSugeridoCard';
 import { ResultadoLayout } from '../resultados/ResultadoLayout';
 
 export function ResultadoDisjuntorScreen({
+  navigation,
   route,
 }: ScreenProps<'ResultadoDisjuntor'>) {
   return (
-    <ResultadoLayout>
+    <ResultadoLayout formulario="FormDisjuntor" navigation={navigation}>
       <DisjuntorSugeridoCard disjuntor={route.params.resultado.disjuntor} />
     </ResultadoLayout>
   );
