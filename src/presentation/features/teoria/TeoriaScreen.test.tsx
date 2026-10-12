@@ -1,12 +1,13 @@
-import { render, screen, userEvent } from '@testing-library/react-native';
+import { screen, userEvent } from '@testing-library/react-native';
 import { Linking } from 'react-native';
 
+import { renderScreen } from '../../testing/renderScreen';
 import { secoesTeoria } from './secoesTeoria';
 import { TeoriaScreen } from './TeoriaScreen';
 
 describe('TeoriaScreen', () => {
   it('lists the 14 sections of the original app, collapsed', async () => {
-    await render(<TeoriaScreen />);
+    await renderScreen(TeoriaScreen, 'Teoria', undefined);
 
     expect(secoesTeoria).toHaveLength(14);
     for (const secao of secoesTeoria) {
@@ -18,7 +19,7 @@ describe('TeoriaScreen', () => {
   });
 
   it('shows both circuit-current formulas with their captions', async () => {
-    await render(<TeoriaScreen />);
+    await renderScreen(TeoriaScreen, 'Teoria', undefined);
 
     await userEvent.press(
       screen.getByRole('button', { name: 'Corrente do Circuito' }),
@@ -30,7 +31,7 @@ describe('TeoriaScreen', () => {
   });
 
   it('shows the minimum sections with pt-BR decimals', async () => {
-    await render(<TeoriaScreen />);
+    await renderScreen(TeoriaScreen, 'Teoria', undefined);
 
     await userEvent.press(
       screen.getByRole('button', { name: 'Seção Mínima do Condutor' }),
@@ -43,22 +44,41 @@ describe('TeoriaScreen', () => {
     ).toBeOnTheScreen();
   });
 
-  it('opens the source of a table', async () => {
+  it('shows the Siemens table and opens its source', async () => {
     const openURL = jest.spyOn(Linking, 'openURL').mockResolvedValue(undefined);
-    await render(<TeoriaScreen />);
+    await renderScreen(TeoriaScreen, 'Teoria', undefined);
 
     await userEvent.press(
       screen.getByRole('button', { name: 'Recomendação de Disjuntor' }),
     );
-    expect(
-      screen.getByRole('image', {
-        name: 'Catálogo de minidisjuntores Siemens',
-      }),
-    ).toBeOnTheScreen();
+    expect(screen.getByText('5SL1 120-7MB')).toBeOnTheScreen();
     await userEvent.press(screen.getByRole('link', { name: 'Marca: Siemens' }));
 
     expect(openURL).toHaveBeenCalledWith(
       expect.stringContaining('catalogo-minidisjuntores'),
     );
+  });
+
+  it('opens a table full screen when tapped', async () => {
+    const { navigation } = await renderScreen(
+      TeoriaScreen,
+      'Teoria',
+      undefined,
+    );
+
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Recomendação de Eletroduto' }),
+    );
+    await userEvent.press(
+      screen.getByRole('button', {
+        name: 'Eletrodutos corrugados Kanalex (Kanaflex). Toque para ampliar',
+      }),
+    );
+
+    expect(navigation.navigate).toHaveBeenCalledWith('Tabela', {
+      tabela: expect.objectContaining({
+        titulo: 'Eletrodutos corrugados Kanalex (Kanaflex)',
+      }),
+    });
   });
 });

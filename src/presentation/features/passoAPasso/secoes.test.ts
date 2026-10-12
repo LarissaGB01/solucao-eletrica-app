@@ -16,10 +16,12 @@ const textos = (secao: Secao | undefined) =>
 const cabecalho = (secao: Secao) =>
   secao.valor === undefined ? secao.titulo : `${secao.titulo} = ${secao.valor}`;
 
-const descricoesTabelas = (secoes: readonly Secao[]) =>
+const tabelas = (secoes: readonly Secao[]) =>
   secoes.flatMap(s =>
-    s.blocos.flatMap(b => (b.tipo === 'tabela' ? [b.descricao] : [])),
+    s.blocos.flatMap(b => (b.tipo === 'tabela' ? [b.tabela] : [])),
   );
+const titulosTabelas = (secoes: readonly Secao[]) =>
+  tabelas(secoes).map(t => t.titulo);
 
 describe('secoesCondutor', () => {
   const secoes = secoesCondutor(exemplo.memoria.condutor, exemplo.condutor);
@@ -52,8 +54,8 @@ describe('secoesCondutor', () => {
   });
 
   it('shows the conduction table of the cable insulation', () => {
-    expect(descricoesTabelas(secoes)).toContain(
-      'Tabela de capacidade de condução de corrente, isolação PVC',
+    expect(titulosTabelas(secoes)).toContain(
+      'Capacidade de condução de corrente, isolação PVC (NBR 5410, Tabela 36)',
     );
     const epr = secoesCondutor(
       {
@@ -62,9 +64,18 @@ describe('secoesCondutor', () => {
       },
       exemplo.condutor,
     );
-    expect(descricoesTabelas(epr)).toContain(
-      'Tabela de capacidade de condução de corrente, isolação EPR',
+    expect(titulosTabelas(epr)).toContain(
+      'Capacidade de condução de corrente, isolação EPR (NBR 5410, Tabela 37)',
     );
+  });
+
+  it('highlights the rows used: temperature factor and chosen section', () => {
+    const [temperatura, conducao] = tabelas(secoes);
+    expect(temperatura?.linhas[temperatura.destaque ?? -1]).toEqual([
+      '30',
+      '1',
+    ]);
+    expect(conducao?.linhas[conducao.destaque ?? -1]?.[0]).toBe('2,5');
   });
 });
 

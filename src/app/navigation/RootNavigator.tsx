@@ -11,6 +11,7 @@ import { ResultadoEletrodutoScreen } from '../../presentation/features/eletrodut
 import { PassoAPassoCondutorScreen } from '../../presentation/features/passoAPasso/PassoAPassoCondutorScreen';
 import { PassoAPassoDisjuntorScreen } from '../../presentation/features/passoAPasso/PassoAPassoDisjuntorScreen';
 import { PassoAPassoEletrodutoScreen } from '../../presentation/features/passoAPasso/PassoAPassoEletrodutoScreen';
+import { TabelaScreen } from '../../presentation/features/conteudo/TabelaScreen';
 import { TeoriaScreen } from '../../presentation/features/teoria/TeoriaScreen';
 import { HomeScreen } from '../../presentation/features/home/HomeScreen';
 import type { RootStackParamList } from '../../presentation/navigation/routes';
@@ -82,6 +83,11 @@ export function RootNavigator() {
           name="PassoAPassoEletroduto"
           component={PassoAPassoEletrodutoScreen}
           options={{ title: titulosTelas.passoAPasso }}
+        />
+        <Stack.Screen
+          name="Tabela"
+          component={TabelaScreen}
+          options={{ title: titulosTelas.tabela }}
         />
       </Stack.Navigator>
     </NavigationContainer>

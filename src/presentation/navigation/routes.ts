@@ -13,6 +13,7 @@ import type {
   DisjuntorSugerido,
   EletrodutoSugerido,
 } from '../../domain/dimensionamento/sugestoes';
+import type { Tabela } from '../features/conteudo/Bloco';
 
 // Routes are added here as their phase lands (see PLAN.md).
 export type RootStackParamList = {
@@ -34,6 +35,7 @@ export type RootStackParamList = {
     memoria: MemoriaEletroduto;
     eletroduto: EletrodutoSugerido | null;
   };
+  Tabela: { tabela: Tabela };
 };
 
 export type ScreenProps<Route extends keyof RootStackParamList> =

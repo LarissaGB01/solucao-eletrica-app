@@ -20,7 +20,7 @@ import {
 import type { CondutorSugerido } from '../../../domain/dimensionamento/sugestoes';
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Secao } from '../conteudo/Bloco';
-import { tabelas } from '../conteudo/tabelas';
+import { conducaoUsada, fatorTemperaturaUsado } from '../conteudo/tabelas';
 import { formula, linha, linkNbr, rotuloFases } from './comum';
 
 const { unidades } = resultados;
@@ -76,8 +76,7 @@ export function secoesCondutor(
         formula(p.fatorTemperatura(m)),
         {
           tipo: 'tabela',
-          ...tabelas.fatorTemperatura,
-          descricao: teoria.tabelas.fatorTemperatura,
+          tabela: fatorTemperaturaUsado(dados.temperaturaC, isolacao),
         },
         linkNbr,
       ],
@@ -147,17 +146,16 @@ export function secoesCondutor(
             unidades.secao
           }`,
         },
-        isolacao === 'PVC'
-          ? {
-              tipo: 'tabela',
-              ...tabelas.conducaoPvc,
-              descricao: teoria.tabelas.conducaoPvc,
-            }
-          : {
-              tipo: 'tabela',
-              ...tabelas.conducaoEpr,
-              descricao: teoria.tabelas.conducaoEpr,
-            },
+        {
+          tipo: 'tabela',
+          tabela: conducaoUsada(
+            material,
+            isolacao,
+            dados.metodoInstalacao,
+            CONDUTORES_CARREGADOS[dados.fases],
+            condutor.secaoNominalMm2,
+          ),
+        },
         linkNbr,
         linha(
           resultados.condutor.secao,
