@@ -139,13 +139,12 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 - All 5 Maestro flows pass on iOS.
 - Apple Developer account active (team FB7R6D99A3); signing set up; signed App Store package builds with `npm run ios:release`.
 - iPhone only (iPads run it in iPhone mode), so no iPad screenshots or iPad review.
+- App created in App Store Connect; build 1 uploaded to TestFlight on 2026-10-12.
 
 ### iOS: what's missing
 
 | Step                                                                                                        | Who       | Time     |
 | ----------------------------------------------------------------------------------------------------------- | --------- | -------- |
-| Create the app in App Store Connect (bundle ID `com.larissagb.solucaoeletrica`)                             | you       | 5 min    |
-| Upload the build to TestFlight (`npm run ios:release -- upload`)                                            | dev       | ~20 min  |
 | App Store Connect listing: reuse `docs/play/` texts, privacy label "Data Not Collected", iPhone screenshots | you + dev | ~1 h     |
 | Submit for review (no mandatory test period)                                                                | Apple     | 1–3 days |
 
