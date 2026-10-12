@@ -1,0 +1,41 @@
+# App Store screenshots (6.3", resized from the 6.9" capture to 1206x2622: sips -z 2622 1206 *.png). Run on an iPhone Pro Max simulator with a Release build:
+#   xcrun simctl status_bar booted override --time 9:41 --batteryState discharging --batteryLevel 100
+#   maestro test --test-output-dir out docs/app-store/capturas.yaml
+appId: com.larissagb.solucaoeletrica
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: 'Dimensionar Cabeamento'
+    timeout: 10000
+- takeScreenshot: screenshots/1-home
+- tapOn: 'Dimensionar Cabeamento'
+- tapOn: 'Próximo'
+- waitForAnimationToEnd
+- takeScreenshot: screenshots/2-formulario
+- tapOn: 'Próximo'
+- tapOn: 'Próximo'
+- tapOn: 'Finalizar'
+- assertVisible: 'Condutor Sugerido'
+- waitForAnimationToEnd
+- takeScreenshot: screenshots/3-resultado
+- scrollUntilVisible:
+    element: 'Ver cálculos.*'
+- tapOn: 'Ver cálculos.*'
+- waitForAnimationToEnd:
+    timeout: 3000
+- tapOn: 'Corrente do Circuito.*'
+- extendedWaitUntil:
+    visible: 'espera-fixa-inexistente'
+    timeout: 4000
+    optional: true
+- takeScreenshot: screenshots/4-passo-a-passo
+- launchApp:
+    clearState: true
+- tapOn: 'Base Teórica'
+- tapOn: 'Corrente de Projeto.*'
+- extendedWaitUntil:
+    visible: 'espera-fixa-inexistente'
+    timeout: 4000
+    optional: true
+- takeScreenshot: screenshots/5-teoria

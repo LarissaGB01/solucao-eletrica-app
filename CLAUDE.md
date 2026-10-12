@@ -40,6 +40,7 @@ Run a single test file: `npx jest src/domain/shared/Result.test.ts`
 
 After changing `babel.config.js`, restart Metro with `npm start -- --reset-cache`.
 Golden fixtures: see the header of `scripts/golden/gerar-golden.mjs` (needs the Java backend running).
+Store material and publishing steps: `docs/play/` (Google Play), `docs/app-store/` (App Store). Current state: `STATUS.md`.
 
 ## Layout
 

@@ -1,7 +1,7 @@
 <h1 align="center">Solução Elétrica</h1>
 <h4 align="center">Aplicativo para dimensionamento de cabos, disjuntores e eletrodutos segundo a NBR 5410</h4>
 <p align="center">
-  <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge" alt="Badge em Desenvolvimento">
+  <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20PUBLICA%C3%87%C3%83O&color=GREEN&style=for-the-badge" alt="Badge em publicação">
   <a href="https://github.com/LarissaGB01/solucao-eletrica-app/actions/workflows/ci.yml"><img src="https://github.com/LarissaGB01/solucao-eletrica-app/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
 </p>
 
@@ -39,10 +39,10 @@ Este repositório é a reescrita do app original ([solucao_eletrica](https://git
 | ---------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | Plataforma | Expo + JavaScript                                                                                                   | React Native CLI + TypeScript                     |
 | Cálculos   | Backend Java + MySQL via REST ([solucao_eletrica_backend](https://github.com/LarissaGB01/solucao_eletrica_backend)) | No próprio aparelho, **sem internet**             |
-| Sistemas   | Android                                                                                                             | Android (iOS planejado)                           |
+| Sistemas   | Android                                                                                                             | Android e iOS                                     |
 | Qualidade  | —                                                                                                                   | Arquitetura em camadas, testes automatizados e CI |
 
-> **Estado atual:** os cálculos rodam no aparelho, com as mesmas fórmulas e tabelas do backend Java original, conferidos por testes comparativos ([ADR 0006](docs/adr/0006-offline-engine-full-precision.md)).
+> **Estado atual:** os cálculos rodam no aparelho, com as mesmas fórmulas e tabelas do backend Java original, conferidos por testes comparativos ([ADR 0006](docs/adr/0006-offline-engine-full-precision.md)). A versão 1.0 foi enviada para revisão na App Store em 12/10/2026; o Google Play aguarda a validação da conta. Detalhes em [STATUS.md](STATUS.md).
 
 ## Documentação teórica
 
@@ -57,8 +57,8 @@ Para mais informações sobre as telas e a navegação do aplicativo, acesse [es
 ### Pré-requisitos
 
 - Node 22 (veja `.nvmrc`)
-- JDK 17 (Zulu recomendado)
-- Android Studio com Android SDK e um emulador ou aparelho com depuração USB
+- Android: JDK 17 (Zulu recomendado) e Android Studio com Android SDK e um emulador ou aparelho com depuração USB
+- iOS (só no macOS): Xcode e CocoaPods (`brew install cocoapods`)
 
 Guia oficial do ambiente: [React Native – Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment).
 
@@ -70,18 +70,23 @@ npm start            # inicia o Metro (deixe rodando)
 npm run android      # em outro terminal: compila e instala no emulador/aparelho
 ```
 
+No iOS, na primeira vez rode `cd ios && pod install && cd ..`; depois `npm run ios` abre o simulador.
+
 Não é necessário Expo Go nem configurar API: o app funciona totalmente offline.
 
 > **Android 17:** se o app mostrar "Unable to load script", rode `adb reverse tcp:8081 tcp:8081` e abra o app novamente.
 
 ## Comandos úteis
 
-| Comando             | O que faz                                              |
-| ------------------- | ------------------------------------------------------ |
-| `npm test`          | Roda os testes (Jest)                                  |
-| `npm run lint`      | ESLint, incluindo as regras de camadas                 |
-| `npm run typecheck` | Verificação de tipos (TypeScript)                      |
-| `npm run validate`  | Tudo acima + formatação + cobertura (o mesmo que a CI) |
+| Comando                  | O que faz                                                          |
+| ------------------------ | ------------------------------------------------------------------ |
+| `npm test`               | Roda os testes (Jest)                                              |
+| `npm run lint`           | ESLint, incluindo as regras de camadas                             |
+| `npm run typecheck`      | Verificação de tipos (TypeScript)                                  |
+| `npm run validate`       | Tudo acima + formatação + cobertura (o mesmo que a CI)             |
+| `npm run e2e`            | Fluxos E2E (Maestro) no emulador/simulador aberto                  |
+| `npm run android:bundle` | Pacote assinado para o Google Play (`.aab`)                        |
+| `npm run ios:release`    | Pacote assinado para a App Store (`-- upload` envia ao TestFlight) |
 
 ## Documentação técnica
 
@@ -89,6 +94,7 @@ Não é necessário Expo Go nem configurar API: o app funciona totalmente offlin
 - [ARCHITECTURE.md](ARCHITECTURE.md): camadas, fluxo de dados e regras de dependência
 - [PLAN.md](PLAN.md): roadmap por fases com critérios de aceite
 - [docs/adr](docs/adr): decisões de arquitetura (ADRs)
+- [docs/play](docs/play/README.md) e [docs/app-store](docs/app-store/README.md): publicação nas lojas (textos, imagens, respostas dos formulários)
 - [CLAUDE.md](CLAUDE.md): convenções e regras do projeto
 
 ## Fonte das imagens
