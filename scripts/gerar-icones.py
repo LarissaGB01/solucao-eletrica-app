@@ -1,9 +1,11 @@
-"""Generates the launcher PNGs (Android 7.x fallback), the Play Store icon and the feature graphic.
+"""Generates the launcher PNGs (Android 7.x fallback), the iOS app icon and launch image,
+the Play Store icon and the feature graphic.
 
 The adaptive icon itself (Android 8+) is vector: res/drawable/ic_launcher_foreground.xml.
 Requires Pillow: python3 -m pip install pillow, then: python3 scripts/gerar-icones.py
 """
 
+import json
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -11,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 RAIZ = Path(__file__).resolve().parent.parent
 RES = RAIZ / "android/app/src/main/res"
 PLAY = RAIZ / "docs/play"
+IOS = RAIZ / "ios/SolucaoEletrica/Images.xcassets"
 
 LARANJA = "#D25719"
 CREME = "#F3CCB8"
@@ -54,6 +57,31 @@ def play_icon() -> None:
     icone(512, redondo=False, cantos=False).convert("RGB").save(PLAY / "icone-512.png")
 
 
+def ios() -> None:
+    # iOS rounds the corners itself and rejects transparency in the app icon.
+    # Explicit sizes: Xcode 27's actool ignores the single-size (1024 universal) format.
+    pasta = IOS / "AppIcon.appiconset"
+    imagens = []
+    for pt, escalas, idiom in [(20, (2, 3), "iphone"), (29, (2, 3), "iphone"), (40, (2, 3), "iphone"),
+                               (60, (2, 3), "iphone"), (1024, (1,), "ios-marketing")]:
+        for escala in escalas:
+            nome = f"icone-{pt}@{escala}x.png"
+            icone(pt * escala, redondo=False, cantos=False).convert("RGB").save(pasta / nome)
+            imagens.append({"filename": nome, "idiom": idiom, "scale": f"{escala}x", "size": f"{pt}x{pt}"})
+    (pasta / "Contents.json").write_text(
+        json.dumps({"images": imagens, "info": {"author": "xcode", "version": 1}}, indent=2) + "\n"
+    )
+    # White bolt on transparent background for the orange launch screen (60 pt).
+    for escala in (1, 2, 3):
+        s = 60 * escala * SUPERSAMPLE
+        img = Image.new("RGBA", (s, s), (0, 0, 0, 0))
+        ImageDraw.Draw(img).polygon(raio(s, 1.6, (s / 2, s / 2)), fill=BRANCO)
+        sufixo = "" if escala == 1 else f"@{escala}x"
+        img.resize((60 * escala, 60 * escala), Image.LANCZOS).save(
+            IOS / f"LaunchRaio.imageset/raio{sufixo}.png"
+        )
+
+
 def feature_graphic() -> None:
     largura, altura = 1024, 500
     img = Image.new("RGB", (largura, altura), LARANJA)
@@ -73,5 +101,6 @@ def feature_graphic() -> None:
 if __name__ == "__main__":
     launcher_pngs()
     play_icon()
+    ios()
     feature_graphic()
     print("ok")

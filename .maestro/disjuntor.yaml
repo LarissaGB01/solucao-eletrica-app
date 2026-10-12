@@ -1,0 +1,12 @@
+# E2E: size a breaker with the prefilled values, then open its steps.
+appId: com.larissagb.solucaoeletrica
+---
+- launchApp:
+    clearState: true
+- tapOn: 'Dimensionar Disjuntores'
+- tapOn: 'Finalizar'
+- assertVisible: 'Disjuntor Sugerido'
+- assertVisible: '5SL1 216-7MB'
+- tapOn: 'Ver cálculos »'
+- tapOn: 'Corrente Nominal do Disjuntor'
+- takeScreenshot: e2e-out/disjuntor-passo-a-passo

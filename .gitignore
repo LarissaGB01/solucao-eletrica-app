@@ -80,3 +80,6 @@ yarn-error.log
 # Google Play upload key (never commit)
 android/keystore.properties
 *.jks
+
+# Maestro screenshots
+e2e-out/

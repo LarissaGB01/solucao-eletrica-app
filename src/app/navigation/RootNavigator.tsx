@@ -21,7 +21,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export function RootNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerTintColor: colors.primary }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerTintColor: colors.primary,
+          // iOS would show the previous route's name ("Home") next to the arrow.
+          headerBackButtonDisplayMode: 'minimal',
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={HomeScreen}

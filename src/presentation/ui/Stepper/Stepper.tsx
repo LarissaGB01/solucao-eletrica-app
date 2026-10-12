@@ -1,5 +1,13 @@
-import { type ReactNode, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { HeaderHeightContext } from '@react-navigation/elements';
+import { type ReactNode, useContext, useState } from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { stepper as textos } from '../../../content/ui';
@@ -24,6 +32,8 @@ type Props = {
 export function Stepper({ steps, onFinish, canAdvance }: Props) {
   const [active, setActive] = useState(0);
   const { bottom } = useSafeAreaInsets();
+  // Outside a navigator (e.g. in tests) there is no header.
+  const headerHeight = useContext(HeaderHeightContext) ?? 0;
   const isFirst = active === 0;
   const isLast = active === steps.length - 1;
   const step = steps[active];
@@ -40,10 +50,17 @@ export function Stepper({ steps, onFinish, canAdvance }: Props) {
   };
 
   return (
-    <View style={styles.container}>
+    // iOS does not resize the screen for the keyboard: lift the content and the bottom bar,
+    // so Próximo stays reachable (the decimal pad has no return key). Android resizes itself.
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      keyboardVerticalOffset={headerHeight}
+    >
       <ScrollView
         contentContainerStyle={styles.content}
         keyboardShouldPersistTaps="handled"
+        keyboardDismissMode="on-drag"
       >
         {/* A single step needs no progress indicator. */}
         {steps.length > 1 && (
@@ -93,7 +110,7 @@ export function Stepper({ steps, onFinish, canAdvance }: Props) {
           />
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

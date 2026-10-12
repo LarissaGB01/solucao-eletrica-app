@@ -1,0 +1,12 @@
+# E2E: an invalid value shows a pt-BR message and keeps the user on the step.
+appId: com.larissagb.solucaoeletrica
+---
+- launchApp:
+    clearState: true
+- tapOn: 'Dimensionar Cabeamento'
+- tapOn: 'Próximo'
+- tapOn: 'Tensão (V)'
+- eraseText
+- tapOn: 'Próximo'
+- assertVisible: 'Informe uma tensão inteira maior que zero.'
+- assertVisible: 'Dados elétricos'

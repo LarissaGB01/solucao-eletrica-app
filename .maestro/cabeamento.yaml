@@ -1,0 +1,19 @@
+# E2E: size a cable end to end (Android and iOS). Run: maestro test .maestro/
+appId: com.larissagb.solucaoeletrica
+---
+- launchApp:
+    clearState: true
+- tapOn: 'Dimensionar Cabeamento'
+- tapOn: 'Próximo'
+- tapOn: 'Tensão (V)'
+- eraseText
+- inputText: '220'
+# The bottom bar must stay reachable while the decimal keyboard is open.
+- takeScreenshot: e2e-out/cabeamento-teclado
+- tapOn: 'Próximo'
+- assertVisible: 'Instalação'
+- tapOn: 'Próximo'
+- tapOn: 'Finalizar'
+- assertVisible: 'Condutor Sugerido'
+- assertVisible: '2,50 mm²'
+- takeScreenshot: e2e-out/cabeamento-resultado
