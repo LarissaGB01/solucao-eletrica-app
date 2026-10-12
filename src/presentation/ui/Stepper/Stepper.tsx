@@ -2,7 +2,6 @@ import { HeaderHeightContext } from '@react-navigation/elements';
 import { type ReactNode, useContext, useState } from 'react';
 import {
   KeyboardAvoidingView,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -50,11 +49,12 @@ export function Stepper({ steps, onFinish, canAdvance }: Props) {
   };
 
   return (
-    // iOS does not resize the screen for the keyboard: lift the content and the bottom bar,
-    // so Próximo stays reachable (the decimal pad has no return key). Android resizes itself.
+    // Neither platform resizes the screen for the keyboard (Android runs edge-to-edge, where
+    // adjustResize no longer applies): lift the content and the bottom bar, so Próximo stays
+    // reachable (the decimal pad has no return key).
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      behavior="padding"
       keyboardVerticalOffset={headerHeight}
     >
       <ScrollView
