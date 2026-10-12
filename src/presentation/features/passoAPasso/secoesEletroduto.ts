@@ -8,7 +8,7 @@ import type { EletrodutoSugerido } from '../../../domain/dimensionamento/sugesto
 import { formatarPolegadas } from '../../format/formatarPolegadas';
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
-import { tabelas } from '../conteudo/tabelas';
+import { tabelaEletrodutos } from '../conteudo/tabelas';
 import { formula, linha } from './comum';
 
 const mm = resultados.unidades.milimetro;
@@ -57,8 +57,7 @@ export function secoesEletroduto(
         },
         {
           tipo: 'tabela',
-          ...tabelas.eletrodutos,
-          descricao: teoria.tabelas.eletrodutos,
+          tabela: tabelaEletrodutos(eletroduto?.diametroNominalPolegadas),
         },
         {
           tipo: 'link',

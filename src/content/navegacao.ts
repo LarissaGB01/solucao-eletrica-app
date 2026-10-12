@@ -3,4 +3,5 @@ export const titulosTelas = {
   formulario: 'Formulário',
   resultado: 'Resultado',
   passoAPasso: 'Passo a Passo',
+  tabela: 'Tabela',
 } as const;

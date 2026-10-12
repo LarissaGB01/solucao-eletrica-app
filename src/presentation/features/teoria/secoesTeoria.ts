@@ -4,7 +4,12 @@ import { formulasTeoria as f } from '../../../domain/dimensionamento/formulas/te
 import { SECAO_MINIMA } from '../../../domain/dimensionamento/nbr5410/constantes';
 import { formatarNumero } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
-import { tabelas } from '../conteudo/tabelas';
+import {
+  tabelaDisjuntores,
+  tabelaEletrodutos,
+  trechoConducao,
+  trechoFatorTemperatura,
+} from '../conteudo/tabelas';
 
 const linkNbr: Bloco = {
   tipo: 'link',
@@ -46,14 +51,7 @@ export const secoesTeoria: readonly Secao[] = [
   },
   {
     titulo: titulos.fatorTemperatura,
-    blocos: [
-      {
-        tipo: 'tabela',
-        ...tabelas.fatorTemperatura,
-        descricao: textos.tabelas.fatorTemperatura,
-      },
-      linkNbr,
-    ],
+    blocos: [{ tipo: 'tabela', tabela: trechoFatorTemperatura() }, linkNbr],
   },
   {
     titulo: titulos.correnteProjeto,
@@ -109,16 +107,8 @@ export const secoesTeoria: readonly Secao[] = [
   {
     titulo: titulos.condutorRecomendado,
     blocos: [
-      {
-        tipo: 'tabela',
-        ...tabelas.conducaoPvc,
-        descricao: textos.tabelas.conducaoPvc,
-      },
-      {
-        tipo: 'tabela',
-        ...tabelas.conducaoEpr,
-        descricao: textos.tabelas.conducaoEpr,
-      },
+      { tipo: 'tabela', tabela: trechoConducao('PVC') },
+      { tipo: 'tabela', tabela: trechoConducao('EPR') },
       linkNbr,
     ],
   },
@@ -129,11 +119,7 @@ export const secoesTeoria: readonly Secao[] = [
   {
     titulo: titulos.disjuntorRecomendado,
     blocos: [
-      {
-        tipo: 'tabela',
-        ...tabelas.disjuntores,
-        descricao: textos.tabelas.disjuntores,
-      },
+      { tipo: 'tabela', tabela: tabelaDisjuntores() },
       { tipo: 'link', rotulo: textos.fontes.siemens, url: referencias.siemens },
     ],
   },
@@ -148,11 +134,7 @@ export const secoesTeoria: readonly Secao[] = [
   {
     titulo: titulos.eletrodutoRecomendado,
     blocos: [
-      {
-        tipo: 'tabela',
-        ...tabelas.eletrodutos,
-        descricao: textos.tabelas.eletrodutos,
-      },
+      { tipo: 'tabela', tabela: tabelaEletrodutos() },
       {
         tipo: 'link',
         rotulo: textos.fontes.kanaflex,

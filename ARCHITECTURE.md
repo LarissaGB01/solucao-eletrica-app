@@ -33,14 +33,14 @@ and don't depend on React Native, so they can be tested in isolation and reused 
 
 ## Modules
 
-| Layer          | Path                 | Responsibility                                                                                 | Knows about                  |
-| -------------- | -------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------- |
-| domain         | `src/domain`         | Entities, value objects, domain errors, ports, NBR 5410 rules, LaTeX formula builders          | nothing else                 |
-| application    | `src/application`    | Use cases that orchestrate the domain (`DimensionarCabeamento`, …)                             | domain                       |
-| infrastructure | `src/infrastructure` | Adapters to the outside world (empty today; local persistence later)                           | application, domain          |
-| presentation   | `src/presentation`   | Screens, `useXxxViewModel` hooks, shared UI (Accordion, Stepper, Formula, NumericInput), theme | application, domain, content |
-| content        | `src/content`        | Static pt-BR texts: labels, theory, reference links                                            | nothing else                 |
-| app            | `src/app`            | `App.tsx`, navigation, DI container (React context), provider setup                            | everything                   |
+| Layer          | Path                 | Responsibility                                                                                            | Knows about                  |
+| -------------- | -------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| domain         | `src/domain`         | Entities, value objects, domain errors, ports, NBR 5410 rules, LaTeX formula builders                     | nothing else                 |
+| application    | `src/application`    | Use cases that orchestrate the domain (`DimensionarCabeamento`, …)                                        | domain                       |
+| infrastructure | `src/infrastructure` | Adapters to the outside world (empty today; local persistence later)                                      | application, domain          |
+| presentation   | `src/presentation`   | Screens, `useXxxViewModel` hooks, shared UI (Accordion, Stepper, Formula, DataTable, NumericInput), theme | application, domain, content |
+| content        | `src/content`        | Static pt-BR texts: labels, theory, reference links                                                       | nothing else                 |
+| app            | `src/app`            | `App.tsx`, navigation, DI container (React context), provider setup                                       | everything                   |
 
 ### Domain contexts
 
@@ -108,7 +108,13 @@ Home ─┬─► Teoria
       │                                          └─► PassoAPassoEletroduto
       ├─► FormDisjuntor  ─► ResultadoDisjuntor  ───► PassoAPassoDisjuntor
       └─► FormEletroduto ─► ResultadoEletroduto ───► PassoAPassoEletroduto
+
+Teoria and every PassoAPasso* ─► Tabela (one table full screen, pinch-to-zoom)
 ```
+
+Reference tables are drawn from the engine's own data (`features/conteudo/tabelas.ts`): the
+Siemens and Kanalex catalogs whole, NBR 5410 tables only as excerpts (the standard is sold by
+ABNT), with the row used in the calculation highlighted in Passo a passo.
 
 ## Dependency rules
 

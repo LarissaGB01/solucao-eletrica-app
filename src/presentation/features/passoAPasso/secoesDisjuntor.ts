@@ -8,7 +8,7 @@ import { CONDUTORES_CARREGADOS } from '../../../domain/dimensionamento/nbr5410/c
 import type { DisjuntorSugerido } from '../../../domain/dimensionamento/sugestoes';
 import { formatarNumero as n } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
-import { tabelas } from '../conteudo/tabelas';
+import { tabelaDisjuntores } from '../conteudo/tabelas';
 import { formula, linha, rotuloFases } from './comum';
 
 const { unidades } = resultados;
@@ -52,8 +52,7 @@ export function secoesDisjuntor(
         },
         {
           tipo: 'tabela',
-          ...tabelas.disjuntores,
-          descricao: teoria.tabelas.disjuntores,
+          tabela: tabelaDisjuntores(disjuntor?.correnteNominalA),
         },
         {
           tipo: 'link',

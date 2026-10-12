@@ -1,10 +1,16 @@
 import { Linking, StyleSheet, Text, View } from 'react-native';
 
+import { teoria } from '../../../content/teoria';
 import { colors, spacing, typography } from '../../theme';
-import { Formula, LinkButton, TableImage } from '../../ui';
-import type { Bloco } from './Bloco';
+import { DataTable, Formula, LinkButton } from '../../ui';
+import type { Bloco, Tabela } from './Bloco';
 
-export function BlocoView({ bloco }: { bloco: Bloco }) {
+type Props = {
+  bloco: Bloco;
+  onAbrirTabela: (tabela: Tabela) => void;
+};
+
+export function BlocoView({ bloco, onAbrirTabela }: Props) {
   switch (bloco.tipo) {
     case 'formula':
       return (
@@ -19,10 +25,14 @@ export function BlocoView({ bloco }: { bloco: Bloco }) {
       return <Text style={styles.texto}>{bloco.texto}</Text>;
     case 'tabela':
       return (
-        <TableImage
-          source={bloco.imagem}
-          aspectRatio={bloco.proporcao}
-          accessibilityLabel={bloco.descricao}
+        <DataTable
+          title={bloco.tabela.titulo}
+          columns={bloco.tabela.colunas}
+          rows={bloco.tabela.linhas}
+          highlightedRow={bloco.tabela.destaque}
+          note={bloco.tabela.nota}
+          onPress={() => onAbrirTabela(bloco.tabela)}
+          hint={teoria.ampliar}
         />
       );
     case 'link':

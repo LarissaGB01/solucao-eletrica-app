@@ -1,5 +1,6 @@
 export { Accordion } from './Accordion/Accordion';
 export { Button } from './Button/Button';
+export { DataTable } from './DataTable/DataTable';
 export { ChipGroup } from './ChipGroup/ChipGroup';
 export { Formula } from './Formula/Formula';
 export { LinkButton } from './LinkButton/LinkButton';
@@ -9,6 +10,5 @@ export { parseDecimal } from './NumericInput/parseDecimal';
 export { Question } from './Question/Question';
 export { ResultCard, type ResultLine } from './ResultCard/ResultCard';
 export { Segmented, type SegmentedOption } from './Segmented/Segmented';
-export { TableImage } from './TableImage/TableImage';
 export { Stepper, type Step } from './Stepper/Stepper';
 export { StepperForm } from './StepperForm/StepperForm';
