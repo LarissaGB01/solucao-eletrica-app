@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Android app (iOS later) for sizing electrical cables, circuit breakers and conduits per **NBR 5410**.
+Android and iOS app for sizing electrical cables, circuit breakers and conduits per **NBR 5410**.
 Rewrite of the Expo app `LarissaGB01/solucao_eletrica`. Fully offline: no backend, no HTTP.
 
 See `ARCHITECTURE.md` for layers and data flow, `PLAN.md` for the roadmap and current phase.

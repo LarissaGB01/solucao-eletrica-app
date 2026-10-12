@@ -85,6 +85,7 @@ Não é necessário Expo Go nem configurar API: o app funciona totalmente offlin
 
 ## Documentação técnica
 
+- [STATUS.md](STATUS.md): situação atual (desenvolvimento, Android, iOS), como rodar e o que falta
 - [ARCHITECTURE.md](ARCHITECTURE.md): camadas, fluxo de dados e regras de dependência
 - [PLAN.md](PLAN.md): roadmap por fases com critérios de aceite
 - [docs/adr](docs/adr): decisões de arquitetura (ADRs)
