@@ -58,7 +58,7 @@ validate every field with pt-BR messages, and show a typical-value hint under ea
 | E2E flows (Maestro)                        | 5 flows: cable, breaker, conduit, theory, validation error | `npm run e2e`      |
 | CI on every PR (GitHub Actions)            | lint/typecheck/tests + Android debug build                 | automatic          |
 
-### What's missing (Phase 6, ~6–8 h)
+### Development: what's missing (Phase 6, ~6–8 h)
 
 - [ ] Run the Maestro flows in CI on an Android emulator (they pass locally on iOS).
 - [ ] Accessibility pass with TalkBack/VoiceOver; text at 200 % without clipping.
@@ -75,7 +75,7 @@ Known small issues, none blocking:
 
 ## 2. Android
 
-### Done
+### Android: done
 
 - Runs on Android 7.0+ (minSdk 24, targetSdk 36). Tested on an Android 17 emulator.
 - Release build: no internet permission, app name "Solução Elétrica", adaptive icon (bolt on
@@ -86,7 +86,7 @@ Known small issues, none blocking:
 - Store material in [docs/play](docs/play): pt-BR listing, privacy policy, 512 px icon,
   feature graphic, 5 screenshots, answers for every "App content" form.
 
-### What's missing
+### Android: what's missing
 
 | Step                                                                    | Who                 | Time           |
 | ----------------------------------------------------------------------- | ------------------- | -------------- |
@@ -98,7 +98,7 @@ Known small issues, none blocking:
 
 Full guide: [docs/play/README.md](docs/play/README.md).
 
-### Run it locally
+### Android: run it locally
 
 Needs Node 22, JDK 17 (Zulu) and Android Studio with the SDK and an emulator.
 
@@ -119,7 +119,7 @@ npm run android:bundle
 If Gradle says "SDK location not found", `android/local.properties` must contain
 `sdk.dir=/Users/<you>/Library/Android/sdk` (gitignored, one per machine).
 
-### Where to check
+### Android: where to check
 
 - Play Console → Dashboard: the checklist of what Google still requires.
 - Play Console → Testing → Closed testing: testers opted in and days elapsed.
@@ -129,7 +129,7 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 
 ## 3. iOS
 
-### Done
+### iOS: done
 
 - Runs on iOS 15.1+; tested on the iOS 27 simulator (iPhone 17e).
 - Adopted the scene lifecycle, which iOS 27 requires (the React Native template crashed at launch).
@@ -138,7 +138,7 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 - Keyboard: the bottom bar rises above the number pad; dragging closes it.
 - All 5 Maestro flows pass on iOS.
 
-### What's missing
+### iOS: what's missing
 
 | Step                                                                                                        | Who       | Time             |
 | ----------------------------------------------------------------------------------------------------------- | --------- | ---------------- |
@@ -148,7 +148,7 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 | App Store Connect listing: reuse `docs/play/` texts, privacy label "Data Not Collected", iPhone screenshots | you + dev | ~1 h             |
 | Submit for review (no mandatory test period)                                                                | Apple     | 1–3 days         |
 
-### Run it locally
+### iOS: run it locally
 
 Needs Xcode (installed: Xcode 27) and CocoaPods (`brew install cocoapods`).
 
@@ -161,7 +161,7 @@ npm run e2e                      # Maestro flows on the running simulator
 
 Maestro is installed in `~/.maestro/bin` (`curl -fsSL https://get.maestro.mobile.dev | bash`).
 
-### Where to check
+### iOS: where to check
 
 - [developer.apple.com/account](https://developer.apple.com/account): membership status.
 - App Store Connect → the app → TestFlight and App Review status, once the account is active.
