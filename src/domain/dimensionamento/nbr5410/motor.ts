@@ -27,7 +27,7 @@ import {
 } from './constantes';
 import { CONDUCAO_CABOS } from './tabelas/conducaoCabos';
 import { DISJUNTORES } from './tabelas/disjuntores';
-import { ELETRODUTOS } from './tabelas/eletrodutos';
+import { ELETRODUTOS, type LinhaEletroduto } from './tabelas/eletrodutos';
 import { FATOR_TEMPERATURA } from './tabelas/fatorTemperatura';
 
 // Offline port of the original Java backend (LarissaGB01/solucao_eletrica_backend):
@@ -167,6 +167,7 @@ export function selecionarDisjuntor(
 export function calcularEletroduto(
   secaoNominalMm2: number,
   quantidadeCondutores: number,
+  tabela: readonly LinhaEletroduto[] = ELETRODUTOS,
 ): { eletroduto: EletrodutoSugerido | null; memoria: MemoriaEletroduto } {
   const diametroCondutorMm = Math.sqrt((4 * secaoNominalMm2) / Math.PI);
   // Linear in the conductor count, as in the backend (ADR 0006 keeps this formula).
@@ -174,7 +175,7 @@ export function calcularEletroduto(
     (diametroCondutorMm * quantidadeCondutores * 100) /
     TAXA_OCUPACAO_ELETRODUTO;
   const linha = menor(
-    ELETRODUTOS.filter(([, , externo]) => externo > diametroMinimoEletrodutoMm),
+    tabela.filter(([, , externo]) => externo > diametroMinimoEletrodutoMm),
     ([, , , interno]) => interno,
   );
   return {

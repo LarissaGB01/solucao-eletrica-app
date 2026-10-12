@@ -15,20 +15,20 @@ export const teoria = {
     conducaoPvc: 'Tabela de capacidade de condução de corrente, isolação PVC',
     conducaoEpr: 'Tabela de capacidade de condução de corrente, isolação EPR',
     disjuntores: 'Catálogo de minidisjuntores Siemens',
-    eletrodutos: 'Catálogo de eletrodutos Kanaflex',
+    eletrodutos: 'Catálogo de eletrodutos Kanalex (Kanaflex)',
   },
   fontes: {
-    nbr5410: 'Fonte: NBR 5410',
+    nbr5410: 'Fonte: ABNT NBR 5410:2004 (versão corrigida 2008)',
     siemens: 'Marca: Siemens',
-    kanaflex: 'Marca: Kanaflex',
+    kanaflex: 'Fonte: Kanaflex, Manual Técnico Kanalex (2025)',
   },
 } as const;
 
-/** External documents the tables come from (same links as the original app). */
+/** External documents the tables come from. The NBR is sold by ABNT, so the link is its catalog. */
 export const referencias = {
-  nbr5410:
-    'https://docente.ifrn.edu.br/jeangaldino/disciplinas/2015.1/instalacoes-eletricas/nbr-5410',
+  nbr5410: 'https://www.abntcatalogo.com.br/',
   siemens:
     'https://assets.new.siemens.com/siemens/assets/api/uuid:5e2a000b-6c1f-43be-853e-1799db7956e2/catalogo-minidisjuntores-janeiro-2022-net.pdf',
-  kanaflex: 'https://www.kanaflex.com.br/novosite/arquivos/mt_6.pdf',
+  kanaflex:
+    'https://www.kanaflex.com.br/wp-content/uploads/2025/06/Manual-Tecnico-Kanalex-1.pdf',
 } as const;
