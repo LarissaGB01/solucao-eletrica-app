@@ -100,7 +100,7 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 6: Hardening (6–8h)
 
-- [ ] Maestro E2E: 3 happy paths + 1 validation-error flow, run in CI on an Android emulator
+- [ ] Maestro E2E: 3 happy paths + 1 validation-error flow (flows written and passing on iOS; CI pending)
 - [ ] Accessibility labels on all inputs/buttons; text scales to 200% without clipping
 - [x] App icon (adaptive, bolt on brand orange); splash still pending (`react-native-bootsplash`)
 - [ ] Crash reporting (Sentry) with source maps uploaded from CI
@@ -124,9 +124,10 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 8: iOS (later, ~2 days)
 
-- [ ] `pod install`, Xcode signing, Fastlane `match`
+- [x] `pod install`, UIScene lifecycle (required by iOS 27), icon, launch screen, keyboard avoidance
+- [ ] Xcode signing (needs the Apple Developer account), Fastlane `match`
 - [ ] macOS CI job, TestFlight upload
-- [ ] Manual parity pass on an iPhone
+- [x] Parity pass on the iPhone simulator (all Maestro flows pass on iOS 27)
 
 **Acceptance criteria**
 

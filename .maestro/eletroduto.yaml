@@ -1,0 +1,10 @@
+# E2E: size a conduit with the prefilled values.
+appId: com.larissagb.solucaoeletrica
+---
+- launchApp:
+    clearState: true
+- tapOn: 'Dimensionar Eletrodutos'
+- tapOn: 'Finalizar'
+- assertVisible: 'Eletroduto Sugerido'
+- assertVisible: '1 1/4" (30,00 mm)'
+- takeScreenshot: e2e-out/eletroduto-resultado

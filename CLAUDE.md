@@ -21,6 +21,8 @@ npm ci                  # install (Node 22, see .nvmrc); postinstall generates K
 npm start               # Metro bundler
 npm run android         # build + run on emulator/device (needs JDK 17 + Android SDK)
 npm run android:bundle  # signed Play bundle (.aab); see docs/play/README.md
+npm run ios             # iPhone simulator (needs Xcode; first run: cd ios && pod install)
+npm run e2e             # Maestro flows in .maestro/ on the running emulator/simulator
 adb reverse tcp:8081 tcp:8081  # if the app can't reach Metro (Android 17 blocks local network in debug)
 npm test                # Jest
 npm run test:watch      # Jest watch mode
