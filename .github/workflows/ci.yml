@@ -82,9 +82,18 @@ jobs:
           arch: x86_64
           target: google_apis
           profile: pixel_6
+          cores: 4
+          ram-size: 4096M
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           disable-animations: true
+          # A fresh CI emulator often shows "Pixel Launcher isn't responding" over the app:
+          # hide system error dialogs and close any already open before the flows start.
           script: |
+            adb shell settings put global hide_error_dialogs 1
+            sleep 30
+            adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS
             adb install android/app/build/outputs/apk/release/app-release.apk
+            mkdir -p e2e-out
             maestro test .maestro/ --format junit --output e2e-out/report.xml
       - if: always()
         uses: actions/upload-artifact@v4
