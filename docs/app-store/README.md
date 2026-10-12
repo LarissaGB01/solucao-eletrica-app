@@ -11,18 +11,18 @@ ficha da loja. Os textos longos são os mesmos do Google Play: [ficha-da-loja.md
 
 ## 2. Ficha da loja (Distribuição → iOS App 1.0)
 
-| Campo                          | Valor                                                                                                 |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| Capturas de tela (iPhone 6,9") | as 5 imagens de `screenshots/` (1320×2868), nesta ordem                                               |
-| Texto promocional (até 170)    | Dimensione cabos, disjuntores e eletrodutos pela NBR 5410, com o passo a passo de cada cálculo.       |
-| Descrição                      | "Descrição completa" de `../play/ficha-da-loja.md`                                                    |
-| Palavras-chave (até 100)       | `nbr 5410,dimensionamento,cabo,disjuntor,eletroduto,condutor,elétrica,instalação,engenharia,circuito` |
-| URL de suporte                 | `https://github.com/LarissaGB01/solucao-eletrica-app/issues`                                          |
-| Copyright                      | 2026 Larissa Barcelos                                                                                 |
-| Build                          | o build enviado pelo TestFlight                                                                       |
-| Notas para a revisão           | O app não tem login nem conexão com a internet. Todos os cálculos são feitos no aparelho.             |
-| Contato da revisão             | seu nome, telefone e `larissabarcelos.dev@gmail.com`                                                  |
-| Liberação da versão            | Manual (você decide quando publicar após a aprovação)                                                 |
+| Campo                                                    | Valor                                                                                                 |
+| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Capturas de tela (iPhone com Dynamic Island, tela média) | as 5 imagens de `screenshots/` (1206×2622), nesta ordem                                               |
+| Texto promocional (até 170)                              | Dimensione cabos, disjuntores e eletrodutos pela NBR 5410, com o passo a passo de cada cálculo.       |
+| Descrição                                                | "Descrição completa" de `../play/ficha-da-loja.md`                                                    |
+| Palavras-chave (até 100)                                 | `nbr 5410,dimensionamento,cabo,disjuntor,eletroduto,condutor,elétrica,instalação,engenharia,circuito` |
+| URL de suporte                                           | `https://github.com/LarissaGB01/solucao-eletrica-app/issues`                                          |
+| Copyright                                                | 2026 Larissa Barcelos                                                                                 |
+| Build                                                    | o build enviado pelo TestFlight                                                                       |
+| Notas para a revisão                                     | O app não tem login nem conexão com a internet. Todos os cálculos são feitos no aparelho.             |
+| Contato da revisão                                       | seu nome, telefone e `larissabarcelos.dev@gmail.com`                                                  |
+| Liberação da versão                                      | Manual (você decide quando publicar após a aprovação)                                                 |
 
 ## 3. Informações do app (menu à esquerda)
 

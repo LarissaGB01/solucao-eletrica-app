@@ -1,4 +1,4 @@
-# App Store screenshots (6.9", 1320x2868). Run on an iPhone Pro Max simulator with a Release build:
+# App Store screenshots (6.3", resized from the 6.9" capture to 1206x2622: sips -z 2622 1206 *.png). Run on an iPhone Pro Max simulator with a Release build:
 #   xcrun simctl status_bar booted override --time 9:41 --batteryState discharging --batteryLevel 100
 #   maestro test --test-output-dir out docs/app-store/capturas.yaml
 appId: com.larissagb.solucaoeletrica
