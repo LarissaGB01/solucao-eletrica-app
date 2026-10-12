@@ -61,6 +61,7 @@
     "prepare": "husky",
     "postinstall": "node scripts/build-katex-assets.mjs",
     "android:bundle": "cd android && ./gradlew bundleRelease",
-    "e2e": "maestro test .maestro/"
+    "e2e": "maestro test .maestro/",
+    "ios:release": "bash scripts/ios-release.sh"
   }
 }
