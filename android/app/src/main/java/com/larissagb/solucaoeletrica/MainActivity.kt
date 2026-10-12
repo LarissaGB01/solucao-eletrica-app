@@ -1,6 +1,7 @@
 package com.larissagb.solucaoeletrica
 
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -10,7 +11,9 @@ import com.swmansion.rnscreens.fragment.restoration.RNScreensFragmentFactory
 class MainActivity : ReactActivity() {
 
   // Required by react-native-screens to restore screens after Android kills the activity.
+  // installSplashScreen() must run before super.onCreate (launch screen, see styles.xml).
   override fun onCreate(savedInstanceState: Bundle?) {
+    installSplashScreen()
     supportFragmentManager.fragmentFactory = RNScreensFragmentFactory()
     super.onCreate(savedInstanceState)
   }
