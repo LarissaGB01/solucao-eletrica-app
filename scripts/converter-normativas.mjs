@@ -76,18 +76,4 @@ export const DISJUNTORES: readonly LinhaDisjuntor[] = ${JSON.stringify(
 `,
 );
 
-escrever(
-  'eletrodutos',
-  `/** Kanaflex conduits. */
-export type LinhaEletroduto = readonly [
-  diametroPolegadas: string,
-  diametroNominalMm: number,
-  diametroExternoMm: number,
-  diametroInternoMm: number,
-];
-
-export const ELETRODUTOS: readonly LinhaEletroduto[] = ${JSON.stringify(
-    linhas('exemplos_eletrodutos'),
-  )};
-`,
-);
+// eletrodutos.ts is maintained by hand from the current Kanalex catalog (ADR 0007).

@@ -154,3 +154,4 @@ Recorded in `docs/adr/` (copy `0000-template.md` for new ones):
 - [0004](docs/adr/0004-katex-in-webview-for-formulas.md) KaTeX in a WebView for formula rendering
 - [0005](docs/adr/0005-mock-calculator-then-offline-engine.md) Mock calculator now, on-device NBR 5410 engine later (superseded)
 - [0006](docs/adr/0006-offline-engine-full-precision.md) Offline engine: backend rules at full precision
+- [0007](docs/adr/0007-kanalex-2025-catalog.md) Conduit table from the 2025 Kanalex catalog

@@ -4,11 +4,13 @@ import { criarProjetoEletroduto } from '../eletroduto/ProjetoEletroduto';
 import goldenCabeamento from './golden/cabeamento.json';
 import goldenDisjuntor from './golden/disjuntor.json';
 import goldenEletroduto from './golden/eletroduto.json';
+import eletrodutos2023 from './golden/eletrodutos-2023.json';
 import {
+  calcularEletroduto,
   dimensionarCabeamento,
   dimensionarDisjuntor,
-  dimensionarEletroduto,
 } from './motor';
+import type { LinhaEletroduto } from './tabelas/eletrodutos';
 
 // Expected values come from the original Java backend (scripts/golden/gerar-golden.mjs).
 // The backend truncated BigDecimal intermediates (e.g. 10.0/π -> 3.2), so continuous values
@@ -23,6 +25,9 @@ const esperarProximo = (recebido: number, esperado: number, campo: string) => {
     throw new Error(`${campo}: recebido ${recebido}, esperado ${esperado}`);
   }
 };
+
+// The backend used an older Kanaflex catalog; the app uses the 2025 one (ADR 0007).
+const TABELA_BACKEND = eletrodutos2023 as unknown as readonly LinhaEletroduto[];
 
 // Backend error codes -> engine error codes.
 const ERROS_BACKEND: Record<number, string> = {
@@ -126,7 +131,10 @@ describe('golden: dimensionarCabeamento matches the Java backend', () => {
         saida.diametroMinimoEletrodutoMm * escala,
         'diametroMinimoEletroduto',
       );
-      expect(resultado.value.eletroduto).toEqual(saida.eletroduto);
+      expect(
+        calcularEletroduto(secao, saida.quantidadeCondutores, TABELA_BACKEND)
+          .eletroduto,
+      ).toEqual(saida.eletroduto);
     },
   );
 });
@@ -161,7 +169,11 @@ describe('golden: dimensionarEletroduto matches the Java backend', () => {
       const projeto = criarProjetoEletroduto(caso.entrada);
       if (!projeto.ok) throw new Error('entrada inválida');
 
-      const resultado = dimensionarEletroduto(projeto.value);
+      const resultado = calcularEletroduto(
+        projeto.value.secaoNominalCondutor.mm2,
+        projeto.value.quantidadeCondutores.valor,
+        TABELA_BACKEND,
+      );
 
       esperarProximo(
         resultado.memoria.diametroCondutorMm,
