@@ -57,7 +57,8 @@ src/domain/
     ├── fases.ts            Fases (shared by cabeamento and disjuntor)
     ├── sugestoes.ts        CondutorSugerido, DisjuntorSugerido, EletrodutoSugerido
     ├── memoria.ts          MemoriaCondutor/Disjuntor/Eletroduto: intermediate values per step
-    ├── nbr5410/            constants from the original backend (resistivity, limits, minimums)
+    ├── nbr5410/            offline engine: motor.ts + CalculadoraNbr5410 (implements the port),
+    │                       typed tables, constants, golden fixtures from the Java backend
     ├── resultadosExemplo.ts one coherent example result (engine output; used by tests)
     ├── formulas/           pure LaTeX builders for each calculation step
     └── ports/              CalculadoraDimensionamento (interface)
@@ -132,13 +133,13 @@ Additional rules:
 
 ## Testing per layer
 
-| Layer          | Test type                                                    | Tooling                        |
-| -------------- | ------------------------------------------------------------ | ------------------------------ |
-| domain         | Unit: value objects, rules, formula builders (≥90% coverage) | Jest                           |
-| application    | Unit with a fake `CalculadoraDimensionamento`                | Jest                           |
-| infrastructure | Adapter tests (none yet)                                     | Jest                           |
-| presentation   | Component: validation, navigation, loading and error states  | React Native Testing Library   |
-| whole app      | E2E happy paths per flow                                     | Maestro (CI, Android emulator) |
+| Layer          | Test type                                                    | Tooling                                  |
+| -------------- | ------------------------------------------------------------ | ---------------------------------------- |
+| domain         | Unit: value objects, rules, formula builders (≥90% coverage) | Jest                                     |
+| application    | Unit with a fake `CalculadoraDimensionamento`                | Jest                                     |
+| infrastructure | Adapter tests (none yet)                                     | Jest                                     |
+| presentation   | Component: validation, navigation, loading and error states  | React Native Testing Library             |
+| whole app      | E2E happy paths per flow                                     | Maestro (`.maestro/`, local; CI pending) |
 
 **Golden tests** (`nbr5410/motor.golden.test.ts`) compare the engine with fixtures captured from
 the original Java backend (`scripts/golden/gerar-golden.mjs`); see ADR 0006 for tolerances.

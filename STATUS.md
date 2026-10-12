@@ -1,15 +1,14 @@
 # Status report — Solução Elétrica
 
-_As of 2026-10-12._ The app is feature-complete and runs offline on Android and iOS. What's left is
-publishing: Google Play is waiting on account validation, and the App Store needs an Apple
-Developer account.
+_As of 2026-10-12._ The app is feature-complete and runs offline on Android and iOS. iOS 1.0 is in App Store
+review; Google Play is waiting on account validation.
 
 | Area                    | State                                                                      | Blocked on                                                |
 | ----------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------- |
 | Development (features)  | Done: all 3 sizing flows, Passo a passo, Teoria, offline engine            | —                                                         |
 | Development (hardening) | Partly done: E2E flows written, CI for them and accessibility pass pending | —                                                         |
 | Android                 | Release-ready: signed `.aab` builds, store material in `docs/play/`        | Google Play account validation, then a 14-day closed test |
-| iOS                     | Runs on the iOS 27 simulator; all E2E flows pass                           | Apple Developer Program ($99/year), signing               |
+| iOS                     | 1.0 (build 1) submitted for App Store review on 2026-10-12                 | Apple review (1–3 days), then it goes live automatically  |
 
 Day-to-day tracking: [PLAN.md](PLAN.md) (phases with checkboxes), [ARCHITECTURE.md](ARCHITECTURE.md),
 decisions in [docs/adr](docs/adr), open work in the
@@ -140,13 +139,14 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 - Apple Developer account active (team FB7R6D99A3); signing set up; signed App Store package builds with `npm run ios:release`.
 - iPhone only (iPads run it in iPhone mode), so no iPad screenshots or iPad review.
 - App created in App Store Connect; build 1 uploaded to TestFlight on 2026-10-12.
+- Listing filled and version 1.0 (1) submitted for review on 2026-10-12 (release: automatic after approval).
 
 ### iOS: what's missing
 
-| Step                                                                                                        | Who       | Time     |
-| ----------------------------------------------------------------------------------------------------------- | --------- | -------- |
-| App Store Connect listing: reuse `docs/play/` texts, privacy label "Data Not Collected", iPhone screenshots | you + dev | ~1 h     |
-| Submit for review (no mandatory test period)                                                                | Apple     | 1–3 days |
+| Step                                              | Who   | Time           |
+| ------------------------------------------------- | ----- | -------------- |
+| App Review, then automatic release                | Apple | 1–3 days       |
+| macOS CI job that uploads to TestFlight (Phase 8) | dev   | ~3 h, optional |
 
 ### iOS: run it locally
 
@@ -163,8 +163,9 @@ Maestro is installed in `~/.maestro/bin` (`curl -fsSL https://get.maestro.mobile
 
 ### iOS: where to check
 
-- [developer.apple.com/account](https://developer.apple.com/account): membership status.
-- App Store Connect → the app → TestFlight and App Review status, once the account is active.
+- App Store Connect → Solução Elétrica → **Revisão de apps**: review status (Apple also emails).
+- App Store Connect → **TestFlight**: builds and testers.
+- [docs/app-store/README.md](docs/app-store/README.md): listing fields and how to resubmit.
 - [PLAN.md](PLAN.md), Phase 8: remaining iOS items.
 
 ---
@@ -179,5 +180,6 @@ Maestro is installed in `~/.maestro/bin` (`curl -fsSL https://get.maestro.mobile
 | `npm run validate`                     | Everything CI checks                                                  |
 | `npm run e2e`                          | Maestro flows                                                         |
 | `npm run android:bundle`               | Signed Play bundle                                                    |
+| `npm run ios:release [-- upload]`      | Signed App Store package; `upload` sends it to TestFlight             |
 | `python3 scripts/gerar-icones.py`      | Regenerate icons, launch image and store images (needs Pillow)        |
 | `node scripts/golden/gerar-golden.mjs` | Re-capture golden cases from the Java backend (see the script header) |
