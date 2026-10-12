@@ -273,12 +273,14 @@
 					"-ObjC",
 					"-lc++",
 				);
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FB7R6D99A3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.larissagb.solucaoeletrica;
 				PRODUCT_NAME = SolucaoEletrica;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -302,11 +304,13 @@
 					"-ObjC",
 					"-lc++",
 				);
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FB7R6D99A3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.larissagb.solucaoeletrica;
 				PRODUCT_NAME = SolucaoEletrica;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
