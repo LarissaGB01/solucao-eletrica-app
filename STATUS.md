@@ -140,13 +140,13 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 - Apple Developer account active (team FB7R6D99A3); signing set up; signed App Store package builds with `npm run ios:release`.
 - iPhone only (iPads run it in iPhone mode), so no iPad screenshots or iPad review.
 - App created in App Store Connect; build 1 uploaded to TestFlight on 2026-10-12.
+- Listing filled and version 1.0 (1) submitted for review on 2026-10-12 (release: automatic after approval).
 
 ### iOS: what's missing
 
-| Step                                                                                                  | Who   | Time     |
-| ----------------------------------------------------------------------------------------------------- | ----- | -------- |
-| App Store Connect listing: follow `docs/app-store/README.md` (texts, 6.9" screenshots, privacy label) | you   | ~30 min  |
-| Submit for review (no mandatory test period)                                                          | Apple | 1–3 days |
+| Step                                         | Who   | Time     |
+| -------------------------------------------- | ----- | -------- |
+| Submit for review (no mandatory test period) | Apple | 1–3 days |
 
 ### iOS: run it locally
 
