@@ -4,6 +4,7 @@ import { formulasTeoria as f } from '../../../domain/dimensionamento/formulas/te
 import { SECAO_MINIMA } from '../../../domain/dimensionamento/nbr5410/constantes';
 import { formatarNumero } from '../../format/formatarNumero';
 import type { Bloco, Secao } from '../conteudo/Bloco';
+import { onde } from '../conteudo/onde';
 import {
   tabelaDisjuntores,
   tabelaEletrodutos,
@@ -28,7 +29,13 @@ const secaoMinima = (utilizacao: 'TOMADA' | 'ILUMINACAO'): Bloco => ({
 export const secoesTeoria: readonly Secao[] = [
   {
     titulo: titulos.potenciaAparente,
-    blocos: [{ tipo: 'formula', expressoes: [f.potenciaAparente()] }],
+    blocos: [
+      {
+        tipo: 'formula',
+        expressoes: [f.potenciaAparente()],
+        onde: onde('potenciaAparente', 'potenciaAtiva', 'fatorPotencia'),
+      },
+    ],
   },
   {
     titulo: titulos.correnteCircuito,
@@ -42,12 +49,19 @@ export const secoesTeoria: readonly Secao[] = [
         tipo: 'formula',
         legenda: textos.legendas.naoTrifasico,
         expressoes: [f.correnteCircuito('MONOFASICO')],
+        onde: onde('correnteCircuito', 'potenciaAparente', 'tensao'),
       },
     ],
   },
   {
     titulo: titulos.fatorAgrupamento,
-    blocos: [{ tipo: 'formula', expressoes: [f.fatorAgrupamento()] }],
+    blocos: [
+      {
+        tipo: 'formula',
+        expressoes: [f.fatorAgrupamento()],
+        onde: onde('fatorAgrupamento', 'quantidadeCircuitos'),
+      },
+    ],
   },
   {
     titulo: titulos.fatorTemperatura,
@@ -55,7 +69,18 @@ export const secoesTeoria: readonly Secao[] = [
   },
   {
     titulo: titulos.correnteProjeto,
-    blocos: [{ tipo: 'formula', expressoes: [f.correnteProjeto()] }],
+    blocos: [
+      {
+        tipo: 'formula',
+        expressoes: [f.correnteProjeto()],
+        onde: onde(
+          'correnteProjeto',
+          'correnteCircuito',
+          'fatorAgrupamento',
+          'fatorTemperatura',
+        ),
+      },
+    ],
   },
   {
     titulo: titulos.resistividade,
@@ -69,6 +94,7 @@ export const secoesTeoria: readonly Secao[] = [
         tipo: 'formula',
         legenda: textos.legendas.cobre,
         expressoes: [f.resistividade('COBRE')],
+        onde: onde('resistividade'),
       },
     ],
   },
@@ -84,6 +110,7 @@ export const secoesTeoria: readonly Secao[] = [
         tipo: 'formula',
         legenda: textos.legendas.terminal,
         expressoes: [f.quedaTensao('TERMINAL')],
+        onde: onde('quedaTensao'),
       },
     ],
   },
@@ -99,6 +126,14 @@ export const secoesTeoria: readonly Secao[] = [
         tipo: 'formula',
         legenda: textos.legendas.naoTrifasico,
         expressoes: [f.secaoCondutor('MONOFASICO')],
+        onde: onde(
+          'secaoCondutor',
+          'resistividade',
+          'comprimento',
+          'correnteProjeto',
+          'quedaTensao',
+          'tensao',
+        ),
       },
       secaoMinima('TOMADA'),
       secaoMinima('ILUMINACAO'),
@@ -114,7 +149,17 @@ export const secoesTeoria: readonly Secao[] = [
   },
   {
     titulo: titulos.correnteDisjuntor,
-    blocos: [{ tipo: 'formula', expressoes: [f.coordenacaoDisjuntor()] }],
+    blocos: [
+      {
+        tipo: 'formula',
+        expressoes: [f.coordenacaoDisjuntor()],
+        onde: onde(
+          'correnteProjeto',
+          'correnteNominal',
+          'correnteMaximaCondutor',
+        ),
+      },
+    ],
   },
   {
     titulo: titulos.disjuntorRecomendado,
@@ -125,11 +170,27 @@ export const secoesTeoria: readonly Secao[] = [
   },
   {
     titulo: titulos.diametroCondutor,
-    blocos: [{ tipo: 'formula', expressoes: [f.diametroCondutor()] }],
+    blocos: [
+      {
+        tipo: 'formula',
+        expressoes: [f.diametroCondutor()],
+        onde: onde('diametroCondutor', 'secaoNominal'),
+      },
+    ],
   },
   {
     titulo: titulos.diametroEletroduto,
-    blocos: [{ tipo: 'formula', expressoes: [f.diametroEletroduto()] }],
+    blocos: [
+      {
+        tipo: 'formula',
+        expressoes: [f.diametroEletroduto()],
+        onde: onde(
+          'diametroEletroduto',
+          'diametroCondutor',
+          'quantidadeCondutores',
+        ),
+      },
+    ],
   },
   {
     titulo: titulos.eletrodutoRecomendado,

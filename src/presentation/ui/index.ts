@@ -3,6 +3,7 @@ export { Button } from './Button/Button';
 export { DataTable } from './DataTable/DataTable';
 export { ChipGroup } from './ChipGroup/ChipGroup';
 export { Formula } from './Formula/Formula';
+export type { FormulaLegend } from './Formula/formulaHtml';
 export { LinkButton } from './LinkButton/LinkButton';
 export { NumberSpinner } from './NumberSpinner/NumberSpinner';
 export { NumericInput } from './NumericInput/NumericInput';

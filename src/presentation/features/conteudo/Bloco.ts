@@ -1,3 +1,5 @@
+import type { FormulaLegend } from '../../ui';
+
 /** A table drawn by the app (Teoria, Passo a passo and the full-screen view). Plain data. */
 export type Tabela = Readonly<{
   titulo: string;
@@ -10,7 +12,13 @@ export type Tabela = Readonly<{
 
 /** One piece of an explanatory section (Teoria and Passo a passo). */
 export type Bloco =
-  | { tipo: 'formula'; expressoes: readonly string[]; legenda?: string }
+  | {
+      tipo: 'formula';
+      expressoes: readonly string[];
+      legenda?: string;
+      /** Meaning of each symbol, listed under the formula. */
+      onde?: FormulaLegend;
+    }
   | { tipo: 'texto'; texto: string }
   | { tipo: 'tabela'; tabela: Tabela }
   | { tipo: 'link'; rotulo: string; url: string };
