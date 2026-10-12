@@ -2,22 +2,24 @@ import { useMemo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
 
-import { buildFormulaHtml } from './formulaHtml';
+import { buildFormulaHtml, type FormulaLegend } from './formulaHtml';
 
 type Props = {
   /** One or more LaTeX expressions, rendered top to bottom in a single WebView. */
   expressions: readonly string[];
   /** Readable description for screen readers (WebView content isn't announced well). */
   accessibilityLabel?: string;
+  /** Meaning of the symbols, rendered under the expressions in the same WebView. */
+  legend?: FormulaLegend;
 };
 
 const INITIAL_HEIGHT = 60;
 
-export function Formula({ expressions, accessibilityLabel }: Props) {
+export function Formula({ expressions, accessibilityLabel, legend }: Props) {
   const [height, setHeight] = useState(INITIAL_HEIGHT);
-  const key = expressions.join('\n');
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- key captures the array content
-  const html = useMemo(() => buildFormulaHtml(expressions), [key]);
+  const key = JSON.stringify([expressions, legend ?? null]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- key captures the content
+  const html = useMemo(() => buildFormulaHtml(expressions, legend), [key]);
 
   const onMessage = (event: WebViewMessageEvent) => {
     const reported = Number(event.nativeEvent.data);

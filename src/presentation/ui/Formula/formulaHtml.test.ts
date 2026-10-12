@@ -14,6 +14,17 @@ describe('buildFormulaHtml', () => {
     expect(html).toContain('\\u003c/script>');
   });
 
+  it('lists the meaning of each symbol under the formulas', () => {
+    const html = buildFormulaHtml(['\\rho = 0{,}0172'], {
+      title: 'Onde:',
+      items: [{ symbol: '\\rho', meaning: 'resistividade <do cobre>' }],
+    });
+    expect(html).toContain('"title":"Onde:"');
+    expect(html).toContain('\\u003cdo cobre>');
+    expect(html).toContain('meaning.textContent = item.meaning');
+    expect(buildFormulaHtml(['x'])).toContain('var legend = null;');
+  });
+
   it('does not reference any external resource', () => {
     expect(buildFormulaHtml(['x'])).not.toMatch(/(src|href)=["']?https?:/);
   });

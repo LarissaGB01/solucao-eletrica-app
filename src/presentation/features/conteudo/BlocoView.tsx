@@ -18,7 +18,7 @@ export function BlocoView({ bloco, onAbrirTabela }: Props) {
           {bloco.legenda !== undefined && (
             <Text style={styles.legenda}>{bloco.legenda}</Text>
           )}
-          <Formula expressions={bloco.expressoes} />
+          <Formula expressions={bloco.expressoes} legend={bloco.onde} />
         </View>
       );
     case 'texto':

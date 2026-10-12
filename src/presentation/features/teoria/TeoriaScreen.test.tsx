@@ -30,6 +30,25 @@ describe('TeoriaScreen', () => {
     expect(screen.getAllByTestId('formula')).toHaveLength(2);
   });
 
+  it('explains every symbol of a formula under it', async () => {
+    await renderScreen(TeoriaScreen, 'Teoria', undefined);
+
+    await userEvent.press(
+      screen.getByRole('button', { name: 'Corrente de Projeto' }),
+    );
+
+    const html: string = screen.getByTestId('formula').props.source.html;
+    expect(html).toContain('"title":"Onde:"');
+    for (const significado of [
+      'corrente de projeto, já corrigida pelos fatores, em A',
+      'corrente do circuito, em A',
+      'fator de correção de agrupamento',
+      'fator de correção de temperatura',
+    ]) {
+      expect(html).toContain(significado);
+    }
+  });
+
   it('shows the minimum sections with pt-BR decimals', async () => {
     await renderScreen(TeoriaScreen, 'Teoria', undefined);
 
