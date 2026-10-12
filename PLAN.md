@@ -1,12 +1,12 @@
 # Implementation Plan
 
 Rewrite of the Expo app `LarissaGB01/solucao_eletrica` as a bare React Native + TypeScript app.
-Android first, iOS later. Offline: results come from a **mock calculator** now and from an
-on-device NBR 5410 engine (ported from `LarissaGB01/solucao_eletrica_backend`) later.
+Android and iOS from the same code. Fully offline: results come from an on-device NBR 5410 engine
+ported from `LarissaGB01/solucao_eletrica_backend` (Phase 5).
 
 Estimates assume part-time work. Total ≈ 75–90h plus the 14-day Play closed test.
 
-**Current phase:** 6, Hardening
+**Current phase:** 6, Hardening. In parallel: store publishing (Phases 7 and 8); iOS 1.0 is in App Store review since 2026-10-12.
 
 ---
 
@@ -102,7 +102,7 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 - [ ] Maestro E2E: 3 happy paths + 1 validation-error flow (flows written and passing on iOS; CI pending)
 - [ ] Accessibility labels on all inputs/buttons; text scales to 200% without clipping
-- [x] App icon (adaptive, bolt on brand orange); splash still pending (`react-native-bootsplash`)
+- [x] App icon (adaptive, bolt on brand orange) and iOS launch screen; Android launch screen still pending (`react-native-bootsplash`)
 - [ ] Crash reporting (Sentry) with source maps uploaded from CI
 
 **Acceptance criteria**
@@ -112,9 +112,11 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 7: Release to Google Play (6–8h + 14 days)
 
-- [ ] Release keystore, Play App Signing, secrets in GitHub Actions
+- [x] Upload keystore and signed AAB built locally (`npm run android:bundle`, `android/keystore.properties`)
+- [ ] Play App Signing (on first upload), keystore secrets in GitHub Actions
 - [ ] Fastlane `supply`; CI builds a signed AAB on tag `v*`; `versionCode` = CI run number
 - [x] Play listing (pt-BR), privacy policy, data safety answers (`docs/play/`)
+- [ ] Google Play account validation (waiting on Google)
 - [ ] Internal track → closed test (12 testers, 14 days) → production
 
 **Acceptance criteria**
@@ -122,13 +124,17 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 - Pushing tag `v1.0.0` produces a signed AAB in the internal track with no manual steps
 - App is live on Google Play
 
-## Phase 8: iOS (later, ~2 days)
+## Phase 8: iOS (~2 days)
 
 - [x] `pod install`, UIScene lifecycle (required by iOS 27), icon, launch screen, keyboard avoidance
-- [ ] Xcode signing (needs the Apple Developer account), Fastlane `match`
-- [ ] macOS CI job, TestFlight upload
+- [x] Xcode automatic signing (team FB7R6D99A3, cloud-managed distribution certificate, so no Fastlane `match`); iPhone only
+- [x] TestFlight upload from the Mac (`npm run ios:release -- upload`)
+- [x] App Store listing (`docs/app-store/`) and 1.0 submitted for review (2026-10-12)
+- [ ] Approved by Apple and live (releases automatically after approval)
+- [ ] macOS CI job that uploads to TestFlight (optional)
 - [x] Parity pass on the iPhone simulator (all Maestro flows pass on iOS 27)
 
 **Acceptance criteria**
 
 - TestFlight build installs and all E2E flows pass on the iOS simulator
+- App is live on the App Store

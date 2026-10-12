@@ -1,6 +1,6 @@
 # Demonstrativo do Aplicativo
 
-> As capturas de tela abaixo são da versão original (Expo, 2023). A reescrita mantém o mesmo visual e o mesmo fluxo; a diferença é que os cálculos passam a ser feitos no próprio aparelho, sem chamada a endpoint REST (ver [ADR 0005](../adr/0005-mock-calculator-then-offline-engine.md)).
+> As capturas de tela abaixo são da versão original (Expo, 2023). A reescrita mantém o mesmo visual e o mesmo fluxo; a diferença é que os cálculos passam a ser feitos no próprio aparelho, sem chamada a endpoint REST (ver [ADR 0006](../adr/0006-offline-engine-full-precision.md)).
 
 ## Indice
 
