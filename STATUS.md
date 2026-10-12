@@ -143,10 +143,10 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 
 ### iOS: what's missing
 
-| Step                                                                                                        | Who       | Time     |
-| ----------------------------------------------------------------------------------------------------------- | --------- | -------- |
-| App Store Connect listing: reuse `docs/play/` texts, privacy label "Data Not Collected", iPhone screenshots | you + dev | ~1 h     |
-| Submit for review (no mandatory test period)                                                                | Apple     | 1–3 days |
+| Step                                                                                                  | Who   | Time     |
+| ----------------------------------------------------------------------------------------------------- | ----- | -------- |
+| App Store Connect listing: follow `docs/app-store/README.md` (texts, 6.9" screenshots, privacy label) | you   | ~30 min  |
+| Submit for review (no mandatory test period)                                                          | Apple | 1–3 days |
 
 ### iOS: run it locally
 
