@@ -1,9 +1,14 @@
-# Fresh launch, then wait for the home screen. A cold start on the CI emulator (software GPU)
-# can keep the launch screen up longer than tapOn's default wait, which made the first tap flaky.
+# Fresh launch, then wait for the home screen.
+# On the CI emulator, Android sometimes finishes removing the cleared task after the new process
+# has started and kills it ("Destroy timeout of remove-task"), leaving the launch screen with no
+# app behind it. Waiting longer never helps there, so relaunch instead.
 appId: com.larissagb.solucaoeletrica
 ---
-- launchApp:
-    clearState: true
-- extendedWaitUntil:
-    visible: 'Base Teórica'
-    timeout: 60000
+- retry:
+    maxRetries: 2
+    commands:
+      - launchApp:
+          clearState: true
+      - extendedWaitUntil:
+          visible: 'Base Teórica'
+          timeout: 30000
