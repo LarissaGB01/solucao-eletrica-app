@@ -1,8 +1,7 @@
 # E2E: size a conduit with the prefilled values.
 appId: com.larissagb.solucaoeletrica
 ---
-- launchApp:
-    clearState: true
+- runFlow: shared/abrir-app.yaml
 - tapOn: 'Dimensionar Eletrodutos'
 - tapOn: 'Finalizar'
 - assertVisible: 'Eletroduto Sugerido'

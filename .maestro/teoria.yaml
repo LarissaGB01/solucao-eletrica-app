@@ -1,8 +1,7 @@
 # E2E: theory sections open and render their formulas.
 appId: com.larissagb.solucaoeletrica
 ---
-- launchApp:
-    clearState: true
+- runFlow: shared/abrir-app.yaml
 - tapOn: 'Base Teórica'
 - tapOn: 'Corrente do Circuito'
 - assertVisible: 'Em circuitos TRIFÁSICOS'
