@@ -3,12 +3,12 @@
 _As of 2026-10-12._ The app is feature-complete and runs offline on Android and iOS. iOS 1.0 is in App Store
 review; Google Play is waiting on account validation.
 
-| Area                    | State                                                                      | Blocked on                                                |
-| ----------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------- |
-| Development (features)  | Done: all 3 sizing flows, Passo a passo, Teoria, offline engine            | —                                                         |
-| Development (hardening) | Partly done: E2E flows written, CI for them and accessibility pass pending | —                                                         |
-| Android                 | Release-ready: signed `.aab` builds, store material in `docs/play/`        | Google Play account validation, then a 14-day closed test |
-| iOS                     | 1.0 (build 1) submitted for App Store review on 2026-10-12                 | Apple review (1–3 days), then it goes live automatically  |
+| Area                    | State                                                               | Blocked on                                                |
+| ----------------------- | ------------------------------------------------------------------- | --------------------------------------------------------- |
+| Development (features)  | Done: all 3 sizing flows, Passo a passo, Teoria, offline engine     | —                                                         |
+| Development (hardening) | Partly done: E2E flows run in CI; accessibility pass pending        | —                                                         |
+| Android                 | Release-ready: signed `.aab` builds, store material in `docs/play/` | Google Play account validation, then a 14-day closed test |
+| iOS                     | 1.0 (build 1) submitted for App Store review on 2026-10-12          | Apple review (1–3 days), then it goes live automatically  |
 
 Day-to-day tracking: [PLAN.md](PLAN.md) (phases with checkboxes), [ARCHITECTURE.md](ARCHITECTURE.md),
 decisions in [docs/adr](docs/adr), open work in the
@@ -27,8 +27,8 @@ decisions in [docs/adr](docs/adr), open work in the
 | Dimensionar Disjuntores | Phases + design current + conductor capacity → suggested Siemens breaker                                   |
 | Dimensionar Eletrodutos | Conductor section + number of conductors → suggested Kanaflex conduit                                      |
 | Resultado               | Answer cards, "Ver cálculos", "Dimensionar outro" (fresh form), "Voltar ao início"                         |
-| Passo a passo           | Every step: formula → formula with values → result, plus the NBR/Siemens/Kanaflex tables used              |
-| Base Teórica            | 14 sections of formulas, tables and source links                                                           |
+| Passo a passo           | Every step: formula → formula with values → result, plus the table rows used, highlighted                  |
+| Base Teórica            | 14 sections: formulas with an "Onde:" symbol legend, tables (tap for full screen with zoom), source links  |
 
 Forms start prefilled with common Brazilian values (127/220 V, 2200 VA, FP 0,92, 15 m, 2,5 mm²),
 validate every field with pt-BR messages, and show a typical-value hint under each input.
@@ -41,8 +41,8 @@ validate every field with pt-BR messages, and show a typical-value hint under ea
   `presentation` (screens) ← `app` (wiring). See [ARCHITECTURE.md](ARCHITECTURE.md).
 - **Calculation engine:** `src/domain/dimensionamento/nbr5410/motor.ts`, a port of the original Java
   backend with the same formulas, constants and lookup rules. Its tables (temperature factors,
-  960 conduction rows, Siemens breakers, Kanaflex conduits) were generated from the backend's
-  `normativas.sql`. It runs on the phone with no network.
+  960 conduction rows, Siemens breakers) were generated from the backend's `normativas.sql`; the
+  conduit table follows the Kanalex 2025 catalog ([ADR 0007](docs/adr/0007-kanalex-2025-catalog.md)). It runs on the phone with no network.
 - **Verified against the real backend:** 39 golden cases captured by running the original Java
   backend locally (`scripts/golden/`). Every component choice matches exactly. One deliberate
   difference: the app keeps full precision where the backend truncated (2200 VA / 127 V →
@@ -52,14 +52,13 @@ validate every field with pt-BR messages, and show a typical-value hint under ea
 
 | Check                                      | Count                                                      | Command            |
 | ------------------------------------------ | ---------------------------------------------------------- | ------------------ |
-| Unit and component tests (Jest)            | 247 tests in 56 files                                      | `npm test`         |
+| Unit and component tests (Jest)            | 270 tests in 62 files                                      | `npm test`         |
 | Lint, types, format, coverage (same as CI) | domain coverage ≥ 90 %                                     | `npm run validate` |
 | E2E flows (Maestro)                        | 5 flows: cable, breaker, conduit, theory, validation error | `npm run e2e`      |
-| CI on every PR (GitHub Actions)            | lint/typecheck/tests + Android debug build                 | automatic          |
+| CI on every PR (GitHub Actions)            | lint/typecheck/tests, Android build, Maestro on emulator   | automatic          |
 
-### Development: what's missing (Phase 6, ~6–8 h)
+### Development: what's missing (Phase 6, ~4–6 h)
 
-- [ ] Run the Maestro flows in CI on an Android emulator (they pass locally on iOS).
 - [ ] Accessibility pass with TalkBack/VoiceOver; text at 200 % without clipping.
 - [ ] Crash reporting (Sentry) — optional, needs a Sentry account.
 
@@ -78,7 +77,8 @@ Known small issues, none blocking:
 
 - Runs on Android 7.0+ (minSdk 24, targetSdk 36). Tested on an Android 17 emulator.
 - Release build: no internet permission, app name "Solução Elétrica", adaptive icon (bolt on
-  brand orange, supports themed icons).
+  brand orange, supports themed icons), launch screen with the same bolt.
+- Keyboard: the bottom bar rises above the number pad (edge-to-edge, so `KeyboardAvoidingView` pads it).
 - Signed with your upload key (`android/upload-keystore.jks`, read from
   `android/keystore.properties`; both gitignored). Verified: certificate `CN=Larissa Barcelos`,
   SHA-256 starting `40:76:EE:02`.
@@ -140,6 +140,7 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 - iPhone only (iPads run it in iPhone mode), so no iPad screenshots or iPad review.
 - App created in App Store Connect; build 1 uploaded to TestFlight on 2026-10-12.
 - Listing filled and version 1.0 (1) submitted for review on 2026-10-12 (release: automatic after approval).
+- Version 1.0.1 (2) on `main`: Kanalex 2025 conduits, native tables with zoom, symbol legend. Next TestFlight upload; send to review once 1.0 is live.
 
 ### iOS: what's missing
 

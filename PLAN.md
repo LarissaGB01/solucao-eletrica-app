@@ -100,9 +100,9 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 
 ## Phase 6: Hardening (6–8h)
 
-- [ ] Maestro E2E: 3 happy paths + 1 validation-error flow (flows written and passing on iOS; CI pending)
+- [x] Maestro E2E: 3 happy paths + theory + 1 validation-error flow, green on iOS locally and on an Android emulator in CI
 - [ ] Accessibility labels on all inputs/buttons; text scales to 200% without clipping
-- [x] App icon (adaptive, bolt on brand orange) and iOS launch screen; Android launch screen still pending (`react-native-bootsplash`)
+- [x] App icon (adaptive, bolt on brand orange) and launch screens (iOS storyboard, Android `core-splashscreen`)
 - [ ] Crash reporting (Sentry) with source maps uploaded from CI
 
 **Acceptance criteria**

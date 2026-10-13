@@ -139,13 +139,13 @@ Additional rules:
 
 ## Testing per layer
 
-| Layer          | Test type                                                    | Tooling                                  |
-| -------------- | ------------------------------------------------------------ | ---------------------------------------- |
-| domain         | Unit: value objects, rules, formula builders (≥90% coverage) | Jest                                     |
-| application    | Unit with a fake `CalculadoraDimensionamento`                | Jest                                     |
-| infrastructure | Adapter tests (none yet)                                     | Jest                                     |
-| presentation   | Component: validation, navigation, loading and error states  | React Native Testing Library             |
-| whole app      | E2E happy paths per flow                                     | Maestro (`.maestro/`, local; CI pending) |
+| Layer          | Test type                                                    | Tooling                                          |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------ |
+| domain         | Unit: value objects, rules, formula builders (≥90% coverage) | Jest                                             |
+| application    | Unit with a fake `CalculadoraDimensionamento`                | Jest                                             |
+| infrastructure | Adapter tests (none yet)                                     | Jest                                             |
+| presentation   | Component: validation, navigation, loading and error states  | React Native Testing Library                     |
+| whole app      | E2E happy paths per flow                                     | Maestro (`.maestro/`, CI on an Android emulator) |
 
 **Golden tests** (`nbr5410/motor.golden.test.ts`) compare the engine with fixtures captured from
 the original Java backend (`scripts/golden/gerar-golden.mjs`); see ADR 0006 for tolerances.
