@@ -1,8 +1,7 @@
 # E2E: size a breaker with the prefilled values, then open its steps.
 appId: com.larissagb.solucaoeletrica
 ---
-- launchApp:
-    clearState: true
+- runFlow: shared/abrir-app.yaml
 - tapOn: 'Dimensionar Disjuntores'
 - tapOn: 'Finalizar'
 - assertVisible: 'Disjuntor Sugerido'

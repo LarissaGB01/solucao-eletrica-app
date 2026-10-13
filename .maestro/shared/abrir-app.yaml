@@ -1,0 +1,9 @@
+# Fresh launch, then wait for the home screen. A cold start on the CI emulator (software GPU)
+# can keep the launch screen up longer than tapOn's default wait, which made the first tap flaky.
+appId: com.larissagb.solucaoeletrica
+---
+- launchApp:
+    clearState: true
+- extendedWaitUntil:
+    visible: 'Base Teórica'
+    timeout: 60000

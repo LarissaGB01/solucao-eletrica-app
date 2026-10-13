@@ -1,8 +1,7 @@
 # E2E: size a cable end to end (Android and iOS). Run: maestro test .maestro/
 appId: com.larissagb.solucaoeletrica
 ---
-- launchApp:
-    clearState: true
+- runFlow: shared/abrir-app.yaml
 - tapOn: 'Dimensionar Cabeamento'
 - tapOn: 'Próximo'
 - tapOn: 'Tensão (V)'
