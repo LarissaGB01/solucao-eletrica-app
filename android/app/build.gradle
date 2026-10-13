@@ -100,7 +100,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         // CI will pass a growing VERSION_CODE (Phase 7); local builds use 1.
         versionCode((System.getenv("VERSION_CODE") ?: "1").toInteger())
-        versionName "1.0"
+        versionName "1.0.1"
     }
     signingConfigs {
         debug {
