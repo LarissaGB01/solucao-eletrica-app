@@ -1,14 +1,14 @@
 # Status report — Solução Elétrica
 
-_As of 2026-10-12._ The app is feature-complete and runs offline on Android and iOS. iOS 1.0 is in App Store
-review; Google Play is waiting on account validation.
+_As of 2026-10-15._ The app is feature-complete and runs offline on Android and iOS. iOS 1.0 is live on the
+App Store; Google Play is waiting on the developer account checks.
 
-| Area                    | State                                                               | Blocked on                                                |
-| ----------------------- | ------------------------------------------------------------------- | --------------------------------------------------------- |
-| Development (features)  | Done: all 3 sizing flows, Passo a passo, Teoria, offline engine     | —                                                         |
-| Development (hardening) | Partly done: E2E flows run in CI; accessibility pass pending        | —                                                         |
-| Android                 | Release-ready: signed `.aab` builds, store material in `docs/play/` | Google Play account validation, then a 14-day closed test |
-| iOS                     | 1.0 (build 1) submitted for App Store review on 2026-10-12          | Apple review (1–3 days), then it goes live automatically  |
+| Area                    | State                                                               | Blocked on                                                                        |
+| ----------------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Development (features)  | Done: all 3 sizing flows, Passo a passo, Teoria, offline engine     | —                                                                                 |
+| Development (hardening) | Partly done: E2E flows run in CI; accessibility pass pending        | —                                                                                 |
+| Android                 | Release-ready: signed `.aab` builds, store material in `docs/play/` | Play Console phone check (needs a real Android device), then a 14-day closed test |
+| iOS                     | 1.0 live since 2026-10-14; 1.0.1 (build 3) next                     | Upload build 3, then App Review for 1.0.1                                         |
 
 Day-to-day tracking: [PLAN.md](PLAN.md) (phases with checkboxes), [ARCHITECTURE.md](ARCHITECTURE.md),
 decisions in [docs/adr](docs/adr), open work in the
@@ -140,14 +140,15 @@ If Gradle says "SDK location not found", `android/local.properties` must contain
 - iPhone only (iPads run it in iPhone mode), so no iPad screenshots or iPad review.
 - App created in App Store Connect; build 1 uploaded to TestFlight on 2026-10-12.
 - Listing filled and version 1.0 (1) submitted for review on 2026-10-12 (release: automatic after approval).
-- Version 1.0.1 (2) on `main`: Kanalex 2025 conduits, native tables with zoom, symbol legend. Next TestFlight upload; send to review once 1.0 is live.
+- 1.0 was first rejected (Guideline 2.1, new developer account: Apple asked for a screen recording and app details), resubmitted on 2026-10-13 and approved on 2026-10-14.
+- Version 1.0.1 on `main`: Kanalex 2025 conduits, native tables with zoom, symbol legend. Build 2 is on TestFlight but tables don't open full screen on iOS; build 3 fixes it.
 
 ### iOS: what's missing
 
-| Step                                              | Who   | Time           |
-| ------------------------------------------------- | ----- | -------------- |
-| App Review, then automatic release                | Apple | 1–3 days       |
-| macOS CI job that uploads to TestFlight (Phase 8) | dev   | ~3 h, optional |
+| Step                                              | Who | Time               |
+| ------------------------------------------------- | --- | ------------------ |
+| Upload 1.0.1 (3), add it to version 1.0.1, submit | you | ~10 min + 1–3 days |
+| macOS CI job that uploads to TestFlight (Phase 8) | dev | ~3 h, optional     |
 
 ### iOS: run it locally
 

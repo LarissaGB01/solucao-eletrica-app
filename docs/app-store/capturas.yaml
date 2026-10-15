@@ -24,11 +24,11 @@ appId: com.larissagb.solucaoeletrica
 - tapOn: 'Ver cálculos.*'
 - waitForAnimationToEnd:
     timeout: 3000
-- tapOn: 'Corrente do Circuito.*'
-- extendedWaitUntil:
-    visible: 'espera-fixa-inexistente'
-    timeout: 4000
-    optional: true
+- scrollUntilVisible:
+    element: 'Recomendação de Condutor.*'
+- tapOn: 'Recomendação de Condutor.*'
+- scrollUntilVisible:
+    element: '.*Toque para ampliar'
 - takeScreenshot: screenshots/4-passo-a-passo
 - launchApp:
     clearState: true
