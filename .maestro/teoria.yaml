@@ -1,4 +1,4 @@
-# E2E: theory sections open and render their formulas.
+# E2E: theory sections open and render their formulas; a table opens full screen.
 appId: com.larissagb.solucaoeletrica
 ---
 - runFlow: shared/abrir-app.yaml
@@ -6,3 +6,11 @@ appId: com.larissagb.solucaoeletrica
 - tapOn: 'Corrente do Circuito'
 - assertVisible: 'Em circuitos TRIFÁSICOS'
 - takeScreenshot: e2e-out/teoria
+- scrollUntilVisible:
+    element: 'Recomendação de Disjuntor.*'
+- tapOn: 'Recomendação de Disjuntor.*'
+- scrollUntilVisible:
+    element: '.*Toque para ampliar'
+- tapOn: '.*Toque para ampliar'
+- assertVisible:
+    id: 'tabela-ampliada'

@@ -26,59 +26,60 @@ export function DataTable({
   onPress,
   hint,
 }: Props) {
+  // The whole block opens the table. On iOS the sideways ScrollView keeps the touches on the
+  // table body for itself, so the body gets its own Pressable inside the scroll content.
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={onPress}
+      disabled={onPress === undefined}
+      accessibilityRole={onPress ? 'button' : undefined}
+      accessibilityLabel={hint ? `${title}. ${hint}` : title}
+    >
       <Text style={styles.title}>{title}</Text>
-      <Pressable
-        onPress={onPress}
-        disabled={onPress === undefined}
-        accessibilityRole={onPress ? 'button' : undefined}
-        accessibilityLabel={hint ? `${title}. ${hint}` : title}
-      >
-        <ScrollView horizontal contentContainerStyle={styles.scroll}>
-          <View
-            style={[
-              styles.table,
-              { minWidth: columns.length * COLUMN_MIN_WIDTH },
-            ]}
-          >
-            <View style={[styles.row, styles.header]}>
-              {columns.map(column => (
-                <Text key={column} style={[styles.cell, styles.headerText]}>
-                  {column}
-                </Text>
-              ))}
-            </View>
-            {rows.map((row, index) => {
-              const highlighted = index === highlightedRow;
-              return (
-                <View
-                  key={index}
-                  testID={highlighted ? 'linha-destaque' : undefined}
-                  style={[styles.row, highlighted && styles.highlighted]}
-                >
-                  {row.map((cell, column) => (
-                    <Text
-                      key={column}
-                      style={[
-                        styles.cell,
-                        highlighted && styles.highlightedText,
-                      ]}
-                    >
-                      {cell}
-                    </Text>
-                  ))}
-                </View>
-              );
-            })}
+      <ScrollView horizontal contentContainerStyle={styles.scroll}>
+        <Pressable
+          onPress={onPress}
+          disabled={onPress === undefined}
+          accessible={false}
+          style={[
+            styles.table,
+            { minWidth: columns.length * COLUMN_MIN_WIDTH },
+          ]}
+        >
+          <View style={[styles.row, styles.header]}>
+            {columns.map(column => (
+              <Text key={column} style={[styles.cell, styles.headerText]}>
+                {column}
+              </Text>
+            ))}
           </View>
-        </ScrollView>
-      </Pressable>
+          {rows.map((row, index) => {
+            const highlighted = index === highlightedRow;
+            return (
+              <View
+                key={index}
+                testID={highlighted ? 'linha-destaque' : undefined}
+                style={[styles.row, highlighted && styles.highlighted]}
+              >
+                {row.map((cell, column) => (
+                  <Text
+                    key={column}
+                    style={[styles.cell, highlighted && styles.highlightedText]}
+                  >
+                    {cell}
+                  </Text>
+                ))}
+              </View>
+            );
+          })}
+        </Pressable>
+      </ScrollView>
       {note !== undefined && <Text style={styles.note}>{note}</Text>}
       {onPress !== undefined && hint !== undefined && (
         <Text style={styles.hint}>{hint}</Text>
       )}
-    </View>
+    </Pressable>
   );
 }
 

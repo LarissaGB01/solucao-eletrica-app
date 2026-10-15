@@ -48,6 +48,18 @@ describe('DataTable', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('opens full screen from the hint and the title too', async () => {
+    const onPress = jest.fn();
+    await render(
+      <DataTable {...props} onPress={onPress} hint="Toque para ampliar" />,
+    );
+
+    await userEvent.press(screen.getByText('Toque para ampliar'));
+    await userEvent.press(screen.getByText('Disjuntores'));
+
+    expect(onPress).toHaveBeenCalledTimes(2);
+  });
+
   it('is not a button without onPress', async () => {
     await render(<DataTable {...props} hint="Toque para ampliar" />);
 

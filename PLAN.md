@@ -130,7 +130,7 @@ Shared pieces: `combinarCampos` (domain), `calcular` (application), `features/fo
 - [x] Xcode automatic signing (team FB7R6D99A3, cloud-managed distribution certificate, so no Fastlane `match`); iPhone only
 - [x] TestFlight upload from the Mac (`npm run ios:release -- upload`)
 - [x] App Store listing (`docs/app-store/`) and 1.0 submitted for review (2026-10-12)
-- [ ] Approved by Apple and live (releases automatically after approval)
+- [x] Approved by Apple and live (2026-10-14)
 - [ ] macOS CI job that uploads to TestFlight (optional)
 - [x] Parity pass on the iPhone simulator (all Maestro flows pass on iOS 27)
 
